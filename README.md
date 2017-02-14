@@ -1,0 +1,1 @@
+Rubik's Room is a coop puzzle game with a unique controller scheme - Manipulate the position and orientation of a player's first person level by using a rubik's cube as a controller for that level.

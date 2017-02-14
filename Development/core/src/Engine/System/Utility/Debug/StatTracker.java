@@ -1,0 +1,28 @@
+////////////////////////////////////////////////
+// The Pyramid's Curse
+// A game by Chris Dalke
+////////////////////////////////////////////////
+// Module: StatTracker
+////////////////////////////////////////////////
+
+package Engine.System.Utility.Debug;
+
+public class StatTracker {
+    public static int stat;
+
+    public static void reset(){
+        stat = 0;
+    }
+
+    public static void add(){
+        stat++;
+    }
+
+    public static int get(){
+        return stat;
+    }
+}
+
+////////////////////////////////////////////////
+// End of code
+////////////////////////////////////////////////

@@ -1,12 +1,16 @@
 package com.rubiks.game.desktop;
 
+import Engine.System.Platforms.Desktop.Desktop;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.rubiks.game.MyGdxGame;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new MyGdxGame(), config);
+		config.title = "Rubik's Room";
+		config.samples = 4;
+		config.resizable = false;
+		config.vSyncEnabled = true;
+		new LwjglApplication(new Desktop(), config);
 	}
 }

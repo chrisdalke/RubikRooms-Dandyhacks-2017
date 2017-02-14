@@ -10,6 +10,7 @@ package Engine.System;
 import Engine.Audio.Audio;
 import Engine.Display.Display;
 import Engine.Input.Input;
+import Engine.Networking.Networking;
 import Engine.Renderer.Renderer;
 import Engine.System.Config.ConfigManager;
 import Engine.System.Config.Configuration;
@@ -38,6 +39,7 @@ public class Main {
             Renderer.init(config);
             Audio.init(config);
             UI.init(config);
+            Networking.init(config);
             Game.init(config);
 
         } catch (Exception e){
@@ -65,10 +67,11 @@ public class Main {
         FPSTimer.updateFrameTime();
 
         //update the input manager
+        Networking.update();
         System.update();
         Input.update();
 
-
+        
         Game.update(); //Handle game logic update
 
         Display.startRender();
@@ -87,6 +90,7 @@ public class Main {
         //Destroy all the game resources before we close the game
         Logger.logError("Disposing...");
 
+        Networking.dispose();
         Game.dispose();
         Audio.dispose();
         Renderer.dispose();

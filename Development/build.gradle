@@ -30,6 +30,7 @@ allprojects {
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
     }
+
 }
 
 project(":desktop") {
@@ -42,6 +43,7 @@ project(":desktop") {
         compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
         compile "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
         compile "de.tomgrill.gdxdialogs:gdx-dialogs-desktop:1.2.0"
+        compile "com.esotericsoftware:kryonet:2.22.0-RC1"
     }
 }
 
@@ -58,17 +60,23 @@ project(":ios") {
         compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-ios"
         compile "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-ios"
         compile "de.tomgrill.gdxdialogs:gdx-dialogs-ios:1.2.0"
+        compile "com.esotericsoftware:kryonet:2.22.0-RC1"
     }
 }
 
 project(":core") {
     apply plugin: "java"
 
+    compileJava {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         compile "de.tomgrill.gdxdialogs:gdx-dialogs-core:1.2.0"
+        compile "com.esotericsoftware:kryonet:2.22.0-RC1"
         compile files('../dependencies/jcodec-0.1.5.jar')
     }
 }

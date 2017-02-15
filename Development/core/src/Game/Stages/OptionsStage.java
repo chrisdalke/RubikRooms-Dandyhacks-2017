@@ -2,14 +2,14 @@
 // Development
 // Chris Dalke
 ////////////////////////////////////////////////
-// Module: GameStage
+// Module: OptionsStage
 ////////////////////////////////////////////////
 
-package Engine.UI.Stages.Types;
+package Game.Stages;
 
 import Engine.UI.Stages.UIStage;
 
-public class GameStage extends UIStage {
+public class OptionsStage extends UIStage {
    
    @Override
    protected void init() {

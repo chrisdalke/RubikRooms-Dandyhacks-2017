@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package Engine.Renderer;
+package Engine.Renderer.PostProcess;
 
 import com.badlogic.gdx.graphics.g3d.environment.*;
 import com.badlogic.gdx.Gdx;

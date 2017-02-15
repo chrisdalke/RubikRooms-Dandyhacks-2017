@@ -2,14 +2,12 @@ package Engine.Game.Instance;
 
 import Engine.Display.Display;
 import Engine.Game.Entity.GameObject3d;
-import Engine.Renderer.CustomDirectionalShadowLight;
+import Engine.Renderer.PostProcess.CustomDirectionalShadowLight;
 import Engine.Renderer.Renderer;
 import Engine.Renderer.Text;
 import Engine.System.Config.Configuration;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
@@ -115,18 +113,20 @@ public abstract class AbstractGameInstance {
     public ArrayList<ModelInstance> collectModels(){
         ArrayList<ModelInstance> modelInstances = new ArrayList<ModelInstance>();
         for (GameObject3d curObj : levelObjects){
-            modelInstances.add(curObj.getModel());
+            if (curObj.getModel() != null) {
+                modelInstances.add(curObj.getModel());
+            }
         }
         return modelInstances;
     }
     
     public void startWorld(){
         modelBatch.begin(camera);
-    
+        /*
         Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         Gdx.gl.glDepthFunc(GL20.GL_GREATER);
-        
+        */
         renderModels();
     
     }

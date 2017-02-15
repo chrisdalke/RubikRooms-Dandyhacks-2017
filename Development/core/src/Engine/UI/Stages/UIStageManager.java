@@ -135,8 +135,8 @@ public class UIStageManager {
 
       // uiStageBatch.end();
 
-        Renderer.endUI();
-        Renderer.startUI();
+       // Renderer.endUI();
+       // Renderer.startUI();
 
         switch (transitionState){
             case 0:

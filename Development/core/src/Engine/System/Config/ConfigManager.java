@@ -28,7 +28,7 @@ public class ConfigManager {
         this.config = config;
     }
 
-    public static final String CONFIG_FILE = "Resources/Config/default.cfg";
+    public static final String CONFIG_FILE = "Assets/Config/default.cfg";
 
     public ConfigManager(){
         load(CONFIG_FILE);

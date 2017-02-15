@@ -11,12 +11,19 @@ import Engine.Audio.Audio;
 import Engine.Game.Instance.AbstractGameInstance;
 import Engine.Input.Input;
 import Engine.Renderer.Renderer;
+import Engine.Renderer.Text;
+import Engine.Renderer.Textures.Texture;
+import Engine.Renderer.Textures.TextureLoader;
 import Engine.System.Config.Configuration;
 import Engine.System.Timer.DeltaTimeManager;
 import Engine.System.Utility.MethodInvoker;
 import Engine.UI.Stages.UIStageManager;
+import Game.Instances.GameInstance;
 import Game.Instances.MenuInstance;
-import Game.Instances.Test3dGameInstance;
+import Game.Stages.GameStage;
+import Game.Stages.LevelSelectionStage;
+import Game.Stages.MainMenuStage;
+import Game.Stages.OptionsStage;
 
 import java.util.ArrayList;
 
@@ -40,6 +47,8 @@ public class Game {
     private static AbstractGameInstance gameInstance;
     private static AbstractGameInstance menuInstance;
 
+    static Texture test;
+
     ////////////////////////////////////////////////
     // Game Controller: Initialization
     ////////////////////////////////////////////////
@@ -52,17 +61,18 @@ public class Game {
         
         // Set up the global interface
         UIStageManager.init();
-        /*
-        UIStageManager.addStage("mainMenuStage",new MainMenuStage());
-        UIStageManager.addStage("ingameStage",new IngameStage());
-        UIStageManager.addStage("levelSelectStage",new LevelSelectStage());
-        UIStageManager.addStage("levelEditorStage",new LevelEditorStage());
-        */
+        UIStageManager.addStage("GameStage",new GameStage());
+        UIStageManager.addStage("LevelSelectionStage",new LevelSelectionStage());
+        UIStageManager.addStage("MainMenuStage",new MainMenuStage());
+        UIStageManager.addStage("OptionsStage",new OptionsStage());
+        UIStageManager.switchTo("GameStage");
         
         // Set up the game instance / menu instance
-        gameInstance = new Test3dGameInstance();
+        gameInstance = new GameInstance();
         gameInstance.init(config);
         menuInstance = new MenuInstance();
+
+        test = TextureLoader.load("Assets/Textures/spark-2.png");
     }
 
     ////////////////////////////////////////////////
@@ -122,7 +132,7 @@ public class Game {
             }
         }
     }
-    
+
     public static void render(){
 
         //Render game stuff here
@@ -137,7 +147,10 @@ public class Game {
         //Render Scene2d UI layers
         //This is all above the in-game UI layer
         Renderer.startUI();
-        UIStageManager.render();
+
+        Text.draw(10,100,"Hello World");
+        Renderer.draw(test.getRegion(),0,0,100,100);
+        //UIStageManager.render();
         Renderer.endUI();
     }
     

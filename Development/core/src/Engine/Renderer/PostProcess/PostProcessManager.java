@@ -5,7 +5,7 @@
 // Module: PostProcessManager
 ////////////////////////////////////////////////
 
-package Engine.Renderer;
+package Engine.Renderer.PostProcess;
 
 import Engine.System.Logging.Logger;
 import Engine.System.System;
@@ -36,7 +36,6 @@ public class PostProcessManager {
     public static void init() {
         ShaderLoader.BasePath = "Assets/Shaders/post/shaders/";
         postProcessor = new PostProcessor( false, false, System.isDesktop());
-
         /*
 
         Bloom bloom = new Bloom( (int)(Display.getWidth() * 0.25f), (int)(Display.getHeight() * 0.25f) );
@@ -87,6 +86,8 @@ public class PostProcessManager {
 
         MotionBlur motionBlur = new MotionBlur();
         //postProcessor.addEffect(motionBlur);
+
+        setUIMode(true);
 
         Logger.log("Initialized Post Processor...");
 

@@ -74,26 +74,22 @@ public class Display {
 
         frameNumber = 0;
     }
-    
-    public static void hideCursor(){
-        Pixmap pm = new Pixmap(Gdx.files.internal("Assets/Textures/pixel_blank.png"));
-        Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
-        pm.dispose();
-    }
-    
-    public static void showCursor(){
-        Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
-    }
 
     public static void startRender(){
         //Clear the background
+
+        Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        Gdx.gl.glClearColor(0.5f,0.5f,0.5f, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+        Gdx.gl.glDepthFunc(GL20.GL_GREATER);
+
+        /*
         Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Gdx.gl.glClearColor(0.4f,0.4f,0.4f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         Gdx.gl.glDepthFunc(GL20.GL_GREATER);
-    
+        */
     }
-
     
     public static void finishRender(){
 
@@ -111,8 +107,10 @@ public class Display {
         if (Input.getKeyPress(com.badlogic.gdx.Input.Keys.GRAVE)){
             if (Recording.isRecording()){
                 Recording.stopRecording();
+                Logger.log("Stopped video recording!");
             } else {
                 Recording.startRecording();
+                Logger.log("Started video recording!");
             }
         }
 
@@ -122,6 +120,17 @@ public class Display {
     public static void dispose(){
 
     }
+
+    public static void hideCursor(){
+        Pixmap pm = new Pixmap(Gdx.files.internal("Assets/Textures/pixel_blank.png"));
+        Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
+        pm.dispose();
+    }
+
+    public static void showCursor(){
+        Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
+    }
+
 }
 
 ////////////////////////////////////////////////

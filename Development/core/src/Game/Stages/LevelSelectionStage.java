@@ -5,7 +5,7 @@
 // Module: LevelSelectionStage
 ////////////////////////////////////////////////
 
-package Engine.UI.Stages.Types;
+package Game.Stages;
 
 import Engine.UI.Stages.UIStage;
 

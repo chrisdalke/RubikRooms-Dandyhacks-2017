@@ -7,12 +7,20 @@
 
 package Game.Instances;
 
+import Engine.Display.Display;
 import Engine.Game.Entity.GameObject3d;
 import Engine.Game.Entity.Types.Camera3d;
 import Engine.Game.Instance.AbstractGameInstance;
+import Engine.Renderer.FrameBuffer;
+import Engine.Renderer.PostProcess.PostProcessManager;
+import Engine.Renderer.Renderer;
 import Engine.System.Config.Configuration;
 import Game.Cube;
+import Game.Entities.FirstPersonFlightCamera;
 import Game.LevelDataObject;
+import Game.OutlineCube;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 
 ////////////////////////////////////////////////
@@ -33,12 +41,12 @@ public class GameInstance extends AbstractGameInstance {
 
     //Loaded level data
     public LevelDataObject level;
-    public GameObject3d cube;
 
     ////////////////////////////////////////////////
     // Level Loading
     ////////////////////////////////////////////////
 
+    /*
     //Load from file
     public GameInstance(String levelFilename){
         level = new LevelDataObject(levelFilename);
@@ -48,6 +56,13 @@ public class GameInstance extends AbstractGameInstance {
     public GameInstance(LevelDataObject newLevel){
         level = newLevel;
     }
+    */
+
+    FrameBuffer frameBuffer;
+
+    public GameInstance(){
+        frameBuffer = new FrameBuffer(320,240);
+    }
 
     ////////////////////////////////////////////////
     // Level Initialization
@@ -55,14 +70,21 @@ public class GameInstance extends AbstractGameInstance {
 
     @Override
     public void init(Configuration config) {
+        super.init(config);
 
-        //Set up 3d scene objects
-        Camera3d gameCamera = new Camera3d();
-        cube = new Cube();
-        addObject(gameCamera);
-        addObject(cube);
-       
-       setCamera(gameCamera.getCam());
+        OutlineCube outlineCube = new OutlineCube();
+        addObject(outlineCube);
+
+        for (int i = 0; i < 100; i++){
+            GameObject3d cubeObj = new Cube();
+            cubeObj.setPosition(ThreadLocalRandom.current().nextInt(-50,50),ThreadLocalRandom.current().nextInt(-50,50),ThreadLocalRandom.current().nextInt(-50,50));
+            addObject(cubeObj);
+
+        }
+        Camera3d fpsCam = new FirstPersonFlightCamera();
+        setCamera(fpsCam.getCam());
+        addObject(fpsCam);
+
     }
 
     ////////////////////////////////////////////////
@@ -72,6 +94,8 @@ public class GameInstance extends AbstractGameInstance {
     @Override
     public void update() {
         super.update();
+
+
         
     }
 
@@ -81,7 +105,16 @@ public class GameInstance extends AbstractGameInstance {
 
     @Override
     public void render() {
-
+        frameBuffer.start();
+        startWorld();
+        renderModels();
+        endWorld();
+        frameBuffer.end();
+        Renderer.startUI();
+        PostProcessManager.start();
+        Renderer.draw(frameBuffer.getRegion(),0,0, (float)Display.getWidth(),(float)Display.getHeight());
+        PostProcessManager.end();
+        Renderer.endUI();
     }
 
 

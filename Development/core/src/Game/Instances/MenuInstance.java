@@ -19,6 +19,7 @@ public class MenuInstance extends AbstractGameInstance {
 
     Texture bg1;
     Texture bg2;
+    Texture title;
 
     Texture[] cubeTextures;
 
@@ -29,6 +30,7 @@ public class MenuInstance extends AbstractGameInstance {
 
         bg1 = TextureLoader.load("Assets/Textures/bg_layer1.png");
         bg2 = TextureLoader.load("Assets/Textures/bg_layer2.png");
+        title = TextureLoader.load("Assets/Textures/title.png");
 
         cubeTextures = new Texture[8];
         for (int i = 1; i <= 8; i++){
@@ -44,6 +46,7 @@ public class MenuInstance extends AbstractGameInstance {
         for (int i = 1; i <= 8; i++){
             Renderer.draw(cubeTextures[i-1].getRegion(),0,-40+(float)Math.sin((TimerManager.getTime() + (i*2000))/(2000.0f))*40.0f,(float) Display.getWidth(),(float)Display.getHeight());
         }
+        Renderer.draw(title.getRegion(),0,0,(float) Display.getWidth(),(float)Display.getHeight());
 
         Renderer.endUI();
 

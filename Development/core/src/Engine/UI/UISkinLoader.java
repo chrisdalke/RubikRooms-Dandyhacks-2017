@@ -9,7 +9,7 @@
 package Engine.UI;
 
 import Engine.System.Logging.Logger;
-import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
@@ -48,7 +48,7 @@ public class UISkinLoader {
             //Texture windowTex = TextureLoader.load("Resources/Textures/windowPatch.png");
             //VisUI.getSkin().add("window-custom", new NinePatch(windowTex.getRegion(),10,10,10,10));
 
-            skin = new Skin(new FileHandle("Assets/Skins/flat/skin/skin.json"));
+            skin = new Skin(Gdx.files.internal("Assets/Skins/flat/skin/skin.json"));
 
             Logger.log("Loaded UI Skinning system!");
             isReady = true;

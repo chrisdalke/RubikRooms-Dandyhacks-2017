@@ -10,13 +10,17 @@ package Game;
 import Engine.Audio.Audio;
 import Engine.Game.Instance.AbstractGameInstance;
 import Engine.Input.Input;
+import Engine.Networking.Tests.ClientTest;
+import Engine.Networking.Tests.ServerTest;
 import Engine.Renderer.Renderer;
 import Engine.Renderer.Textures.Texture;
 import Engine.Renderer.Textures.TextureLoader;
 import Engine.System.Config.Configuration;
+import Engine.System.Platforms.PlatformManager;
 import Engine.System.Timer.DeltaTimeManager;
 import Engine.System.Utility.MethodInvoker;
 import Engine.UI.Stages.UIStageManager;
+import Game.Instances.GameInstance;
 import Game.Instances.MenuInstance;
 import Game.Stages.GameStage;
 import Game.Stages.LevelSelectionStage;
@@ -66,13 +70,31 @@ public class Game {
         UIStageManager.switchTo("GameStage");
         
         // Set up the game instance / menu instance
-        //gameInstance = new GameInstance();
-        //gameInstance.init(config);
+        gameInstance = new GameInstance();
+        gameInstance.init(config);
         menuInstance = new MenuInstance();
         menuInstance.init(config);
 
+        /*
+        if (PlatformManager.getPlatform() == PlatformManager.IOS){
+            // Load the controller instance
+            gameInstance = new ControllerInstance();
+            gameInstance.init(config);
+        }
+        */
+
+        //Start test networking
+        if (PlatformManager.getPlatform() == PlatformManager.IOS){
+            ClientTest.startClient("10.4.132.104",54555, 54556);
+        } else {
+            ServerTest.startServer();
+        }
+
+
         test = TextureLoader.load("Assets/Textures/spark-2.png");
     }
+    static boolean sentPacket;
+
 
     ////////////////////////////////////////////////
     // Game Controller: Game State Methods
@@ -108,8 +130,23 @@ public class Game {
                 i.run();
             }
             methodInvokers.clear();
+
+
+            //Test iOS networking
+            if (PlatformManager.getPlatform() == PlatformManager.IOS) {
+                if (Input.getMouseClicked() == 1) {
+                    if (!sentPacket) {
+                        sentPacket = true;
+                        ClientTest.clientSendString("Message from IOS!!");
+                    }
+                } else {
+                    sentPacket = false;
+                }
+            }
+
         
             if (gameInstance != null) {
+
                 if (!isPaused) {
                     //Update the instance
                     gameInstance.update();

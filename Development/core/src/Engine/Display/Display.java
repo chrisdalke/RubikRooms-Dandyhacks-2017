@@ -11,6 +11,7 @@ import Engine.Display.Recording.Recording;
 import Engine.Input.Input;
 import Engine.System.Config.Configuration;
 import Engine.System.Logging.Logger;
+import Engine.System.Platforms.PlatformManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.graphics.Cursor;
@@ -31,8 +32,13 @@ public class Display {
 
     public static void init(Configuration config){
         Display.config = config;
-        config.width = 640;
-        config.height = 480;
+        config.width = 1024;
+        config.height = 768;
+        config.fullscreen = true;
+
+        if (PlatformManager.getPlatform() == PlatformManager.IOS){
+            config.fullscreen_window = true;
+        }
 
         if (config.fullscreen_window){
             //Fullscreen window sets resolution to match monitor resolution

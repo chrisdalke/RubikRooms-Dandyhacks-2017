@@ -19,10 +19,8 @@ public class ServerTest {
       
       String localIp = Networking.getLocalIP();
       System.out.println("Local IP: "+localIp);
-   
-      Server server = new Server();
-      server.start();
-      server.bind(54555, 54556);
+
+      startServer();
       String tcpPort = "54555";
       
       String encodedIp = URLEncoder.encodeURL(localIp+":"+tcpPort);
@@ -30,18 +28,6 @@ public class ServerTest {
       System.out.println("Server ID: "+encodedIp);
       
       System.out.print("Starting server...");
-   
-      server.addListener(new Listener() {
-         public void received (Connection connection, Object object) {
-            if (object instanceof String) {
-               String request = (String)object;
-               System.out.println(request);
-            
-               String response = "Hello World!";
-               connection.sendTCP(request);
-            }
-         }
-      });
       
       while (true){
          //Keep the program running until we manually quit it.
@@ -49,6 +35,33 @@ public class ServerTest {
       
       //server.stop();
       
+   }
+
+   public static void startServer() {
+      try {
+         Server server = new Server();
+         server.start();
+         server.bind(54555, 54556);
+
+         String localIp = Networking.getLocalIP();
+         System.out.println("Local IP: "+localIp);
+
+         server.addListener(new Listener() {
+            public void received (Connection connection, Object object) {
+               if (object instanceof String) {
+                  String request = (String)object;
+                  System.out.println(request);
+
+                  String response = "Hello World!";
+                  connection.sendTCP(request);
+               }
+            }
+         });
+      } catch (Exception e){
+         e.printStackTrace();
+      }
+
+
    }
    
    

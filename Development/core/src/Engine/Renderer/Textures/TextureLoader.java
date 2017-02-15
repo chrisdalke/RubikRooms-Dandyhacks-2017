@@ -10,7 +10,7 @@ package Engine.Renderer.Textures;
 //Java package imports
 
 import Engine.System.Logging.Logger;
-import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 ////////////////////////////////////////////////
@@ -31,7 +31,7 @@ public class TextureLoader {
             newTex.setID(null);
             try {
 
-                com.badlogic.gdx.graphics.Texture tempTex = new com.badlogic.gdx.graphics.Texture(new FileHandle(filename));
+                com.badlogic.gdx.graphics.Texture tempTex = new com.badlogic.gdx.graphics.Texture(Gdx.files.internal(filename));
 
                 newTex.setID(tempTex);
                 newTex.setHasFiltering(true);

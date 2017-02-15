@@ -23,10 +23,21 @@ public class OutlineCube extends GameObject3d {
       ModelBuilder modelBuilder = new ModelBuilder();
       modelBuilder.begin();
       MeshPartBuilder builder = modelBuilder.part("line", 1, 3, new Material());
-      builder.setColor(Color.RED);
-      builder.line(0.0f, 0.0f, -5.0f, 0.0f, 0.0f, 5.0f);
-      builder.line(-5.0f, 0.0f, 0.0f, 5.0f, 0.0f, 0.0f);
-      builder.line(0.0f, -5.0f, 0.0f, 0.0f, 5.0f, 0.0f);
+      builder.setColor(Color.WHITE);
+      builder.line(-5.0f, -5.0f, -5.0f, 5.0f, -5.0f, -5.0f);
+      builder.line(-5.0f, -5.0f, 5.0f, 5.0f, -5.0f, 5.0f);
+      builder.line(-5.0f, -5.0f, -5.0f, -5.0f, -5.0f, 5.0f);
+      builder.line(5.0f, -5.0f, -5.0f, 5.0f, -5.0f, 5.0f);
+
+      builder.line(-5.0f, 5.0f, -5.0f, 5.0f, 5.0f, -5.0f);
+      builder.line(-5.0f, 5.0f, 5.0f, 5.0f, 5.0f, 5.0f);
+      builder.line(-5.0f, 5.0f, -5.0f, -5.0f, 5.0f, 5.0f);
+      builder.line(5.0f, 5.0f, -5.0f, 5.0f, 5.0f, 5.0f);
+
+      builder.line(-5.0f, -5.0f, -5.0f, -5.0f, 5.0f, -5.0f);
+      builder.line(5.0f, -5.0f, -5.0f, 5.0f, 5.0f, -5.0f);
+      builder.line(-5.0f, -5.0f, 5.0f, -5.0f, 5.0f, 5.0f);
+      builder.line(5.0f, -5.0f, 5.0f, 5.0f, 5.0f, 5.0f);
       Model lineModel = modelBuilder.end();
       setModel(new ModelInstance(lineModel));
       

@@ -8,6 +8,7 @@
 package Engine.Renderer.PostProcess;
 
 import Engine.System.Logging.Logger;
+import Engine.System.Platforms.PlatformManager;
 import Engine.System.System;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -34,8 +35,9 @@ public class PostProcessManager {
 
 
     public static void init() {
-        ShaderLoader.BasePath = "Assets/Shaders/post/shaders/";
-        postProcessor = new PostProcessor( false, false, System.isDesktop());
+        if (PlatformManager.getPlatform() == PlatformManager.DESKTOP) {
+            ShaderLoader.BasePath = "Assets/Shaders/post/shaders/";
+            postProcessor = new PostProcessor(false, false, System.isDesktop());
         /*
 
         Bloom bloom = new Bloom( (int)(Display.getWidth() * 0.25f), (int)(Display.getHeight() * 0.25f) );
@@ -47,58 +49,61 @@ public class PostProcessManager {
         postProcessor.addEffect(lensFlare2);
 */
 
-        int vpW = Gdx.graphics.getWidth();
-        int vpH = Gdx.graphics.getHeight();
+            int vpW = Gdx.graphics.getWidth();
+            int vpH = Gdx.graphics.getHeight();
 
-        Bloom bloom = new Bloom( (int)(vpW * 0.25f), (int)(vpH * 0.25f) );
-        bloom.setBloomIntesity(0.7f);
-        bloom.setThreshold(0.4f);
-        bloom.setBlurPasses(4);
-
-
-
-        Curvature curvature = new Curvature();
-        Zoomer zoomer = new Zoomer( vpW, vpH, System.isDesktop() ? RadialBlur.Quality.VeryHigh : RadialBlur.Quality.Low );
-        int effects = CrtScreen.Effect.TweakContrast.v | CrtScreen.Effect.PhosphorVibrance.v | CrtScreen.Effect.Scanlines.v | CrtScreen.Effect.Tint.v;
-        CrtMonitor crt = new CrtMonitor( vpW, vpH, false, false, CrtScreen.RgbMode.ChromaticAberrations, effects );
-        Combine combine = crt.getCombinePass();
-
-        combine.setSource1Intensity( 0f );
-        combine.setSource2Intensity( 1f );
-        combine.setSource1Saturation( 0f );
-        combine.setSource2Saturation( 1f );
-
-        Vignette vignette = new Vignette( vpW, vpH, false );
-        vignette.setIntensity(0.25f);
-
-        LensFlare2 lensFlare2 = new LensFlare2(vpW,vpH);
-        lensFlare2.setLensColorTexture(new Texture(new FileHandle("Assets/Shaders/post/lenscolor.png")));
+            Bloom bloom = new Bloom((int) (vpW * 0.25f), (int) (vpH * 0.25f));
+            bloom.setBloomIntesity(0.7f);
+            bloom.setThreshold(0.4f);
+            bloom.setBlurPasses(4);
 
 
-        // add them to the postprocessor
-        //postProcessor.addEffect( curvature );
-        //postProcessor.addEffect( zoomer );
-        postProcessor.addEffect( vignette );
-        //postProcessor.addEffect( crt );
-        postProcessor.addEffect(new Fxaa(vpW,vpH));
-        postProcessor.addEffect( bloom );
-        //postProcessor.addEffect(lensFlare2);
+            Curvature curvature = new Curvature();
+            Zoomer zoomer = new Zoomer(vpW, vpH, System.isDesktop() ? RadialBlur.Quality.VeryHigh : RadialBlur.Quality.Low);
+            int effects = CrtScreen.Effect.TweakContrast.v | CrtScreen.Effect.PhosphorVibrance.v | CrtScreen.Effect.Scanlines.v | CrtScreen.Effect.Tint.v;
+            CrtMonitor crt = new CrtMonitor(vpW, vpH, false, false, CrtScreen.RgbMode.ChromaticAberrations, effects);
+            Combine combine = crt.getCombinePass();
 
-        MotionBlur motionBlur = new MotionBlur();
-        //postProcessor.addEffect(motionBlur);
+            combine.setSource1Intensity(0f);
+            combine.setSource2Intensity(1f);
+            combine.setSource1Saturation(0f);
+            combine.setSource2Saturation(1f);
 
-        setUIMode(true);
+            Vignette vignette = new Vignette(vpW, vpH, false);
+            vignette.setIntensity(0.25f);
 
-        Logger.log("Initialized Post Processor...");
+            LensFlare2 lensFlare2 = new LensFlare2(vpW, vpH);
+            lensFlare2.setLensColorTexture(new Texture(new FileHandle("Assets/Shaders/post/lenscolor.png")));
 
+
+            // add them to the postprocessor
+            //postProcessor.addEffect( curvature );
+            //postProcessor.addEffect( zoomer );
+            postProcessor.addEffect(vignette);
+            //postProcessor.addEffect( crt );
+            postProcessor.addEffect(new Fxaa(vpW, vpH));
+            postProcessor.addEffect(bloom);
+            //postProcessor.addEffect(lensFlare2);
+
+            MotionBlur motionBlur = new MotionBlur();
+            //postProcessor.addEffect(motionBlur);
+
+            setUIMode(true);
+
+            Logger.log("Initialized Post Processor...");
+        }
     }
 
     public static void start(){
-        postProcessor.capture();
+        if (PlatformManager.getPlatform() == PlatformManager.DESKTOP) {
+            postProcessor.capture();
+        }
     }
 
     public static void end(){
-        postProcessor.render();
+        if (PlatformManager.getPlatform() == PlatformManager.DESKTOP) {
+            postProcessor.render();
+        }
     }
 
 }

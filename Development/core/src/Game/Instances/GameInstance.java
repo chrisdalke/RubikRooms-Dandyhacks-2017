@@ -70,8 +70,16 @@ public class GameInstance extends AbstractGameInstance {
     public void init(Configuration config) {
         super.init(config);
 
-        OutlineCube outlineCube = new OutlineCube();
-        addObject(outlineCube);
+        for (int x = 0; x < 3; x++){
+            for (int y = 0; y < 3; y++){
+                for (int z = 0; z < 3; z++){
+                    OutlineCube outlineCube = new OutlineCube();
+                    outlineCube.setPosition(x*10,y*10,z*10);
+                    addObject(outlineCube);
+
+                }
+            }
+        }
 
         for (int i = 0; i < 100; i++){
             GameObject3d cubeObj = new Cube();

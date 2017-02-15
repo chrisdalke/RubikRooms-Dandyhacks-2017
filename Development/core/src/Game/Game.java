@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////
-// The Pyramid's Curse
+// Frame Engine
 // Chris Dalke
 ////////////////////////////////////////////////
 // Module: Game
@@ -7,62 +7,50 @@
 
 package Game;
 
+import Engine.Audio.Audio;
+import Engine.Game.Instance.AbstractGameInstance;
+import Engine.Input.Input;
 import Engine.Renderer.Renderer;
 import Engine.System.Config.Configuration;
 import Engine.System.Timer.DeltaTimeManager;
+import Engine.System.Utility.MethodInvoker;
 import Engine.UI.Stages.UIStageManager;
-import Game.Instances.AbstractGameInstance;
-import Game.Instances.GameInstance;
-import Game.Instances.TestGameInstance;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
+import Game.Instances.MenuInstance;
+import Game.Instances.Test3dGameInstance;
+
+import java.util.ArrayList;
 
 public class Game {
 
-    //Handles the entirety of the game. This includes menu,
-    //handling of game instances, all that stuff.
-    //For now, menu is disabled, we just create a game instance and start that.
-    
-    static DeltaTimeManager deltaTimeManager;
-    static final double TICK_RATE = 1000.0/60.0;
-    private static int currentFrame;
-    private static Configuration savedConfig;
+    ////////////////////////////////////////////////
+    // Game Controller: Variables
+    ////////////////////////////////////////////////
 
-    public static AbstractGameInstance currentGame;
+    // Game subsystems
+    private static DeltaTimeManager deltaTimeManager;
+    static ArrayList<MethodInvoker> methodInvokers;
 
+    // Constant game properties
+    private static final double TICK_RATE = 1000.0/60.0;
+
+    // Game variable properties
     public static boolean isPaused;
 
-    public static boolean isPaused() {
-        return isPaused;
-    }
+    // Game instances
+    private static AbstractGameInstance gameInstance;
+    private static AbstractGameInstance menuInstance;
 
-    public static void setPaused(boolean isPaused) {
-        Game.isPaused = isPaused;
-    }
-
-    public static GameInstance getGame(){
-        if (currentGame != null) {
-            if (currentGame instanceof GameInstance){
-                return (GameInstance)currentGame;
-            } else {
-                return null;
-            }
-        } else {
-            return null;
-        }
-    }
-
+    ////////////////////////////////////////////////
+    // Game Controller: Initialization
+    ////////////////////////////////////////////////
+    
     public static void init(Configuration config){
-
-        savedConfig = config;
 
         deltaTimeManager = new DeltaTimeManager(TICK_RATE);
         deltaTimeManager.startInterval();
+        methodInvokers = new ArrayList<MethodInvoker>();
         
-        currentGame = new TestGameInstance();
-        currentGame.init(config);
-
-        //Setup user interface stages
+        // Set up the global interface
         UIStageManager.init();
         /*
         UIStageManager.addStage("mainMenuStage",new MainMenuStage());
@@ -70,49 +58,126 @@ public class Game {
         UIStageManager.addStage("levelSelectStage",new LevelSelectStage());
         UIStageManager.addStage("levelEditorStage",new LevelEditorStage());
         */
-
+        
+        // Set up the game instance / menu instance
+        gameInstance = new Test3dGameInstance();
+        gameInstance.init(config);
+        menuInstance = new MenuInstance();
     }
 
-    public static void update(){
-        deltaTimeManager.endInterval();
-        while (deltaTimeManager.consumeTick()) {
-            //Update game
-            currentFrame++;
+    ////////////////////////////////////////////////
+    // Game Controller: Game State Methods
+    ////////////////////////////////////////////////
+    // These methods cause a state transition between
+    // menu and game, and also between pieces of the menu.
+    // Useful to have these in a globally available context.
 
-            if (currentGame != null) {
-                currentGame.update();
+
+    public static void triggerMenu(){
+        // Do nothing yet
+    }
+
+    public static void triggerGame(){
+        // Do nothing yet
+    }
+    ////////////////////////////////////////////////
+    // Game Controller: Main Loop
+    ////////////////////////////////////////////////
+    
+    public static void update(){
+        //Update delta timer
+        deltaTimeManager.endInterval();
+        deltaTimeManager.startInterval();
+    
+        //Update subsystems
+        Audio.update();
+
+        while (deltaTimeManager.consumeTick()) {
+        
+            //Update the command queue
+            for (MethodInvoker i : methodInvokers){
+                i.run();
+            }
+            methodInvokers.clear();
+        
+            if (gameInstance != null) {
+                if (!isPaused) {
+                    //Update the instance
+                    gameInstance.update();
+                
+                    //Pause check
+                    if (Input.getKeyPress(com.badlogic.gdx.Input.Keys.ESCAPE)){
+                        Game.setPaused(true);
+                    }
+                } else {
+                    //Handle pause status
+                    //unpause check
+                    if (Input.getKeyPress(com.badlogic.gdx.Input.Keys.ESCAPE)){
+                        Game.setPaused(false);
+                    }
+                }
+            } else {
+                //Update the main menu game instance
+                menuInstance.update();
             }
         }
-
-        deltaTimeManager.startInterval();
     }
-
+    
     public static void render(){
 
-        Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-        Gdx.gl.glDepthFunc(GL20.GL_GREATER);
-
-        if (currentGame != null) {
-            currentGame.render();
+        //Render game stuff here
+        if (gameInstance != null){
+            //Render the game's view
+            gameInstance.render();
+        } else {
+            //Render the menu instance's view
+            menuInstance.render();
         }
 
-        //Render General purpose UI Stuff here
+        //Render Scene2d UI layers
+        //This is all above the in-game UI layer
         Renderer.startUI();
-
-        //Render UI stage
         UIStageManager.render();
-
         Renderer.endUI();
     }
-
+    
+    ////////////////////////////////////////////////
+    // Game Controller: Cleanup
+    ////////////////////////////////////////////////
+    
     public static void dispose(){
-        if (currentGame != null) {
-            currentGame.dispose();
-            currentGame = null;
+        if (gameInstance != null) {
+            gameInstance.dispose();
+            gameInstance = null;
         }
+        //Dispose of any extra game resources that we won't need.
         UIStageManager.dispose();
     }
+
+    ////////////////////////////////////////////////
+    // Game Controller: Utility Methods
+    ////////////////////////////////////////////////
+
+    public static AbstractGameInstance getGameInstance(){
+        return gameInstance;
+    }
+
+    public static void setGameInstance(AbstractGameInstance newGame){
+        gameInstance = newGame;
+    }
+
+    public static boolean isPaused() {
+        return isPaused;
+    }
+    
+    public static void setPaused(boolean isPaused) {
+        Game.isPaused = isPaused;
+    }
+
+    public static void queueMethodInvoker(MethodInvoker item){
+        methodInvokers.add(item);
+    }
+
 
 }
 

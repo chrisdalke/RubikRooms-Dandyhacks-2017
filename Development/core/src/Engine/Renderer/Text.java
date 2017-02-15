@@ -20,7 +20,7 @@ public class Text {
     public static void init(){
 
         //Generate the font from Freetype files
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Resources/Fonts/existence/Existence-Light.ttf"));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Assets/Fonts/geo_sans_light/GeosansLight.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 28;
         parameter.color = Color.WHITE;

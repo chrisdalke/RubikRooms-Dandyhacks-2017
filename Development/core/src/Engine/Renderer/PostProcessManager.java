@@ -34,7 +34,7 @@ public class PostProcessManager {
 
 
     public static void init() {
-        ShaderLoader.BasePath = "Resources/Shaders/post/shaders/";
+        ShaderLoader.BasePath = "Assets/Shaders/post/shaders/";
         postProcessor = new PostProcessor( false, false, System.isDesktop());
 
         /*
@@ -73,7 +73,7 @@ public class PostProcessManager {
         vignette.setIntensity(0.25f);
 
         LensFlare2 lensFlare2 = new LensFlare2(vpW,vpH);
-        lensFlare2.setLensColorTexture(new Texture(new FileHandle("Resources/Shaders/post/lenscolor.png")));
+        lensFlare2.setLensColorTexture(new Texture(new FileHandle("Assets/Shaders/post/lenscolor.png")));
 
 
         // add them to the postprocessor

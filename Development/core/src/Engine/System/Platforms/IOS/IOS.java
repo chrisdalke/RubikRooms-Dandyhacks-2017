@@ -7,11 +7,28 @@
 
 package Engine.System.Platforms.IOS;
 
-public class IOS {
-    public IOS() {
-        //TODO: Set up ios app implementation
-    }
+import Engine.System.Main;
+import Engine.System.Platforms.PlatformManager;
+import com.badlogic.gdx.ApplicationAdapter;
 
+public class IOS extends ApplicationAdapter {
+    
+    @Override
+    public void create () {
+        PlatformManager.setPlatform(PlatformManager.IOS);
+        Main.init();
+    }
+    
+    @Override
+    public void render () {
+        Main.render();
+    }
+    
+    @Override
+    public void dispose() {
+        Main.dispose();
+    }
+    
 }
 
 ////////////////////////////////////////////////

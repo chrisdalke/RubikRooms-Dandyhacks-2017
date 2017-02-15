@@ -71,7 +71,6 @@ public class Main {
         System.update();
         Input.update();
 
-        
         Game.update(); //Handle game logic update
 
         Display.startRender();

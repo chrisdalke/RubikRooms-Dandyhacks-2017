@@ -2,28 +2,27 @@
 // Development
 // Chris Dalke
 ////////////////////////////////////////////////
-// Module: ControllerInstance
+// Module: GameStage
 ////////////////////////////////////////////////
 
-package Game.Instances;
+package Engine.UI.Stages.Types;
 
-import Engine.Game.Instance.AbstractGameInstance;
-import Engine.System.Config.Configuration;
+import Engine.UI.Stages.UIStage;
 
-public class ControllerInstance extends AbstractGameInstance {
+public class GameStage extends UIStage {
    
    @Override
-   public void init(Configuration config) {
-      super.init(config);
-   }
-   
-   @Override
-   public void render() {
+   protected void init() {
       
    }
    
    @Override
-   public void dispose() {
+   protected void update() {
+      
+   }
+   
+   @Override
+   protected void render() {
       
    }
 }

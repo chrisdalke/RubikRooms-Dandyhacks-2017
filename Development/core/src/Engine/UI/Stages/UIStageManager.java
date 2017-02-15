@@ -184,12 +184,13 @@ public class UIStageManager {
 
             //draw boxes to cover the areas that the spotlight texture has not drawn
             //Horizontal
-            Shapes.drawBox((int)Display.getWidth() - spotlightOriginX, 0,spotlightOriginX,(int)Display.getHeight(), Color.BLACK);
-            Shapes.drawBox(0, 0, spotlightOriginX, (int) Display.getHeight(), Color.BLACK);
+            Shapes.setColor(0,0,0,1);
+            Shapes.drawBox((int)Display.getWidth() - spotlightOriginX, 0,spotlightOriginX,(int)Display.getHeight());
+            Shapes.drawBox(0, 0, spotlightOriginX, (int) Display.getHeight());
 
             //Vertical
-            Shapes.drawBox(0, (int)Display.getHeight()-spotlightOriginY, (int)Display.getWidth(), spotlightOriginY, Color.BLACK);
-            Shapes.drawBox(0, 0, (int) Display.getWidth(), spotlightOriginY, Color.BLACK);
+            Shapes.drawBox(0, (int)Display.getHeight()-spotlightOriginY, (int)Display.getWidth(), spotlightOriginY);
+            Shapes.drawBox(0, 0, (int) Display.getWidth(), spotlightOriginY);
 
             if (transitionState == 3){
                 //Draw a pharoah in the center of the screen

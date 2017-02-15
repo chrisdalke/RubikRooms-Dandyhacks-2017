@@ -5,12 +5,13 @@
 // Module: Camera
 ////////////////////////////////////////////////
 
-package Game;
+package Engine.Game.Entity.Types;
 
+import Engine.Game.Entity.GameObject3d;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 
-public class Camera extends GameObject {
+public class Camera3d extends GameObject3d {
     
     private PerspectiveCamera cam;
     private float cameraShakeAmount = 0;
@@ -18,10 +19,9 @@ public class Camera extends GameObject {
     @Override
     public void init() {
         super.init();
-        
         cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         cam.position.set(getX(), getY(), getZ());
-        cam.near = 1f;
+        cam.near = 0.1f;
         cam.far = 100f;
         cam.update();
     }

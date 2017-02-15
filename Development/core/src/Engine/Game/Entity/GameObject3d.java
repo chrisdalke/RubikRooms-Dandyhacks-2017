@@ -2,17 +2,17 @@
 // Development
 // Chris Dalke
 ////////////////////////////////////////////////
-// Module: GameObject
+// Module: GameObject3d
 ////////////////////////////////////////////////
 
-package Game;
+package Engine.Game.Entity;
 
 import Engine.Renderer.Models.ModelLoader;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 
-public class GameObject {
+public class GameObject3d {
 
     private ModelInstance model;
     private Vector3 position;
@@ -36,11 +36,15 @@ public class GameObject {
 
     }
     
-    public GameObject(){
+    public void dispose(){
+        
+    }
+    
+    public GameObject3d(){
         this((ModelInstance)null);
     }
 
-    public GameObject(ModelInstance model) {
+    public GameObject3d(ModelInstance model) {
         this.model = model;
         position =  new Vector3();
         rotation = new Vector3();
@@ -51,7 +55,7 @@ public class GameObject {
         init();
     }
 
-    public GameObject(String filename){
+    public GameObject3d(String filename){
         this(new ModelInstance(ModelLoader.load(filename)));
     }
 

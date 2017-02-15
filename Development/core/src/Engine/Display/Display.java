@@ -31,6 +31,8 @@ public class Display {
 
     public static void init(Configuration config){
         Display.config = config;
+        config.width = 640;
+        config.height = 480;
 
         if (config.fullscreen_window){
             //Fullscreen window sets resolution to match monitor resolution

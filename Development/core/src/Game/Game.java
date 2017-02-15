@@ -11,14 +11,12 @@ import Engine.Audio.Audio;
 import Engine.Game.Instance.AbstractGameInstance;
 import Engine.Input.Input;
 import Engine.Renderer.Renderer;
-import Engine.Renderer.Text;
 import Engine.Renderer.Textures.Texture;
 import Engine.Renderer.Textures.TextureLoader;
 import Engine.System.Config.Configuration;
 import Engine.System.Timer.DeltaTimeManager;
 import Engine.System.Utility.MethodInvoker;
 import Engine.UI.Stages.UIStageManager;
-import Game.Instances.GameInstance;
 import Game.Instances.MenuInstance;
 import Game.Stages.GameStage;
 import Game.Stages.LevelSelectionStage;
@@ -68,9 +66,10 @@ public class Game {
         UIStageManager.switchTo("GameStage");
         
         // Set up the game instance / menu instance
-        gameInstance = new GameInstance();
-        gameInstance.init(config);
+        //gameInstance = new GameInstance();
+        //gameInstance.init(config);
         menuInstance = new MenuInstance();
+        menuInstance.init(config);
 
         test = TextureLoader.load("Assets/Textures/spark-2.png");
     }
@@ -147,10 +146,7 @@ public class Game {
         //Render Scene2d UI layers
         //This is all above the in-game UI layer
         Renderer.startUI();
-
-        Text.draw(10,100,"Hello World");
-        Renderer.draw(test.getRegion(),0,0,100,100);
-        //UIStageManager.render();
+        UIStageManager.render();
         Renderer.endUI();
     }
     

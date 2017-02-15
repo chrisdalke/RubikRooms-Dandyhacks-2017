@@ -7,17 +7,31 @@
 
 package Game.Stages;
 
-import Engine.Display.Display;
-import Engine.Renderer.Renderer;
-import Engine.Renderer.Text;
-import Engine.Renderer.Textures.Texture;
-import Engine.Renderer.Textures.TextureLoader;
 import Engine.UI.Stages.UIStage;
+import Engine.UI.Stages.UIStageManager;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+
+import static Engine.UI.UISkinLoader.skin;
 
 public class GameStage extends UIStage {
 
    @Override
    protected void init() {
+
+      TextButton store = new TextButton("Toggle Store",skin);
+      addActor(store);
+      store.addListener(new ChangeListener() {
+         public void changed(ChangeListener.ChangeEvent event, Actor actor) {
+            UIStageManager.fadeOutEvent(new Runnable() {
+               @Override
+               public void run() {
+                  UIStageManager.switchTo("GameStage");
+               }
+            });
+         }
+      });
    }
    
    @Override

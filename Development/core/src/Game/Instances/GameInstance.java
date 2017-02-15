@@ -7,12 +7,10 @@
 
 package Game.Instances;
 
-import Engine.Display.Display;
 import Engine.Game.Entity.GameObject3d;
 import Engine.Game.Entity.Types.Camera3d;
 import Engine.Game.Instance.AbstractGameInstance;
 import Engine.Renderer.FrameBuffer;
-import Engine.Renderer.PostProcess.PostProcessManager;
 import Engine.Renderer.Renderer;
 import Engine.System.Config.Configuration;
 import Game.Cube;
@@ -105,15 +103,15 @@ public class GameInstance extends AbstractGameInstance {
 
     @Override
     public void render() {
-        frameBuffer.start();
+        //frameBuffer.start();
         startWorld();
         renderModels();
         endWorld();
-        frameBuffer.end();
+        //frameBuffer.end();
         Renderer.startUI();
-        PostProcessManager.start();
-        Renderer.draw(frameBuffer.getRegion(),0,0, (float)Display.getWidth(),(float)Display.getHeight());
-        PostProcessManager.end();
+        //PostProcessManager.start();
+        //Renderer.draw(frameBuffer.getRegion(),0,0, (float)Display.getWidth(),(float)Display.getHeight());
+        //PostProcessManager.end();
         Renderer.endUI();
     }
 

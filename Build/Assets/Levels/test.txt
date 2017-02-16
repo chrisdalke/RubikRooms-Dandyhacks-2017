@@ -1,0 +1,1 @@
+{"dimensionLength":3,"startingRoom":2,"rooms":[{"mirror":false,"mirrorOrientation":-1}],"planes":null}

@@ -41,6 +41,5 @@ public class Room {
         this.mirrorOrientation = mirrorOrientation;
     }
 
-    t
 }
 

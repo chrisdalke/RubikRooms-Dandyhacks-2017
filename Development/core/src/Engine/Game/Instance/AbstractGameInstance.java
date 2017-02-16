@@ -44,7 +44,8 @@ public abstract class AbstractGameInstance {
         //Initialize 3d batch and environment settings
         //Set up 3d environment conditions
         environment = new Environment();
-        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.8f, 0.8f, 0.8f, 1f));
+        //environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.8f, 0.8f, 0.8f, 1f));
+        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 1f,1f,1f, 1f));
         environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
         //environment.add(new DirectionalLight().set(0.4f, 0.4f, 0.4f, -1f, -0.8f, -0.2f));
 

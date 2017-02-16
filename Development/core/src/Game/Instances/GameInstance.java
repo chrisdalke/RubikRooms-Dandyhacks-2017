@@ -16,7 +16,7 @@ import Engine.Renderer.FrameBuffer;
 import Engine.Renderer.Renderer;
 import Engine.Renderer.Textures.TextureLoader;
 import Engine.System.Config.Configuration;
-import Game.Cube;
+import Game.BackgroundCube;
 import Game.Entities.FirstPersonFlightCamera;
 import Game.LevelDataObject;
 import Game.RoomObject;
@@ -96,9 +96,16 @@ public class GameInstance extends AbstractGameInstance {
             }
         }
 
-        for (int i = 0; i < 100; i++){
-            GameObject3d cubeObj = new Cube();
-            cubeObj.setPosition(ThreadLocalRandom.current().nextInt(-50,50),ThreadLocalRandom.current().nextInt(-50,50),ThreadLocalRandom.current().nextInt(-50,50));
+        for (int i = 0; i < 20; i++){
+            GameObject3d cubeObj = new BackgroundCube();
+            float angle = ThreadLocalRandom.current().nextInt(0,360);
+            float dist = ThreadLocalRandom.current().nextInt(150,300);
+            float x = (float)Math.cos(Math.toRadians(angle)) * dist;
+            float y = ThreadLocalRandom.current().nextInt(-100,100);
+            float z = (float)Math.sin(Math.toRadians(angle)) * dist;
+            float scale = ThreadLocalRandom.current().nextInt(5,40);
+            cubeObj.setScale(scale,scale,scale);
+            cubeObj.setPosition(x,y,z);
             addObject(cubeObj);
 
         }

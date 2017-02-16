@@ -20,6 +20,10 @@ public class Plane {
         // plane must be updated after each turn
     }
 
+    public Plane.Type getType() {
+        return type;
+    }
+
     public enum Type {
         VERTICAL, HORIZONTAL
     }

@@ -7,6 +7,7 @@
 
 package Game.Instances;
 
+import Engine.Display.Display;
 import Engine.Game.Entity.GameObject3d;
 import Engine.Game.Entity.SkyBox;
 import Engine.Game.Entity.Types.Camera3d;
@@ -105,6 +106,8 @@ public class GameInstance extends AbstractGameInstance {
         setCamera(fpsCam.getCam());
         addObject(fpsCam);
 
+        Display.hideCursor();
+
         Texture skyTexTop = TextureLoader.load("Assets/Textures/skybox/skyboxTop.png").getTex();
         Texture skyTexSide = TextureLoader.load("Assets/Textures/skybox/skyboxSide.png").getTex();
         Texture skyTexBottom = TextureLoader.load("Assets/Textures/skybox/skyboxBottom.png").getTex();
@@ -130,6 +133,9 @@ public class GameInstance extends AbstractGameInstance {
 
     @Override
     public void render() {
+        //Center cursor
+        //Gdx.input.setCursorPosition((int)Display.getWidth()/2,(int)Display.getHeight()/2);
+
         //frameBuffer.start();
         startWorld();
 

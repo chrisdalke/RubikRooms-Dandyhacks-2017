@@ -8,13 +8,12 @@
 package Game;
 
 import Engine.Audio.Audio;
+import Engine.Display.Display;
 import Engine.Game.Instance.AbstractGameInstance;
 import Engine.Input.Input;
 import Engine.Networking.Tests.ClientTest;
 import Engine.Networking.Tests.ServerTest;
 import Engine.Renderer.Renderer;
-import Engine.Renderer.Textures.Texture;
-import Engine.Renderer.Textures.TextureLoader;
 import Engine.System.Config.Configuration;
 import Engine.System.Platforms.PlatformManager;
 import Engine.System.Timer.DeltaTimeManager;
@@ -26,6 +25,7 @@ import Game.Stages.GameStage;
 import Game.Stages.LevelSelectionStage;
 import Game.Stages.MainMenuStage;
 import Game.Stages.OptionsStage;
+import com.badlogic.gdx.Gdx;
 
 import java.util.ArrayList;
 
@@ -149,12 +149,15 @@ public class Game {
                     //Pause check
                     if (Input.getKeyPress(com.badlogic.gdx.Input.Keys.ESCAPE)){
                         Game.setPaused(true);
+                        Display.showCursor();
+                        Gdx.input.setCursorPosition((int)Display.getWidth()/2,(int)Display.getHeight()/2);
                     }
                 } else {
                     //Handle pause status
                     //unpause check
                     if (Input.getKeyPress(com.badlogic.gdx.Input.Keys.ESCAPE)){
                         Game.setPaused(false);
+                        Display.hideCursor();
                     }
                 }
             } else {

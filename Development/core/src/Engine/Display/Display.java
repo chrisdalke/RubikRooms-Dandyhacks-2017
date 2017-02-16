@@ -133,10 +133,12 @@ public class Display {
         Pixmap pm = new Pixmap(Gdx.files.internal("Assets/Textures/pixel_blank.png"));
         Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
         pm.dispose();
+        Gdx.input.setCursorCatched(true);
     }
 
     public static void showCursor(){
         Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
+        Gdx.input.setCursorCatched(false);
     }
 
 }

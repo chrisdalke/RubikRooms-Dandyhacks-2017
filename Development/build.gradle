@@ -44,6 +44,8 @@ project(":desktop") {
         compile "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
         compile "de.tomgrill.gdxdialogs:gdx-dialogs-desktop:1.2.0"
         compile "com.esotericsoftware:kryonet:2.22.0-RC1"
+        compile "com.badlogicgames.gdx:gdx-bullet-platform:$gdxVersion:natives-desktop"
+
     }
 }
 
@@ -61,6 +63,8 @@ project(":ios") {
         compile "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-ios"
         compile "de.tomgrill.gdxdialogs:gdx-dialogs-ios:1.2.0"
         compile "com.esotericsoftware:kryonet:2.22.0-RC1"
+        compile "com.badlogicgames.gdx:gdx-bullet-platform:$gdxVersion:natives-ios"
+
     }
 }
 
@@ -73,12 +77,15 @@ project(":core") {
     }
 
     dependencies {
+        compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.0.1'
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         compile "de.tomgrill.gdxdialogs:gdx-dialogs-core:1.2.0"
         compile "com.esotericsoftware:kryonet:2.22.0-RC1"
+        compile "com.badlogicgames.gdx:gdx-bullet:$gdxVersion"
         compile files('../dependencies/jcodec-0.1.5.jar')
         compile files('../dependencies/vis-ui-1.0.2.jar')
+        
     }
 }
 

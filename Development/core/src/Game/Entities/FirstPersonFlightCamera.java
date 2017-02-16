@@ -31,6 +31,8 @@ public class FirstPersonFlightCamera extends Camera3d {
       //Update positions based on user input
       camController.update();
       //super.update();
+
+
    }
    
    @Override

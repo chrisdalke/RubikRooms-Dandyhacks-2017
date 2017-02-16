@@ -22,7 +22,7 @@ public class Camera3d extends GameObject3d {
         cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         cam.position.set(getX(), getY(), getZ());
         cam.near = 0.1f;
-        cam.far = 100f;
+        cam.far = 300f;
         cam.update();
     }
 

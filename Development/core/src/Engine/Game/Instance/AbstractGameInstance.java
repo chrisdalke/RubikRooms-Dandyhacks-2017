@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.environment.DirectionalLight;
+import com.badlogic.gdx.graphics.g3d.utils.DepthShaderProvider;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,7 +28,11 @@ public abstract class AbstractGameInstance {
     public ModelBatch modelBatch;
     public Camera camera;
     public Camera camera2d;
-    
+
+    public Environment getEnvironment() {
+        return environment;
+    }
+
     public void setCamera(Camera cam){
         camera = cam;
     }
@@ -39,24 +44,19 @@ public abstract class AbstractGameInstance {
         //Initialize 3d batch and environment settings
         //Set up 3d environment conditions
         environment = new Environment();
-        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.6f, 0.6f, 0.6f, 1f));
+        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.8f, 0.8f, 0.8f, 1f));
         environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
         //environment.add(new DirectionalLight().set(0.4f, 0.4f, 0.4f, -1f, -0.8f, -0.2f));
-        // environment.add((shadowLight = new CustomDirectionalShadowLight(1024, 1024, 60f, 60f, .1f, 150f))
-        //         .set(1f, 1f, 1f, 40.0f, -35f, -35f));
-        //environment.shadowMap = shadowLight;
-        // shadowBatch = new ModelBatch(new DepthShaderProvider());
+
+
+         environment.add((shadowLight = new CustomDirectionalShadowLight(1024, 1024, 60f, 60f, .1f, 150f))
+                 .set(1f, 1f, 1f, 40.0f, -35f, -35f));
+        environment.shadowMap = shadowLight;
+         shadowBatch = new ModelBatch(new DepthShaderProvider());
         modelBatch = new ModelBatch();
     
-        environment.set(new ColorAttribute(ColorAttribute.Fog, 0.964f,0.674f,0.513f, 1f));
-        
-        /*
-        environment.add((shadowLight = new DirectionalShadowLight(1024, 1024, 60f, 60f, .1f, 50f))
-                .set(1f, 1f, 1f, 40.0f, -35f, -35f));
-        environment.shadowMap = shadowLight;
+        //environment.set(new ColorAttribute(ColorAttribute.Fog, 1.0,0.513f, 1f));
 
-        shadowBatch = new ModelBatch(new DepthShaderProvider());
-        */
     
     }
     
@@ -165,12 +165,12 @@ public abstract class AbstractGameInstance {
     
     public void renderShadows(){
         
-        /*
-        shadowLight.begin(Vector3.Zero, cam.direction);
+
+        shadowLight.begin(camera.position, camera.direction);
         shadowBatch.begin(shadowLight.getCamera());
-        shadowBatch.render(instances);
+        shadowBatch.render(collectModels());
         shadowBatch.end();
-        shadowLight.end();*/
+        shadowLight.end();
     
     }
 }

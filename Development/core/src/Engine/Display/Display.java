@@ -34,7 +34,7 @@ public class Display {
         Display.config = config;
         config.width = 1024;
         config.height = 768;
-        config.fullscreen = true;
+        config.fullscreen = false;
 
         if (PlatformManager.getPlatform() == PlatformManager.IOS){
             config.fullscreen_window = true;
@@ -87,7 +87,7 @@ public class Display {
         //Clear the background
 
         Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        Gdx.gl.glClearColor(0.5f,0.5f,0.5f, 1);
+        Gdx.gl.glClearColor(1.0f,0.0f,0.0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         Gdx.gl.glDepthFunc(GL20.GL_GREATER);
 

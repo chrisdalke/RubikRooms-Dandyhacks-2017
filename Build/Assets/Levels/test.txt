@@ -1,1 +1,8 @@
-{"dimensionLength":3,"startingRoom":2,"rooms":[{"mirror":false,"mirrorOrientation":-1}],"planes":null}
+{
+  "size" : [ 2, 2, 2 ],
+  "levelNumber" : 1,
+  "name" : "Untitled",
+  "description" : "Untitled Level",
+  "rooms" : [ [ [ null, null ], [ null, null ] ], [ [ null, null ], [ null, null ] ] ],
+  "solution" : [ [ [ null, null ], [ null, null ] ], [ [ null, null ], [ null, null ] ] ]
+}

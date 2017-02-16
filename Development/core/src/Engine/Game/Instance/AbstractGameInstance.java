@@ -44,18 +44,21 @@ public abstract class AbstractGameInstance {
         //Initialize 3d batch and environment settings
         //Set up 3d environment conditions
         environment = new Environment();
-        //environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.8f, 0.8f, 0.8f, 1f));
-        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 1f,1f,1f, 1f));
+        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.8f, 0.8f, 0.8f, 1f));
+        //environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 1f,1f,1f, 1f));
         environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -1f, -0.8f, -0.2f));
+
         //environment.add(new DirectionalLight().set(0.4f, 0.4f, 0.4f, -1f, -0.8f, -0.2f));
 
 
-         environment.add((shadowLight = new CustomDirectionalShadowLight(1024, 1024, 60f, 60f, .1f, 150f))
+         environment.add((shadowLight = new CustomDirectionalShadowLight(1024, 1024, 256f, 256f, .1f, 300f))
                  .set(1f, 1f, 1f, 40.0f, -35f, -35f));
         environment.shadowMap = shadowLight;
          shadowBatch = new ModelBatch(new DepthShaderProvider());
+
+
         modelBatch = new ModelBatch();
-    
+
         //environment.set(new ColorAttribute(ColorAttribute.Fog, 1.0,0.513f, 1f));
 
     
@@ -150,7 +153,7 @@ public abstract class AbstractGameInstance {
         //Display debug text here
         Renderer.startUI();
         Text.setColor(Color.BLACK);
-        Text.draw(10, Display.getHeight() - 10,"Rubik's Room");
+        Text.draw(10, (float)Display.getHeight() - 10,"Rubik's Room");
         Text.setColor(Color.WHITE);
         Renderer.endUI();
     }

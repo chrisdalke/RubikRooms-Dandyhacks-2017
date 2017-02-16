@@ -19,7 +19,7 @@ public class Camera3d extends GameObject3d {
     @Override
     public void init() {
         super.init();
-        cam = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        cam = new PerspectiveCamera(75, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         cam.position.set(getX(), getY(), getZ());
         cam.near = 0.1f;
         cam.far = 1000f;

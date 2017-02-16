@@ -7,6 +7,7 @@
 
 package Engine.System;
 
+import Engine.System.Commands.Commands;
 import Engine.System.Config.Configuration;
 import Engine.System.Logging.Logger;
 import Engine.System.Utility.NativeDialog;
@@ -18,6 +19,7 @@ import com.badlogic.gdx.Gdx;
 public class System {
     public static void init(Configuration config){
         Logger.init();
+        Commands.init();
         NativeDialog.init();
 
         isRunning = true;

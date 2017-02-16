@@ -8,6 +8,7 @@
 package Engine.System.Logging;
 
 import Engine.Display.Display;
+import Engine.System.Commands.Commands;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -180,7 +181,9 @@ public class Logger {
         write("<td>" +Display.frameNumber + "</td>");
         write("<td>" + message + "</td>");
         write("</tr>");
-        System.out.println("[Log "+ new Timestamp(date.getTime()).toString() +"] "+message);
+        String messageFormatted = "[Log "+ new Timestamp(date.getTime()).toString() +"] "+message;
+        Commands.log(messageFormatted);
+        System.out.println(messageFormatted);
         buffer.add(message);
         bufferUpdate();
     }

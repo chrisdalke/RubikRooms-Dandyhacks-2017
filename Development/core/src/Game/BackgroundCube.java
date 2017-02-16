@@ -19,6 +19,9 @@ public class BackgroundCube extends GameObject3d {
     float speedX = 0;
     float speedY = 0;
     float speedZ = 0;
+
+
+
     public BackgroundCube() {
         super("Assets/Models/cube.obj");
         this.getModel().materials.get(0).set(ColorAttribute.createDiffuse(0.8f,0.8f,0.8f,1.0f));

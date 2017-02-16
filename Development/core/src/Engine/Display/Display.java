@@ -9,6 +9,7 @@ package Engine.Display;
 
 import Engine.Display.Recording.Recording;
 import Engine.Input.Input;
+import Engine.System.Commands.Commands;
 import Engine.System.Config.Configuration;
 import Engine.System.Logging.Logger;
 import Engine.System.Platforms.PlatformManager;
@@ -113,6 +114,7 @@ public class Display {
         }
 
         if (Input.getKeyPress(com.badlogic.gdx.Input.Keys.GRAVE)){
+            /*
             if (Recording.isRecording()){
                 Recording.stopRecording();
                 Logger.log("Stopped video recording!");
@@ -120,6 +122,8 @@ public class Display {
                 Recording.startRecording();
                 Logger.log("Started video recording!");
             }
+            */
+            Commands.toggle();
         }
 
         frameNumber++;

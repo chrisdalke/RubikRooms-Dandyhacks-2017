@@ -110,6 +110,20 @@ public class Renderer {
 
     }
 
+    public static void setSubtractive(){
+
+        batch.setBlendFunction(GL20.GL_ONE,GL20.GL_ONE);
+    }
+
+    public static void setInvert(){
+        batch.setBlendFunction(GL20.GL_ONE_MINUS_DST_COLOR,GL20.GL_ONE_MINUS_SRC_COLOR);
+    }
+
+
+    public static void resetBlending(){
+        batch.setBlendFunction(GL20.GL_SRC_ALPHA,GL20.GL_ONE_MINUS_SRC_ALPHA);
+    }
+
     public static void flush(){
         batch.flush();
     }

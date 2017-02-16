@@ -15,13 +15,13 @@ import Engine.Game.Instance.AbstractGameInstance;
 import Engine.Renderer.FrameBuffer;
 import Engine.Renderer.Renderer;
 import Engine.Renderer.Textures.TextureLoader;
+import Engine.System.Commands.Commands;
 import Engine.System.Config.Configuration;
 import Game.BackgroundCube;
 import Game.Entities.FirstPersonFlightCamera;
 import Game.LevelDataObject;
-import Game.RoomObject;
+import Game.TestRoomObject;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g3d.environment.PointLight;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -45,6 +45,7 @@ public class GameInstance extends AbstractGameInstance {
     //Loaded level data
     public LevelDataObject level;
     public SkyBox skybox;
+    Engine.Renderer.Textures.Texture crosshairTex;
 
     ////////////////////////////////////////////////
     // Level Loading
@@ -76,6 +77,7 @@ public class GameInstance extends AbstractGameInstance {
     public void init(Configuration config) {
         super.init(config);
 
+        /*
         for (int x = 0; x < 3; x++){
             for (int y = 0; y < 3; y++){
                 for (int z = 0; z < 3; z++){
@@ -95,6 +97,9 @@ public class GameInstance extends AbstractGameInstance {
                 }
             }
         }
+        */
+
+        addObject(new TestRoomObject());
 
         for (int i = 0; i < 20; i++){
             GameObject3d cubeObj = new BackgroundCube();
@@ -113,12 +118,21 @@ public class GameInstance extends AbstractGameInstance {
         setCamera(fpsCam.getCam());
         addObject(fpsCam);
 
+        Commands.bind("test", new Runnable() {
+            @Override
+            public void run() {
+                fpsCam.getCam().translate(fpsCam.getX(),100,fpsCam.getZ());
+            }
+        });
+
         Display.hideCursor();
 
         Texture skyTexTop = TextureLoader.load("Assets/Textures/skybox/skyboxTop.png").getTex();
         Texture skyTexSide = TextureLoader.load("Assets/Textures/skybox/skyboxSide.png").getTex();
         Texture skyTexBottom = TextureLoader.load("Assets/Textures/skybox/skyboxBottom.png").getTex();
         skybox = new SkyBox(skyTexSide,skyTexSide,skyTexTop,skyTexBottom,skyTexSide,skyTexSide);
+
+        crosshairTex = TextureLoader.load("Assets/Textures/crosshair.png");
 
     }
 
@@ -151,13 +165,20 @@ public class GameInstance extends AbstractGameInstance {
 
         renderModels();
         endWorld();
-        //renderShadows();
+        renderShadows();
 
         //frameBuffer.end();
         Renderer.startUI();
         //PostProcessManager.start();
         //Renderer.draw(frameBuffer.getRegion(),0,0, (float)Display.getWidth(),(float)Display.getHeight());
         //PostProcessManager.end();
+
+
+        float crosshairSize = 20;
+        Renderer.setInvert();
+        Renderer.draw(crosshairTex.getRegion(), (float)Display.getWidth()/2,(float)Display.getHeight()/2,crosshairSize,crosshairSize);
+        Renderer.resetBlending();
+
         Renderer.endUI();
     }
 

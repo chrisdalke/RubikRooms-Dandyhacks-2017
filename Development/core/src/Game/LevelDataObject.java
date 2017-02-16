@@ -41,6 +41,14 @@ public class LevelDataObject {
    public void setStartingRoom(int startingRoom) {
       this.startingRoom = startingRoom;
    }
+
+   public void rotatePlane(Plane plane, Float degrees){
+      // rotate specific plane
+   }
+
+   public void updatePlanes(){
+      // update planes array after a rotation
+   }
 }
 
 ////////////////////////////////////////////////

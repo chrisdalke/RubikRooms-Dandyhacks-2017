@@ -12,6 +12,7 @@ public class LevelDataObject {
    int dimensionLength;
    int startingRoom;
    Room[] rooms;
+   Plane[] planes;
 
 
    public LevelDataObject(String filename) {
@@ -27,6 +28,10 @@ public class LevelDataObject {
 
    public Room getRoom(int n) {
       return rooms[n];
+   }
+
+   public Plane getPlane(int n) {
+      return planes[n];
    }
 
    public void setDimensionLength(int dimensionLength) {

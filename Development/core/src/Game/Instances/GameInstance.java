@@ -12,6 +12,8 @@ import Engine.Game.Entity.Types.Camera3d;
 import Engine.Game.Instance.AbstractGameInstance;
 import Engine.Renderer.FrameBuffer;
 import Engine.Renderer.Renderer;
+import Engine.Renderer.Textures.Texture;
+import Engine.Renderer.Textures.TextureLoader;
 import Engine.System.Config.Configuration;
 import Game.Cube;
 import Game.Entities.FirstPersonFlightCamera;
@@ -116,10 +118,13 @@ public class GameInstance extends AbstractGameInstance {
         renderModels();
         endWorld();
         //frameBuffer.end();
+
+
         Renderer.startUI();
         //PostProcessManager.start();
         //Renderer.draw(frameBuffer.getRegion(),0,0, (float)Display.getWidth(),(float)Display.getHeight());
         //PostProcessManager.end();
+        
         Renderer.endUI();
     }
 

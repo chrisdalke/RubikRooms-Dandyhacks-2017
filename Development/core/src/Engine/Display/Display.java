@@ -34,7 +34,7 @@ public class Display {
         Display.config = config;
         config.width = 1024;
         config.height = 768;
-        config.fullscreen = true;
+        config.fullscreen = false;
 
         if (PlatformManager.getPlatform() == PlatformManager.IOS){
             config.fullscreen_window = true;

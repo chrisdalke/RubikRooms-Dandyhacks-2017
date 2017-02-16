@@ -1,30 +1,20 @@
-////////////////////////////////////////////////
-// Development
-// Chris Dalke
-////////////////////////////////////////////////
-// Module: Cube
-////////////////////////////////////////////////
-
 package Game;
 
-import Engine.Game.Entity.GameObject3d;
+/**
+ * Created by Nate on 2/15/17.
+ *
+ * Class to represent a room in the level
+ */
 
-public class Room extends GameObject3d {
+public class Room {
 
-    public Room() {
-        super("Assets/Models/room.obj");
-    }
+    boolean mirror;
 
-    @Override
-    public void init() {
+    Wall[] walls = new Wall[6];
 
-    }
-
-    @Override
-    public void update() {
+    public Room(boolean mirror, Wall[] walls) {
+        this.mirror = mirror;
+        this.walls = walls;
     }
 }
 
-////////////////////////////////////////////////
-// End of code
-////////////////////////////////////////////////

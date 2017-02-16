@@ -49,8 +49,6 @@ public class Game {
     private static AbstractGameInstance gameInstance;
     private static AbstractGameInstance menuInstance;
 
-    static Texture test;
-
     ////////////////////////////////////////////////
     // Game Controller: Initialization
     ////////////////////////////////////////////////
@@ -89,9 +87,6 @@ public class Game {
         } else {
             ServerTest.startServer();
         }
-
-
-        test = TextureLoader.load("Assets/Textures/spark-2.png");
     }
     static boolean sentPacket;
 

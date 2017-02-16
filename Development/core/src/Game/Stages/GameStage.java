@@ -8,7 +8,7 @@
 package Game.Stages;
 
 import Engine.UI.Stages.UIStage;
-import Engine.UI.Stages.UIStageManager;
+import Game.Game;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -20,16 +20,11 @@ public class GameStage extends UIStage {
    @Override
    protected void init() {
 
-      TextButton store = new TextButton("Toggle Store",skin);
-      addActor(store);
-      store.addListener(new ChangeListener() {
+      TextButton menu = new TextButton("Exit to Menu",skin);
+      addActor(menu);
+      menu.addListener(new ChangeListener() {
          public void changed(ChangeListener.ChangeEvent event, Actor actor) {
-            UIStageManager.fadeOutEvent(new Runnable() {
-               @Override
-               public void run() {
-                  UIStageManager.switchTo("GameStage");
-               }
-            });
+            Game.triggerMenu();
          }
       });
    }

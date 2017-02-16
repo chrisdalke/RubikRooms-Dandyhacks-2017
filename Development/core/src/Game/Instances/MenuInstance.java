@@ -12,7 +12,6 @@ import Engine.Game.Instance.AbstractGameInstance;
 import Engine.Renderer.Renderer;
 import Engine.Renderer.Textures.Texture;
 import Engine.Renderer.Textures.TextureLoader;
-import Engine.System.Config.Configuration;
 import Engine.System.Timer.TimerManager;
 
 public class MenuInstance extends AbstractGameInstance {
@@ -25,8 +24,8 @@ public class MenuInstance extends AbstractGameInstance {
 
 
     @Override
-    public void init(Configuration config) {
-        super.init(config);
+    public void init() {
+        super.init();
 
         bg1 = TextureLoader.load("Assets/Textures/bg_layer1.png");
         bg2 = TextureLoader.load("Assets/Textures/bg_layer2.png");
@@ -46,7 +45,7 @@ public class MenuInstance extends AbstractGameInstance {
         for (int i = 1; i <= 8; i++){
             Renderer.draw(cubeTextures[i-1].getRegion(),0,-40+(float)Math.sin((TimerManager.getTime() + (i*2000))/(2000.0f))*40.0f,(float) Display.getWidth(),(float)Display.getHeight());
         }
-        Renderer.draw(title.getRegion(),0,0,(float) Display.getWidth(),(float)Display.getHeight());
+        //Renderer.draw(title.getRegion(),0,0,(float) Display.getWidth(),(float)Display.getHeight());
 
         Renderer.endUI();
 

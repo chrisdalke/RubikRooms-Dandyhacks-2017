@@ -17,7 +17,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Graphics;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
 
 public class Display {
 
@@ -103,7 +102,7 @@ public class Display {
     public static void finishRender(){
 
         //take a screenshot?
-        if (Input.getKeyPress(com.badlogic.gdx.Input.Keys.P)){
+        if (Input.getKeyPress(com.badlogic.gdx.Input.Keys.P) & !Commands.isShown){
             Screenshot.saveScreenshot();
             Logger.log("Took a screenshot!");
         }
@@ -134,15 +133,15 @@ public class Display {
     }
 
     public static void hideCursor(){
-        Pixmap pm = new Pixmap(Gdx.files.internal("Assets/Textures/pixel_blank.png"));
-        Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
-        pm.dispose();
+        //Pixmap pm = new Pixmap(Gdx.files.internal("Assets/Textures/pixel_blank.png"));
+        //Gdx.graphics.setCursor(Gdx.graphics.newCursor(pm, 0, 0));
+        //pm.dispose();
         Gdx.input.setCursorCatched(true);
     }
 
     public static void showCursor(){
-        Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
         Gdx.input.setCursorCatched(false);
+        Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
     }
 
 }

@@ -16,7 +16,6 @@ import Engine.Renderer.FrameBuffer;
 import Engine.Renderer.Renderer;
 import Engine.Renderer.Textures.TextureLoader;
 import Engine.System.Commands.Commands;
-import Engine.System.Config.Configuration;
 import Game.BackgroundCube;
 import Game.Entities.FirstPersonFlightCamera;
 import Game.LevelDataObject;
@@ -74,8 +73,8 @@ public class GameInstance extends AbstractGameInstance {
     ////////////////////////////////////////////////
 
     @Override
-    public void init(Configuration config) {
-        super.init(config);
+    public void init() {
+        super.init();
 
         /*
         for (int x = 0; x < 3; x++){

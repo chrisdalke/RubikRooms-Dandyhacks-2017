@@ -22,10 +22,7 @@ import Engine.System.Utility.MethodInvoker;
 import Engine.UI.Stages.UIStageManager;
 import Game.Instances.GameInstance;
 import Game.Instances.MenuInstance;
-import Game.Stages.GameStage;
-import Game.Stages.LevelSelectionStage;
-import Game.Stages.MainMenuStage;
-import Game.Stages.OptionsStage;
+import Game.Stages.*;
 import com.badlogic.gdx.Gdx;
 
 import java.util.ArrayList;
@@ -63,16 +60,17 @@ public class Game {
         // Set up the global interface
         UIStageManager.init();
         UIStageManager.addStage("GameStage",new GameStage());
+        UIStageManager.addStage("GameSplashStage",new GameSplashStage());
         UIStageManager.addStage("LevelSelectionStage",new LevelSelectionStage());
         UIStageManager.addStage("MainMenuStage",new MainMenuStage());
         UIStageManager.addStage("OptionsStage",new OptionsStage());
-        UIStageManager.switchTo("GameStage");
+        UIStageManager.switchTo("MainMenuStage");
         
         // Set up the game instance / menu instance
-        gameInstance = new GameInstance();
-        gameInstance.init(config);
+        //gameInstance = new GameInstance();
+        //gameInstance.init();
         menuInstance = new MenuInstance();
-        menuInstance.init(config);
+        menuInstance.init();
 
         /*
         if (PlatformManager.getPlatform() == PlatformManager.IOS){
@@ -101,11 +99,25 @@ public class Game {
 
 
     public static void triggerMenu(){
-        // Do nothing yet
+        UIStageManager.fadeOutEvent(new Runnable() {
+            @Override
+            public void run() {
+                gameInstance = null;
+                UIStageManager.switchTo("MainMenuStage");
+            }
+        });
     }
 
     public static void triggerGame(){
-        // Do nothing yet
+        UIStageManager.fadeOutEvent(new Runnable() {
+            @Override
+            public void run() {
+                gameInstance = new GameInstance();
+                gameInstance.init();
+                setPaused(false);
+                UIStageManager.switchTo("GameSplashStage");
+            }
+        });
     }
     ////////////////////////////////////////////////
     // Game Controller: Main Loop
@@ -216,7 +228,6 @@ public class Game {
     public static void setPaused(boolean isPaused) {
         Game.isPaused = isPaused;
         if (isPaused){
-
             Display.showCursor();
             Gdx.input.setCursorPosition((int)Display.getWidth()/2,(int)Display.getHeight()/2);
         } else {

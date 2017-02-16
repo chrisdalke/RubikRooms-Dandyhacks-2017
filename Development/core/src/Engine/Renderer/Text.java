@@ -16,8 +16,8 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 public class Text {
 
 
-    private static BitmapFont font;
-    private static BitmapFont font2;
+    public static BitmapFont font;
+    public static BitmapFont font2;
     private static BitmapFont font3;
     private static BitmapFont currentFont;
 
@@ -26,7 +26,7 @@ public class Text {
         //Generate the font from Freetype files
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Assets/Fonts/geo_sans_light/GeosansLight.ttf"));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 24;
+        parameter.size = 36;
         parameter.color = Color.WHITE;
         font = generator.generateFont(parameter);
         generator.dispose(); // don't forget to dispose to avoid memory leaks!

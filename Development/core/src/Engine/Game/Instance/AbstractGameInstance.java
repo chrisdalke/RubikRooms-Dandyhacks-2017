@@ -5,7 +5,6 @@ import Engine.Game.Entity.GameObject3d;
 import Engine.Renderer.PostProcess.CustomDirectionalShadowLight;
 import Engine.Renderer.Renderer;
 import Engine.Renderer.Text;
-import Engine.System.Config.Configuration;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g3d.Environment;
@@ -37,7 +36,7 @@ public abstract class AbstractGameInstance {
         camera = cam;
     }
 
-    public void init(Configuration config){
+    public void init(){
         //Initialize list of objects
         levelObjects = new ArrayList<>();
         

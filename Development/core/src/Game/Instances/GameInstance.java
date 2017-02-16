@@ -18,7 +18,7 @@ import Engine.System.Config.Configuration;
 import Game.Cube;
 import Game.Entities.FirstPersonFlightCamera;
 import Game.LevelDataObject;
-import Game.Room;
+import Game.RoomObject;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g3d.environment.PointLight;
 
@@ -80,7 +80,7 @@ public class GameInstance extends AbstractGameInstance {
                 for (int z = 0; z < 3; z++){
                     //OutlineCube outlineCube = new OutlineCube();
                     //outlineCube.setPosition(x*10,y*10,z*10);
-                    Room room = new Room();
+                    RoomObject room = new RoomObject();
                     room.setPosition(x*20,y*20,z*20);
                     //addObject(outlineCube);
                     addObject(room);

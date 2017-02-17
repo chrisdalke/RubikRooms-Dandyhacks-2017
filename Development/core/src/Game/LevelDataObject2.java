@@ -91,6 +91,7 @@ public class LevelDataObject2 {
 
     }
 
+    //Assumes that there is only one angle in the rotation array that isn't zero
     public void calculateRoomPositions(){
         //Calculates the world positions of all of the rooms
         //and stores it in the room's member variables.

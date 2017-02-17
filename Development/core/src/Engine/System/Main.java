@@ -11,6 +11,7 @@ import Engine.Audio.Audio;
 import Engine.Display.Display;
 import Engine.Input.Input;
 import Engine.Networking.Networking;
+import Engine.Physics.Physics;
 import Engine.Renderer.Renderer;
 import Engine.System.Config.ConfigManager;
 import Engine.System.Config.Configuration;
@@ -40,6 +41,7 @@ public class Main {
             Audio.init(config);
             UI.init(config);
             Networking.init(config);
+            Physics.init();
             Game.init(config);
 
         } catch (Exception e){

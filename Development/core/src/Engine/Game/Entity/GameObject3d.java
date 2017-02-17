@@ -19,6 +19,15 @@ public class GameObject3d {
     private Vector3 rotation;
     private Vector3 scale;
     private boolean isCollider;
+    private boolean isKilled;
+
+    public void kill(){
+        isKilled = true;
+    }
+
+    public boolean getIsKilled(){
+        return isKilled;
+    }
 
     public boolean isCollider() {
         return isCollider;

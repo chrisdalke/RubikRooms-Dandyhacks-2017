@@ -12,6 +12,10 @@ import Engine.Game.Entity.GameObject3d;
 import Engine.Game.Entity.SkyBox;
 import Engine.Game.Entity.Types.Camera3d;
 import Engine.Game.Instance.AbstractGameInstance;
+import Engine.Input.Input;
+import Engine.Physics.DynamicPhysicsEntity;
+import Engine.Physics.PhysicsWorld;
+import Engine.Physics.StaticPhysicsEntity;
 import Engine.Renderer.FrameBuffer;
 import Engine.Renderer.Renderer;
 import Engine.Renderer.Textures.TextureLoader;
@@ -19,9 +23,11 @@ import Engine.System.Commands.Commands;
 import Game.BackgroundCube;
 import Game.Entities.FirstPersonFlightCamera;
 import Game.LevelDataObject;
+import Game.Sphere;
 import Game.TestRoomObject;
 import com.badlogic.gdx.graphics.Texture;
 
+import java.util.Iterator;
 import java.util.concurrent.ThreadLocalRandom;
 
 
@@ -45,6 +51,7 @@ public class GameInstance extends AbstractGameInstance {
     public LevelDataObject level;
     public SkyBox skybox;
     Engine.Renderer.Textures.Texture crosshairTex;
+    PhysicsWorld physicsWorld;
 
     ////////////////////////////////////////////////
     // Level Loading
@@ -98,7 +105,12 @@ public class GameInstance extends AbstractGameInstance {
         }
         */
 
-        addObject(new TestRoomObject());
+        physicsWorld = new PhysicsWorld(this);
+
+        TestRoomObject testRoom = new TestRoomObject();
+        addObject(testRoom);
+
+        physicsWorld.add(new StaticPhysicsEntity(testRoom));
 
         for (int i = 0; i < 20; i++){
             GameObject3d cubeObj = new BackgroundCube();
@@ -143,6 +155,25 @@ public class GameInstance extends AbstractGameInstance {
     public void update() {
         super.update();
 
+        //Purge killed entities
+        for (Iterator<GameObject3d> iterator = levelObjects.iterator(); iterator.hasNext();) {
+            GameObject3d obj = iterator.next();
+            if (obj.getIsKilled()) {
+                iterator.remove();
+            }
+        }
+
+        physicsWorld.update();
+
+        if (Input.getKeyPress(com.badlogic.gdx.Input.Keys.SPACE)){
+            Sphere sphere = new Sphere();
+            sphere.setPosition(camera.position);
+            DynamicPhysicsEntity sphereEntity = new DynamicPhysicsEntity(sphere);
+            physicsWorld.add(sphereEntity);
+            addObject(sphere);
+            float scale = 500.0f;
+            sphereEntity.applyForce(camera.direction.x*scale,camera.direction.y*scale,camera.direction.z*scale);
+        }
 
         
     }
@@ -165,6 +196,8 @@ public class GameInstance extends AbstractGameInstance {
         renderModels();
         endWorld();
         renderShadows();
+
+        physicsWorld.render();
 
         //frameBuffer.end();
         Renderer.startUI();

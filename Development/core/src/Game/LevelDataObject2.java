@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 
 ////////////////////////////////////////////////
 // Level Data Object class
@@ -81,7 +82,7 @@ public class LevelDataObject2 {
     //Visually rotates the rooms on a given plane at a smooth angle.
     //Does not reposition the room array structure (only visual)
     public void rotatePlane(PLANE plane, float angle){
-
+        
     }
 
     //Repositions the rooms on a given plane.
@@ -89,6 +90,38 @@ public class LevelDataObject2 {
     //Also shifts the orientation stored in each Room object
     public void shiftPlane(PLANE plane, PLANE_ROTATION angle){
 
+
+    }
+
+    public void printArray(int[][] array) {
+        for(int i=0; i<array.length; i++) {
+            for(int j=0; j<array.length; j++) {
+                System.out.print(array[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public int[][] rotate90Degrees(int[][] array){
+        int[][] result = new int[array.length][array.length];
+
+        // transpose matrix
+        for(int i=0; i<array.length; i++) {
+            for(int j=0; j<array.length; j++) {
+                result[i][j] = array[j][i];
+            }
+        }
+
+        // flip rows
+        for(int i=0; i<result.length; i++) {
+            for(int j=0; j<result.length/2; j++) {
+                int temp = result[i][j];
+                result[i][j] = result[i][result.length - j - 1];
+                result[i][result.length - j - 1] = temp;
+            }
+        }
+
+        return result;
     }
 
     //Assumes that there is only one angle in the rotation array that isn't zero
@@ -145,6 +178,10 @@ public class LevelDataObject2 {
 
         LevelDataObject2.save(lvl,"Assets/Levels/test.txt");
         System.out.println("Done.");
+
+        int[][] test = new int[][]{{1,2,3},{4,5,6},{7,8,9}};
+        test = lvl.rotate90Degrees(test);
+
     }
     ////////////////////////////////////////////////
     // Getters / Setters

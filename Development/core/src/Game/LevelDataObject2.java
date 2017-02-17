@@ -83,15 +83,13 @@ public class LevelDataObject2 {
     //Visually rotates the rooms on a given plane at a smooth angle.
     //Does not reposition the room array structure (only visual)
     public void rotatePlane(PLANE plane, int planeId, float angle){
-
         //Override existing rotation if one exists - this might look glitchy
         //Potentially snap grid if angle isn't zero?
         plane = plane;
         planeId = planeId;
         planeRotation = angle;
         planeHasRotation = true;
-        calculateRoomPositions();
-
+        calculateRoomPositions(); //Trigger calculation of room world positions
     }
 
     //Triggers the plane to "snap" into place, converting the smooth angle into a shifted plane.
@@ -123,6 +121,38 @@ public class LevelDataObject2 {
     //Also shifts the orientation stored in each Room object
     public void shiftPlane(PLANE plane, int planeId, PLANE_ROTATION angle){
 
+
+    }
+
+    public void printArray(int[][] array) {
+        for(int i=0; i<array.length; i++) {
+            for(int j=0; j<array.length; j++) {
+                System.out.print(array[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public int[][] rotate90Degrees(int[][] array){
+        int[][] result = new int[array.length][array.length];
+
+        // transpose matrix
+        for(int i=0; i<array.length; i++) {
+            for(int j=0; j<array.length; j++) {
+                result[i][j] = array[j][i];
+            }
+        }
+
+        // flip rows
+        for(int i=0; i<result.length; i++) {
+            for(int j=0; j<result.length/2; j++) {
+                int temp = result[i][j];
+                result[i][j] = result[i][result.length - j - 1];
+                result[i][result.length - j - 1] = temp;
+            }
+        }
+
+        return result;
     }
 
     //Assumes that there is only one angle in the rotation array that isn't zero
@@ -131,8 +161,6 @@ public class LevelDataObject2 {
         //and stores it in the room's member variables.
         //assumes rooms have a size of 1 (will be scaled later in path)
         //Does this based on smooth room angle.
-
-        //Use trigonometry to calculate these transforms!
 
         //Calculate transforms for the non rotated rooms
         for (int x = 0; x < size; x++){
@@ -210,10 +238,14 @@ public class LevelDataObject2 {
 
     public static void main(String[] args){
         System.out.println("Starting level serialization test...");
-        LevelDataObject2 lvl = new LevelDataObject2(2,2,2);
+        LevelDataObject2 lvl = new LevelDataObject2(2);
 
         LevelDataObject2.save(lvl,"Assets/Levels/test.txt");
         System.out.println("Done.");
+
+        int[][] test = new int[][]{{1,2,3},{4,5,6},{7,8,9}};
+        test = lvl.rotate90Degrees(test);
+
     }
     ////////////////////////////////////////////////
     // Getters / Setters

@@ -1,5 +1,7 @@
 package Game;
 
+import com.badlogic.gdx.math.Matrix4;
+
 /**
  * Created by Nate on 2/15/17.
  *
@@ -7,6 +9,12 @@ package Game;
  */
 
 public class Room {
+
+    public Matrix4 transform;
+
+    public void setWorldTransform(Matrix4 transform){
+        this.transform = transform;
+    }
 
     boolean mirror;
 
@@ -27,6 +35,8 @@ public class Room {
         else {
             mirrorOrientation = -1;
         }
+
+        transform = new Matrix4();
     }
 
     public boolean isMirror() {

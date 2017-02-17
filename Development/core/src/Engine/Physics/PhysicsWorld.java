@@ -66,7 +66,7 @@ public class PhysicsWorld {
 
     //TODO convert to smooth timestep based on delta time
     public void update(){
-        collisionWorld.stepSimulation(fixedTimeStep, maxSubSteps, fixedTimeStep);
+        collisionWorld.stepSimulation(fixedTimeStep*1.5f, maxSubSteps, fixedTimeStep);
     }
 
     public void render(){

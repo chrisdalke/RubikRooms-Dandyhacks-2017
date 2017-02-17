@@ -11,11 +11,15 @@ package Game;
 // Package Imports
 ////////////////////////////////////////////////
 
+import Engine.System.Logging.Logger;
+import com.badlogic.gdx.math.Matrix4;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.io.File;
 import java.io.IOException;
+
+import static Game.LevelDataObject2.PLANE_ROTATION.*;
 
 ////////////////////////////////////////////////
 // Level Data Object class
@@ -32,26 +36,22 @@ public class LevelDataObject2 {
     };
 
     public enum PLANE_ROTATION {
-        NINETY, ONE_EIGHTY, TWO_SEVENTY, THREE_SIXTY
+        ZERO, NINETY, ONE_EIGHTY, TWO_SEVENTY
     }
 
     ////////////////////////////////////////////////
     // Constructors
     ////////////////////////////////////////////////
 
-    public LevelDataObject2(int sizeX, int sizeY, int sizeZ) {
-        size = new int[3];
-        size[0] = sizeX;
-        size[1] = sizeY;
-        size[2] = sizeZ;
+    public LevelDataObject2(int size) {
+        this.size = size;
 
         levelNumber = 1;
         name = "Untitled";
         description = "Untitled Level";
 
-        rooms = new Room[sizeX][sizeY][sizeZ];
-        solution = new Room[sizeX][sizeY][sizeZ];
-        rotation = new float[3][Math.max(sizeX,Math.max(sizeY,sizeZ))];
+        rooms = new Room[size][size][size];
+        solution = new Room[size][size][size];
     }
 
     ////////////////////////////////////////////////
@@ -59,15 +59,17 @@ public class LevelDataObject2 {
     ////////////////////////////////////////////////
 
     //General level properties
-    int[] size;
-
+    int size;
     int levelNumber;
     String name;
     String description;
 
     //Rotation properties
-    //2d array in format [axis][vector of rotations];
-    float[][] rotation;
+    //Stores the current plane of rotation, ID of rotation, and float indicating rotation angle
+    PLANE plane;
+    int planeId;
+    float planeRotation;
+    boolean planeHasRotation;
 
     //Room object contains data about what a room contains
     //as well as information about the room's orientation, which this class modifies
@@ -80,14 +82,46 @@ public class LevelDataObject2 {
 
     //Visually rotates the rooms on a given plane at a smooth angle.
     //Does not reposition the room array structure (only visual)
-    public void rotatePlane(PLANE plane, float angle){
+    public void rotatePlane(PLANE plane, int planeId, float angle){
 
+        //Override existing rotation if one exists - this might look glitchy
+        //Potentially snap grid if angle isn't zero?
+        plane = plane;
+        planeId = planeId;
+        planeRotation = angle;
+        planeHasRotation = true;
+        calculateRoomPositions();
+
+    }
+
+    //Triggers the plane to "snap" into place, converting the smooth angle into a shifted plane.
+    public void snapPlane(){
+        //Cap the rotation to 360 degrees
+        planeRotation = planeRotation % 360;
+        //Figure out which rotation angle is the closest
+        int planeRotationRounded = Math.round(Math.round(planeRotation / 90) * 90);
+        PLANE_ROTATION direction = ZERO;
+        switch (planeRotationRounded){
+            case 0:{ direction = ZERO; break;}
+            case 90:{ direction = NINETY; break;}
+            case 180:{ direction = ONE_EIGHTY; break;}
+            case 270:{ direction = TWO_SEVENTY; break;}
+            default: {
+                Logger.log("Invalid snap angle: "+planeRotationRounded);
+                break;
+            }
+        }
+        //Perform rotation if the direction isn't zero
+        if (direction != ZERO){
+            shiftPlane(plane,planeId,direction);
+        }
+        planeHasRotation = false;
     }
 
     //Repositions the rooms on a given plane.
     //Rearranges the array structure and resets rotation for the given plane.
     //Also shifts the orientation stored in each Room object
-    public void shiftPlane(PLANE plane, PLANE_ROTATION angle){
+    public void shiftPlane(PLANE plane, int planeId, PLANE_ROTATION angle){
 
     }
 
@@ -99,6 +133,41 @@ public class LevelDataObject2 {
         //Does this based on smooth room angle.
 
         //Use trigonometry to calculate these transforms!
+
+        //Calculate transforms for the non rotated rooms
+        for (int x = 0; x < size; x++){
+            for (int y = 0; y < size; y++){
+                for (int z = 0; z < size; z++){
+                    rooms[x][y][z].setWorldTransform(new Matrix4().translate(x,y,z));
+                }
+            }
+        }
+        //Calculate transforms for the rotated rooms, if one exists
+        if (planeHasRotation){
+            for (int i = 0; i < size; i++){
+                for (int j = 0; j < size; j++){
+                    switch (plane){
+                        case X:{
+                            //Rotate around the X axis, uses Y,Z
+                            rooms[planeId][i][j].transform.rotate(1,0,0,planeRotation);
+                            break;
+                        }
+                        case Y:{
+                            //Rotate around the Y axis, uses X,Z
+                            rooms[i][planeId][j].transform.rotate(0,1,0,planeRotation);
+                            break;
+                        }
+                        case Z:{
+                            //Rotate around the Z axis, uses X,Y
+                            rooms[i][j][planeId].transform.rotate(0,0,1,planeRotation);
+                            break;
+                        }
+                    }
+
+                }
+            }
+        }
+
     }
 
     public boolean isSolutionPosition(int x, int y, int z){
@@ -151,11 +220,11 @@ public class LevelDataObject2 {
     ////////////////////////////////////////////////
 
 
-    public int[] getSize() {
+    public int getSize() {
         return size;
     }
 
-    public void setSize(int[] size) {
+    public void setSize(int size) {
         this.size = size;
     }
 

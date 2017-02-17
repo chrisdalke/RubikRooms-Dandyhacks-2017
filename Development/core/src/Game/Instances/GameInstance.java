@@ -22,7 +22,6 @@ import Engine.Renderer.Textures.TextureLoader;
 import Engine.System.Commands.Commands;
 import Game.BackgroundCube;
 import Game.Entities.FirstPersonFlightCamera;
-import Game.LevelDataObject;
 import Game.Sphere;
 import Game.TestRoomObject;
 import com.badlogic.gdx.graphics.Texture;
@@ -165,9 +164,10 @@ public class GameInstance extends AbstractGameInstance {
 
         physicsWorld.update();
 
-        if (Input.getKeyPress(com.badlogic.gdx.Input.Keys.SPACE)){
+        if (Input.getKey(com.badlogic.gdx.Input.Keys.SPACE)){
             Sphere sphere = new Sphere();
             sphere.setPosition(camera.position);
+            sphere.setPosition(sphere.getX(),sphere.getY()-2,sphere.getZ());
             DynamicPhysicsEntity sphereEntity = new DynamicPhysicsEntity(sphere);
             physicsWorld.add(sphereEntity);
             addObject(sphere);

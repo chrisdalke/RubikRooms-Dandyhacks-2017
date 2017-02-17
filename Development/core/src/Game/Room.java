@@ -1,6 +1,7 @@
 package Game;
 
 import com.badlogic.gdx.math.Matrix4;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * Created by Nate on 2/15/17.
@@ -8,6 +9,7 @@ import com.badlogic.gdx.math.Matrix4;
  * Class to represent a room in the level
  */
 
+@JsonIgnoreProperties(value = {"transform"})
 public class Room {
 
     public Matrix4 transform;
@@ -16,40 +18,15 @@ public class Room {
         this.transform = transform;
     }
 
-    boolean mirror;
-
-    // way to represent mirror orientation
-    // perhaps 1 = 45 degrees, 2 = 90 degrees, 3 = 135 degrees, ...
-    // -1 if no mirror in the room
-    int mirrorOrientation;
+    public Matrix4 getWorldTransform() {
+        return transform;
+    }
 
     Wall[] walls = new Wall[6];
 
-    public Room(boolean mirror, Wall[] walls) {
-        this.mirror = mirror;
+    public Room(Wall[] walls) {
         this.walls = walls;
-
-        if(mirror == true) {
-            mirrorOrientation = 1;
-        }
-        else {
-            mirrorOrientation = -1;
-        }
-
         transform = new Matrix4();
     }
-
-    public boolean isMirror() {
-        return mirror;
-    }
-
-    public int getMirrorOrientation() {
-        return mirrorOrientation;
-    }
-
-    public void setMirrorOrientation(int mirrorOrientation) {
-        this.mirrorOrientation = mirrorOrientation;
-    }
-
 }
 

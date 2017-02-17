@@ -8,35 +8,15 @@ package Game;
 
 public class Wall {
 
-    boolean opaque; // is the wall opaque
-    boolean laser; // does a laser come out of the wall
-    boolean receiver; // is the wall a laser receiver (goal state)
-    Type type;
-
-    public Wall(boolean opaque, boolean laser, boolean receiver, Type type) {
-        this.opaque = opaque;
-        this.laser = laser;
-        this.receiver = receiver;
-        this.type = type;
+    public enum WALL_TYPE {
+        NONE, WALL, WALL_GLASS, DOOR, LASER_EMITTER, LASER_RECEIVER, LASER_MIRROR
     }
 
-    public boolean isOpaque() {
-        return opaque;
-    }
+    //TODO Implement orientation changes!!!
 
-    public boolean isLaser() {
-        return laser;
-    }
+    public WALL_TYPE wallType;
 
-    public boolean isReceiver() {
-        return receiver;
-    }
-
-    public Wall.Type getType() {
-        return type;
-    }
-
-    public enum Type {
-        CEILING, FLOOR, NORTH, SOUTH, EAST, WEST
+    public Wall(WALL_TYPE wallType) {
+        this.wallType = wallType;
     }
 }

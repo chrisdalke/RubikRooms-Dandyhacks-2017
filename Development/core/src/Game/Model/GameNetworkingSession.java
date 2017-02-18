@@ -2,23 +2,32 @@
 // Development
 // Chris Dalke
 ////////////////////////////////////////////////
-// Module: SkyboxRenderer
+// Module: GameNetworkingSession
 ////////////////////////////////////////////////
 
-package Game;
+package Game.Model;
 
-//Renders a skybox with cube objects floating in the haze.
-//This is designed to be rendered at the beginning of a frame, before other objects.
-public class SkyboxRenderer {
+public class GameNetworkingSession {
 
-
-    public SkyboxRenderer() {
-    }
-
-    public void render(){
+    public static void serverStart(){
 
     }
 
+    public static void serverEnd(){
+
+    }
+
+    public static void clientStart(){
+
+    }
+
+    public static void clientEnd(){
+
+    }
+
+    public static void serverSendLevelPacket(){
+
+    }
 }
 
 ////////////////////////////////////////////////

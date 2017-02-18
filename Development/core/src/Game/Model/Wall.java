@@ -1,4 +1,6 @@
-package Game;
+package Game.Model;
+
+import Game.Game;
 
 /**
  * Created by Nate on 2/15/17.

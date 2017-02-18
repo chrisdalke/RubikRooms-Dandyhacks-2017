@@ -5,7 +5,7 @@
 // Module: BackgroundCube
 ////////////////////////////////////////////////
 
-package Game;
+package Game.Entities;
 
 import Engine.Game.Entity.GameObject3d;
 import com.badlogic.gdx.graphics.Color;

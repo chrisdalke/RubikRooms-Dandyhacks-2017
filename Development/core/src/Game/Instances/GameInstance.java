@@ -22,9 +22,9 @@ import Engine.Renderer.Textures.TextureLoader;
 import Engine.System.Commands.Commands;
 import Game.Entities.BackgroundCube;
 import Game.Entities.FirstPersonFlightCamera;
-import Game.LevelDataObject2;
-import Game.Sphere;
-import Game.TestRoomObject;
+import Game.Model.LevelDataObject;
+import Game.Entities.Sphere;
+import Game.Entities.TestRoomObject;
 import com.badlogic.gdx.graphics.Texture;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -47,7 +47,7 @@ public class GameInstance extends AbstractGameInstance {
     ////////////////////////////////////////////////
 
     //Loaded level data
-    public LevelDataObject2 level;
+    public LevelDataObject level;
     public SkyBox skybox;
     Engine.Renderer.Textures.Texture crosshairTex;
     PhysicsWorld physicsWorld;

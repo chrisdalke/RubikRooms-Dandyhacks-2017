@@ -2,10 +2,10 @@
 // Development
 // Chris Dalke
 ////////////////////////////////////////////////
-// Module: LevelDataObject2
+// Module: LevelDataObject
 ////////////////////////////////////////////////
 
-package Game;
+package Game.Model;
 
 ////////////////////////////////////////////////
 // Package Imports
@@ -19,13 +19,13 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import java.io.File;
 import java.io.IOException;
 
-import static Game.LevelDataObject2.PLANE_ROTATION.*;
+import static Game.Model.LevelDataObject.PLANE_ROTATION.*;
 
 ////////////////////////////////////////////////
 // Level Data Object class
 ////////////////////////////////////////////////
 
-public class LevelDataObject2 {
+public class LevelDataObject {
 
     ////////////////////////////////////////////////
     // Enums
@@ -43,7 +43,7 @@ public class LevelDataObject2 {
     // Constructors
     ////////////////////////////////////////////////
 
-    public LevelDataObject2(int size) {
+    public LevelDataObject(int size) {
         this.size = size;
 
         levelNumber = 1;
@@ -257,7 +257,7 @@ public class LevelDataObject2 {
     // Level Serialization and Tests
     ////////////////////////////////////////////////
 
-    public static void save(LevelDataObject2 level,String filename){
+    public static void save(LevelDataObject level, String filename){
         //Save a level data object to JSON file
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
@@ -267,12 +267,12 @@ public class LevelDataObject2 {
             System.out.println("Failed to save level file!");
         }
     }
-    public static LevelDataObject2 load(String filename){
+    public static LevelDataObject load(String filename){
         //Load a level data object from JSON file
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
         try {
-            LevelDataObject2 obj = mapper.readValue(new File(filename), LevelDataObject2.class);
+            LevelDataObject obj = mapper.readValue(new File(filename), LevelDataObject.class);
             return obj;
         } catch (Exception e){
             System.out.println("Failed to load level file!");
@@ -282,9 +282,9 @@ public class LevelDataObject2 {
 
     public static void main(String[] args){
         System.out.println("Starting level serialization test...");
-        LevelDataObject2 lvl = new LevelDataObject2(2);
+        LevelDataObject lvl = new LevelDataObject(2);
 
-        LevelDataObject2.save(lvl,"Assets/Levels/test.txt");
+        LevelDataObject.save(lvl,"Assets/Levels/test.txt");
         System.out.println("Done.");
 
         int[][] test = new int[][]{{1,2,3},{4,5,6},{7,8,9}};

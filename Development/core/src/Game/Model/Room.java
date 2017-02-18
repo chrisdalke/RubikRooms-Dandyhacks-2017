@@ -1,4 +1,4 @@
-package Game;
+package Game.Model;
 
 import com.badlogic.gdx.math.Matrix4;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

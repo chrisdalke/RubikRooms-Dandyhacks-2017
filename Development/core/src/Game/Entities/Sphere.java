@@ -5,7 +5,7 @@
 // Module: Sphere
 ////////////////////////////////////////////////
 
-package Game;
+package Game.Entities;
 
 import Engine.Game.Entity.GameObject3d;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;

@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static Game.Model.LevelDataObject.PLANE.X;
 import static Game.Model.LevelDataObject.PLANE_ROTATION.*;
@@ -259,6 +260,26 @@ public class LevelDataObject {
         }
 
         return result;
+    }
+
+    public ArrayList<LaserEmitterObject> getLaserEmitterPositions(){
+        ArrayList<LaserEmitterObject> lasers = new ArrayList<LaserEmitterObject>();
+        
+    }
+
+    public void propagateLasers() {
+        for(int i=0; i<size; i++) {
+            for(int j=0; j<size; j++) {
+                for(int k=0; k<size; k++) {
+                    for (int l=0; l<6; l++) {
+                        if (rooms[i][j][k].walls[l].wallType == Wall.WALL_TYPE.NONE ||
+                                rooms[i][j][k].walls[l].wallType == Wall.WALL_TYPE.WALL_GLASS) {
+                            // will continue later
+                        }
+                    }
+                }
+            }
+        }
     }
 
     //Assumes that there is only one angle in the rotation array that isn't zero

@@ -37,6 +37,9 @@ public abstract class AbstractGameInstance {
         camera = cam;
     }
 
+    public float shadowViewportSize = 256f;
+    public boolean hasShadows= true;
+
     public void init(){
         //Initialize list of objects
         levelObjects = new ArrayList<>();
@@ -50,12 +53,12 @@ public abstract class AbstractGameInstance {
 
         //environment.add(new DirectionalLight().set(0.4f, 0.4f, 0.4f, -1f, -0.8f, -0.2f));
 
-
-         environment.add((shadowLight = new CustomDirectionalShadowLight(1024, 1024, 256f, 256f, .1f, 300f))
-                 .set(1f, 1f, 1f, 40.0f, -35f, -35f));
-        environment.shadowMap = shadowLight;
-         shadowBatch = new ModelBatch(new DepthShaderProvider());
-
+        if (hasShadows) {
+            environment.add((shadowLight = new CustomDirectionalShadowLight(1024, 1024, shadowViewportSize, shadowViewportSize, .1f, 300f))
+                    .set(1f, 1f, 1f, 40.0f, -35f, -35f));
+            environment.shadowMap = shadowLight;
+            shadowBatch = new ModelBatch(new DepthShaderProvider());
+        }
 
         modelBatch = new ModelBatch();
 
@@ -178,12 +181,13 @@ public abstract class AbstractGameInstance {
     
     public void renderShadows(){
         
-
-        shadowLight.begin(camera.position, camera.direction);
-        shadowBatch.begin(shadowLight.getCamera());
-        shadowBatch.render(collectModels());
-        shadowBatch.end();
-        shadowLight.end();
+        if (hasShadows) {
+            shadowLight.begin(camera.position, camera.direction);
+            shadowBatch.begin(shadowLight.getCamera());
+            shadowBatch.render(collectModels());
+            shadowBatch.end();
+            shadowLight.end();
+        }
     
     }
 }

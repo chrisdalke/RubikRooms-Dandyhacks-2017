@@ -20,7 +20,7 @@ public class ControllerCube extends GameObject3d {
         isRoom = room;
 
         if (isRoom){
-            this.getModel().materials.get(0).set(ColorAttribute.createDiffuse(0.4f,0.4f,0.8f,1.0f));
+            this.getModel().materials.get(0).set(ColorAttribute.createDiffuse(0.1f,0.4f,0.8f,1.0f));
             this.getModel().materials.get(0).set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA, 1.0f));
         } else {
             this.getModel().materials.get(0).set(ColorAttribute.createDiffuse(0.9f,0.9f,0.9f,1.0f));

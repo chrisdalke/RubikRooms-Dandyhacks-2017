@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import java.io.File;
 import java.io.IOException;
 
+import static Game.Model.LevelDataObject.PLANE.X;
 import static Game.Model.LevelDataObject.PLANE_ROTATION.*;
 
 ////////////////////////////////////////////////
@@ -52,6 +53,22 @@ public class LevelDataObject {
 
         rooms = new Room[size][size][size];
         solution = new Room[size][size][size];
+
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
+                for (int z = 0; z < size; z++) {
+                    rooms[x][y][z] = new Room(null);
+                    solution[x][y][z] = rooms[x][y][z];
+                    rooms[x][y][z].transform = new Matrix4().translate(x,y,z);
+                }
+            }
+        }
+
+        plane = X;
+        planeId = 0;
+        planeRotation = 0;
+        planeHasRotation = false;
+
     }
 
     ////////////////////////////////////////////////
@@ -85,17 +102,61 @@ public class LevelDataObject {
     public void rotatePlane(PLANE plane, int planeId, float angle){
         //Override existing rotation if one exists - this might look glitchy
         //Potentially snap grid if angle isn't zero?
-        plane = plane;
-        planeId = planeId;
-        planeRotation = angle;
+        this.plane = plane;
+        this.planeId = planeId;
+        planeRotation = angle % 360.0f;
         planeHasRotation = true;
         calculateRoomPositions(); //Trigger calculation of room world positions
+    }
+
+    boolean smoothRotateActive;
+    float smoothRotateTargetAngle;
+    float delta;
+
+    //Triggers a smooth rotation which snaps into place once it reaches its target.
+    public void triggerRotatePlane(PLANE plane, int planeId, PLANE_ROTATION targetAngle, float delta){
+        if (!smoothRotateActive) {
+            this.delta = delta;
+            this.plane = plane;
+            this.planeId = planeId;
+            planeRotation = 0;
+            planeHasRotation = true;
+            smoothRotateActive = true;
+            switch (targetAngle) {
+                case NINETY:
+                    smoothRotateTargetAngle = 90;
+                    break;
+                case ONE_EIGHTY:
+                    smoothRotateTargetAngle = 180;
+                    break;
+                case TWO_SEVENTY:
+                    smoothRotateTargetAngle = 270;
+                    break;
+                default:
+                    smoothRotateTargetAngle = 0;
+            }
+        }
+    }
+
+    public void update(){
+        if (smoothRotateActive){
+            if (delta > 0 & smoothRotateTargetAngle > planeRotation){
+                planeRotation += delta;
+            } else if (delta < 0 & -(360-smoothRotateTargetAngle) < planeRotation){
+                planeRotation += delta;
+            } else {
+                //turn rotation off and snap the plane into place.
+                snapPlane();
+                smoothRotateActive = false;
+            }
+            calculateRoomPositions();
+        }
     }
 
     //Triggers the plane to "snap" into place, converting the smooth angle into a shifted plane.
     public void snapPlane(){
         //Cap the rotation to 360 degrees
-        planeRotation = planeRotation % 360;
+        planeRotation = planeRotation % 360.0f;
         //Figure out which rotation angle is the closest
         int planeRotationRounded = Math.round(Math.round(planeRotation / 90) * 90);
         PLANE_ROTATION direction = ZERO;
@@ -113,6 +174,7 @@ public class LevelDataObject {
         if (direction != ZERO){
             shiftPlane(plane,planeId,direction);
         }
+        planeRotation = 0;
         planeHasRotation = false;
     }
 
@@ -206,14 +268,38 @@ public class LevelDataObject {
         //assumes rooms have a size of 1 (will be scaled later in path)
         //Does this based on smooth room angle.
 
-        //Calculate transforms for the non rotated rooms
+        //Calculate center value
+        float center = (size-1) / 2.0f;
+
+        //Reset all transforms to identity matrix
         for (int x = 0; x < size; x++){
             for (int y = 0; y < size; y++){
                 for (int z = 0; z < size; z++){
-                    rooms[x][y][z].setWorldTransform(new Matrix4().translate(x,y,z));
+                    rooms[x][y][z].transform = new Matrix4();
+
+                    //Set transform to center position for given plane of rotation
+                    switch (plane){
+                        case X:{
+                            //Translate this object to center its rotation
+                            rooms[x][y][z].transform.translate(0,center,center);
+                            break;
+                        }
+                        case Y:{
+                            //Translate this object to center its rotation
+                            rooms[x][y][z].transform.translate(center,0,center);
+                            break;
+                        }
+                        case Z:{
+                            //Translate this object to center its rotation
+                            rooms[x][y][z].transform.translate(center,center,0);
+                            break;
+                        }
+                    }
                 }
             }
         }
+
+
         //Calculate transforms for the rotated rooms, if one exists
         if (planeHasRotation){
             for (int i = 0; i < size; i++){
@@ -236,6 +322,29 @@ public class LevelDataObject {
                         }
                     }
 
+                }
+            }
+        }
+
+        //Calculate transforms for the non rotated rooms
+        //Subtract center so that the cube ends up being back in correct position
+        for (int x = 0; x < size; x++){
+            for (int y = 0; y < size; y++){
+                for (int z = 0; z < size; z++){
+                    switch (plane){
+                        case X:{
+                            rooms[x][y][z].transform.translate(x,y-center,z-center);
+                            break;
+                        }
+                        case Y:{
+                            rooms[x][y][z].transform.translate(x-center,y,z-center);
+                            break;
+                        }
+                        case Z:{
+                            rooms[x][y][z].transform.translate(x-center,y-center,z);
+                            break;
+                        }
+                    }
                 }
             }
         }
@@ -287,14 +396,25 @@ public class LevelDataObject {
         LevelDataObject.save(lvl,"Assets/Levels/test.txt");
         System.out.println("Done.");
 
-        int[][] test = new int[][]{{1,2,3},{4,5,6},{7,8,9}};
-        test = lvl.rotate90Degrees(test);
+        //int[][] test = new int[][]{{1,2,3},{4,5,6},{7,8,9}};
+        //test = lvl.rotate90Degrees(test);
 
     }
     ////////////////////////////////////////////////
     // Getters / Setters
     ////////////////////////////////////////////////
 
+    public void setRoom(int x, int y, int z, Room room){
+        rooms[x][y][z] = room;
+    }
+
+    public Room getRoom(int x, int y, int z){
+        try {
+            return rooms[x][y][z];
+        } catch (Exception e){
+            return null;
+        }
+    }
 
     public int getSize() {
         return size;

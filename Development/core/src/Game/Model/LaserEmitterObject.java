@@ -5,13 +5,28 @@ package Game.Model;
  */
 public class LaserEmitterObject {
 
-    float[] worldCoords;
+    double[] worldCoords;
+    Laser_Direction direction;
 
-    public LaserEmitterObject(float x, float y, float z) {
-        this.worldCoords = new float[]{x, y, z};
+    enum Laser_Direction {
+        NEG_X,
+        POS_X,
+        NEG_Y,
+        POS_Y,
+        NEG_Z,
+        POS_Z
     }
 
-    public float[] getWorldCoords() {
+    public LaserEmitterObject(double x, double y, double z, Laser_Direction direction) {
+        this.worldCoords = new double[]{x, y, z};
+        this.direction = direction;
+    }
+
+    public double[] getWorldCoords() {
         return worldCoords;
+    }
+
+    public Laser_Direction getDirection() {
+        return direction;
     }
 }

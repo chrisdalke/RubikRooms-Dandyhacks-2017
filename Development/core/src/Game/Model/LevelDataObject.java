@@ -274,6 +274,23 @@ public class LevelDataObject {
         return result;
     }
 
+    public void undoMove() {
+        Move move = moves.pop();
+        Move undoMove = null;
+        switch (move.getAngle()) {
+            case NINETY:
+                undoMove = new Move(move.getRotatePlane(), move.getRotatePlaneId(), TWO_SEVENTY);
+                break;
+            case ONE_EIGHTY:
+                undoMove = new Move(move.getRotatePlane(), move.getRotatePlaneId(), ONE_EIGHTY);
+                break;
+            case TWO_SEVENTY:
+                undoMove = new Move(move.getRotatePlane(), move.getRotatePlaneId(), NINETY);
+                break;
+        }
+        shiftPlane(undoMove);
+    }
+
     public ArrayList<LaserEmitterObject> getLaserEmitterPositions(){
         ArrayList<LaserEmitterObject> lasers = new ArrayList<LaserEmitterObject>();
         for (int i=0; i<size; i++) {

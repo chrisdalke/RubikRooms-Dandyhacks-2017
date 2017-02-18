@@ -119,22 +119,66 @@ public class LevelDataObject2 {
     //Repositions the rooms on a given plane.
     //Rearranges the array structure and resets rotation for the given plane.
     //Also shifts the orientation stored in each Room object
-    public void shiftPlane(PLANE plane, int planeId, PLANE_ROTATION angle){
+    public void shiftPlane(PLANE rotatePlane, int rotatePlaneId, PLANE_ROTATION angle){
+        int loop;
+        switch (angle) {
+            case NINETY:
+                loop = 1;
+                break;
+            case ONE_EIGHTY:
+                loop = 2;
+                break;
+            case TWO_SEVENTY:
+                loop = 3;
+                break;
+            default:
+                loop = 0;
+        }
 
+        for(int loopId=0; loopId<loop; loopId++) {
 
-    }
+            Room[][] tempArray = new Room[size][size];
 
-    public void printArray(int[][] array) {
-        for(int i=0; i<array.length; i++) {
-            for(int j=0; j<array.length; j++) {
-                System.out.print(array[i][j] + " ");
+            for(int i=0; i<size; i++) {
+                for (int j=0; j<size; j++) {
+                    switch (rotatePlane) {
+                        case X:
+                            tempArray[i][j] = rooms[rotatePlaneId][i][j];
+                            break;
+                        case Y:
+                            tempArray[i][j] = rooms[i][rotatePlaneId][j];
+                            break;
+                        case Z:
+                            tempArray[i][j] = rooms[i][j][rotatePlaneId];
+                            break;
+                    }
+                }
             }
-            System.out.println();
+
+            // rotate over 2D plane
+            tempArray = rotate90Degrees(tempArray);
+
+
+            for(int i=0; i<size; i++) {
+                for (int j=0; j<size; j++) {
+                    switch (rotatePlane) {
+                        case X:
+                            rooms[rotatePlaneId][i][j] = tempArray[i][j];
+                            break;
+                        case Y:
+                            rooms[i][rotatePlaneId][j] = tempArray[i][j];
+                            break;
+                        case Z:
+                            rooms[i][j][rotatePlaneId] = tempArray[i][j];
+                            break;
+                    }
+                }
+            }
         }
     }
 
-    public int[][] rotate90Degrees(int[][] array){
-        int[][] result = new int[array.length][array.length];
+    public Room[][] rotate90Degrees(Room[][] array){
+        Room[][] result = new Room[array.length][array.length];
 
         // transpose matrix
         for(int i=0; i<array.length; i++) {
@@ -146,7 +190,7 @@ public class LevelDataObject2 {
         // flip rows
         for(int i=0; i<result.length; i++) {
             for(int j=0; j<result.length/2; j++) {
-                int temp = result[i][j];
+                Room temp = result[i][j];
                 result[i][j] = result[i][result.length - j - 1];
                 result[i][result.length - j - 1] = temp;
             }

@@ -286,10 +286,6 @@ public class LevelDataObject {
 
         LevelDataObject.save(lvl,"Assets/Levels/test.txt");
         System.out.println("Done.");
-
-        int[][] test = new int[][]{{1,2,3},{4,5,6},{7,8,9}};
-        test = lvl.rotate90Degrees(test);
-
     }
     ////////////////////////////////////////////////
     // Getters / Setters

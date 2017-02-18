@@ -16,7 +16,6 @@ import com.badlogic.gdx.math.Matrix4;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -460,6 +459,7 @@ public class LevelDataObject {
             return obj;
         } catch (Exception e){
             System.out.println("Failed to load level file " + file.getName() + " in load()");
+            e.printStackTrace();
         }
         return null;
     }
@@ -490,14 +490,19 @@ public class LevelDataObject {
         return levelsList;
     }
 
+    public static void test() {
+        LevelDataObject test = new LevelDataObject(3);
+        save(test, "Assets/Levels/NateTest.txt");
+
+        getListOfLevels();
+    }
+
     public static void main(String[] args){
 //        System.out.println("Starting level serialization test...");
 //        LevelDataObject lvl = new LevelDataObject(2);
 //
 //        LevelDataObject.save(lvl,"Assets/Levels/test.txt");
 //        System.out.println("Done.");
-
-        getListOfLevels();
 
         //int[][] test = new int[][]{{1,2,3},{4,5,6},{7,8,9}};
         //test = lvl.rotate90Degrees(test);

@@ -1,0 +1,1305 @@
+{
+  "size" : 3,
+  "levelNumber" : 1,
+  "name" : "Untitled",
+  "description" : "Untitled Level",
+  "rooms" : [ [ [ {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 2.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 2.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  } ], [ {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 2.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 2.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  } ], [ {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 2.0, 0.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 2.0, 0.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 2.0, 1.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 2.0, 1.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 2.0, 2.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 2.0, 2.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  } ] ], [ [ {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 2.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 2.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  } ], [ {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 2.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 2.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  } ], [ {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 2.0, 0.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 2.0, 0.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 2.0, 1.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 2.0, 1.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 2.0, 2.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 2.0, 2.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  } ] ], [ [ {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 0.0, 0.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 0.0, 0.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 0.0, 1.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 0.0, 1.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 0.0, 2.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 0.0, 2.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  } ], [ {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 1.0, 0.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 1.0, 0.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 1.0, 1.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 1.0, 1.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 1.0, 2.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 1.0, 2.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  } ], [ {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 2.0, 0.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 2.0, 0.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 2.0, 1.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 2.0, 1.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 2.0, 2.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 2.0, 2.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  } ] ] ],
+  "solution" : [ [ [ {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 2.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 2.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  } ], [ {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 2.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 2.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  } ], [ {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 2.0, 0.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 2.0, 0.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 2.0, 1.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 2.0, 1.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 2.0, 2.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 2.0, 2.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  } ] ], [ [ {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 2.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 2.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  } ], [ {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 2.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 2.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  } ], [ {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 2.0, 0.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 2.0, 0.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 2.0, 1.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 2.0, 1.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 2.0, 2.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 2.0, 2.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  } ] ], [ [ {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 0.0, 0.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 0.0, 0.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 0.0, 1.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 0.0, 1.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 0.0, 2.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 0.0, 2.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  } ], [ {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 1.0, 0.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 1.0, 0.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 1.0, 1.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 1.0, 1.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 1.0, 2.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 1.0, 2.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  } ], [ {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 2.0, 0.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 2.0, 0.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 2.0, 1.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 2.0, 1.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  }, {
+    "walls" : [ {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    }, {
+      "wallType" : "WALL"
+    } ],
+    "worldTransform" : {
+      "val" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 2.0, 2.0, 1.0 ],
+      "values" : [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 2.0, 2.0, 2.0, 1.0 ],
+      "scaleXSquared" : 1.0,
+      "scaleYSquared" : 1.0,
+      "scaleZSquared" : 1.0,
+      "scaleX" : 1.0,
+      "scaleY" : 1.0,
+      "scaleZ" : 1.0
+    }
+  } ] ] ],
+  "laserEmitterPositions" : [ ]
+}

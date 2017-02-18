@@ -20,6 +20,7 @@ import Engine.UI.Stages.UIStageManager;
 import Game.Instances.ControllerInstance;
 import Game.Instances.GameInstance;
 import Game.Instances.MenuInstance;
+import Game.Model.LevelDataObject;
 import Game.Stages.*;
 import com.badlogic.gdx.Gdx;
 
@@ -83,6 +84,8 @@ public class Game {
             gameInstance.init(config);
         }
         */
+
+        LevelDataObject.test();
 
     }
     static boolean sentPacket;

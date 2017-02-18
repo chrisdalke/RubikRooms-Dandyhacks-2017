@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Stack;
 
 import static Game.Model.LevelDataObject.PLANE.X;
 import static Game.Model.LevelDataObject.PLANE_ROTATION.*;
@@ -58,7 +59,7 @@ public class LevelDataObject {
         for (int x = 0; x < size; x++) {
             for (int y = 0; y < size; y++) {
                 for (int z = 0; z < size; z++) {
-                    rooms[x][y][z] = new Room(null);
+                    rooms[x][y][z] = new Room();
                     solution[x][y][z] = rooms[x][y][z];
                     rooms[x][y][z].transform = new Matrix4().translate(x,y,z);
                 }
@@ -69,6 +70,7 @@ public class LevelDataObject {
         planeId = 0;
         planeRotation = 0;
         planeHasRotation = false;
+        moves = new Stack<Move>();
 
     }
 
@@ -81,6 +83,9 @@ public class LevelDataObject {
     int levelNumber;
     String name;
     String description;
+
+    // Stores the moves made by the user
+    Stack<Move> moves;
 
     //Rotation properties
     //Stores the current plane of rotation, ID of rotation, and float indicating rotation angle
@@ -173,7 +178,9 @@ public class LevelDataObject {
         }
         //Perform rotation if the direction isn't zero
         if (direction != ZERO){
-            shiftPlane(plane,planeId,direction);
+            Move move = new Move(plane, planeId, direction);
+            moves.add(move);
+            shiftPlane(move);
         }
         planeRotation = 0;
         planeHasRotation = false;
@@ -182,7 +189,11 @@ public class LevelDataObject {
     //Repositions the rooms on a given plane.
     //Rearranges the array structure and resets rotation for the given plane.
     //Also shifts the orientation stored in each Room object
-    public void shiftPlane(PLANE rotatePlane, int rotatePlaneId, PLANE_ROTATION angle){
+    public void shiftPlane(Move move){
+        PLANE rotatePlane = move.getRotatePlane();
+        int rotatePlaneId = move.getRotatePlaneId();
+        PLANE_ROTATION angle = move.getAngle();
+
         int loop;
         switch (angle) {
             case NINETY:

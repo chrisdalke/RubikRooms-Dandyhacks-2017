@@ -19,6 +19,9 @@ public class Room {
     Wall east = new Wall(Wall.WALL_TYPE.WALL);
     Wall west = new Wall(Wall.WALL_TYPE.WALL);
 
+    // lasers = [ceiling/floor, north/south, east/west]
+    boolean[] lasers = new boolean[]{false, false, false};
+
     Wall[] walls = new Wall[]{ceiling, floor, north, south, east, west};
 
     public Matrix4 transform;

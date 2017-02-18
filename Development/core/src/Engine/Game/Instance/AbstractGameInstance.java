@@ -16,6 +16,7 @@ import com.badlogic.gdx.graphics.g3d.utils.DepthShaderProvider;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public abstract class AbstractGameInstance {
     
@@ -65,6 +66,15 @@ public abstract class AbstractGameInstance {
     
     public void update(){
         clearEvents();
+
+        //Purge killed entities
+        for (Iterator<GameObject3d> iterator = levelObjects.iterator(); iterator.hasNext();) {
+            GameObject3d obj = iterator.next();
+            if (obj.getIsKilled()) {
+                iterator.remove();
+            }
+        }
+
         for (GameObject3d levelObject : levelObjects){
             levelObject.update();
         }

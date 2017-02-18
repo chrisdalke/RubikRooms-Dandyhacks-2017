@@ -20,13 +20,13 @@ import Engine.Renderer.FrameBuffer;
 import Engine.Renderer.Renderer;
 import Engine.Renderer.Textures.TextureLoader;
 import Engine.System.Commands.Commands;
-import Game.BackgroundCube;
+import Game.Entities.BackgroundCube;
 import Game.Entities.FirstPersonFlightCamera;
+import Game.LevelDataObject2;
 import Game.Sphere;
 import Game.TestRoomObject;
 import com.badlogic.gdx.graphics.Texture;
 
-import java.util.Iterator;
 import java.util.concurrent.ThreadLocalRandom;
 
 
@@ -47,10 +47,11 @@ public class GameInstance extends AbstractGameInstance {
     ////////////////////////////////////////////////
 
     //Loaded level data
-    public LevelDataObject level;
+    public LevelDataObject2 level;
     public SkyBox skybox;
     Engine.Renderer.Textures.Texture crosshairTex;
     PhysicsWorld physicsWorld;
+
 
     ////////////////////////////////////////////////
     // Level Loading
@@ -153,14 +154,6 @@ public class GameInstance extends AbstractGameInstance {
     @Override
     public void update() {
         super.update();
-
-        //Purge killed entities
-        for (Iterator<GameObject3d> iterator = levelObjects.iterator(); iterator.hasNext();) {
-            GameObject3d obj = iterator.next();
-            if (obj.getIsKilled()) {
-                iterator.remove();
-            }
-        }
 
         physicsWorld.update();
 

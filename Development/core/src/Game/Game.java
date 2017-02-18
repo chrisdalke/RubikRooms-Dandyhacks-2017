@@ -20,6 +20,7 @@ import Engine.System.Platforms.PlatformManager;
 import Engine.System.Timer.DeltaTimeManager;
 import Engine.System.Utility.MethodInvoker;
 import Engine.UI.Stages.UIStageManager;
+import Game.Instances.ControllerInstance;
 import Game.Instances.GameInstance;
 import Game.Instances.MenuInstance;
 import Game.Stages.*;
@@ -62,6 +63,7 @@ public class Game {
         UIStageManager.addStage("GameStage",new GameStage());
         UIStageManager.addStage("GameSplashStage",new GameSplashStage());
         UIStageManager.addStage("LevelSelectionStage",new LevelSelectionStage());
+        UIStageManager.addStage("ControllerStage",new ControllerStage());
         UIStageManager.addStage("MainMenuStage",new MainMenuStage());
         UIStageManager.addStage("OptionsStage",new OptionsStage());
         UIStageManager.switchTo("MainMenuStage");
@@ -72,6 +74,11 @@ public class Game {
         menuInstance = new MenuInstance();
         menuInstance.init();
 
+        //test controller instance
+        gameInstance = new ControllerInstance();
+        gameInstance.init();
+        UIStageManager.switchTo("ControllerStage");
+
         /*
         if (PlatformManager.getPlatform() == PlatformManager.IOS){
             // Load the controller instance
@@ -80,12 +87,6 @@ public class Game {
         }
         */
 
-        //Start test networking
-        if (PlatformManager.getPlatform() == PlatformManager.IOS){
-            ClientTest.startClient("10.4.132.104",54555, 54556);
-        } else {
-            ServerTest.startServer();
-        }
     }
     static boolean sentPacket;
 
@@ -139,20 +140,6 @@ public class Game {
             }
             methodInvokers.clear();
 
-
-            //Test iOS networking
-            if (PlatformManager.getPlatform() == PlatformManager.IOS) {
-                if (Input.getMouseClicked() == 1) {
-                    if (!sentPacket) {
-                        sentPacket = true;
-                        ClientTest.clientSendString("Message from IOS!!");
-                    }
-                } else {
-                    sentPacket = false;
-                }
-            }
-
-        
             if (gameInstance != null) {
 
                 if (!isPaused) {

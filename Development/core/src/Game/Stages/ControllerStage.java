@@ -1,0 +1,32 @@
+////////////////////////////////////////////////
+// Development
+// Chris Dalke
+////////////////////////////////////////////////
+// Module: GameStage
+////////////////////////////////////////////////
+
+package Game.Stages;
+
+import Engine.UI.Stages.UIStage;
+
+public class ControllerStage extends UIStage {
+
+   @Override
+   protected void init() {
+
+   }
+   
+   @Override
+   protected void update() {
+      
+   }
+   
+   @Override
+   protected void render() {
+
+   }
+}
+
+////////////////////////////////////////////////
+// End of code
+////////////////////////////////////////////////

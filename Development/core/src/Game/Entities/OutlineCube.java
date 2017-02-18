@@ -5,9 +5,10 @@
 // Module: OutlineCube
 ////////////////////////////////////////////////
 
-package Game;
+package Game.Entities;
 
 import Engine.Game.Entity.GameObject3d;
+import Game.Game;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;

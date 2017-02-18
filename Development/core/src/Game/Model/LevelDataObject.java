@@ -16,6 +16,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -450,25 +451,53 @@ public class LevelDataObject {
             System.out.println("Failed to save level file!");
         }
     }
-    public static LevelDataObject load(String filename){
+    public static LevelDataObject load(File file){
         //Load a level data object from JSON file
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
         try {
-            LevelDataObject obj = mapper.readValue(new File(filename), LevelDataObject.class);
+            LevelDataObject obj = mapper.readValue(file, LevelDataObject.class);
             return obj;
         } catch (Exception e){
-            System.out.println("Failed to load level file!");
+            System.out.println("Failed to load level file " + file.getName() + " in load()");
         }
         return null;
     }
 
-    public static void main(String[] args){
-        System.out.println("Starting level serialization test...");
-        LevelDataObject lvl = new LevelDataObject(2);
+    public static ArrayList<LevelDataObject> getListOfLevels() {
+        ArrayList<LevelDataObject> levelsList = new ArrayList<LevelDataObject>();
+        File[] files = new File("Assets/Levels").listFiles();
+        for(File file: files) {
 
-        LevelDataObject.save(lvl,"Assets/Levels/test.txt");
-        System.out.println("Done.");
+            // get file extension
+            String extension = "";
+            int i = file.getName().lastIndexOf('.');
+            if(i > 0) {
+                extension = file.getName().substring(i+1);
+            }
+
+            // if the file is a .txt
+            if(extension.equals("txt")) {
+                System.out.println("Loading file " + file.getName());
+                try{
+                    levelsList.add(load(file));
+                }
+                catch (Exception e){
+                    System.out.println("Failed to load level file " + file.getName() + " in getListOfLevels()");
+                }
+            }
+        }
+        return levelsList;
+    }
+
+    public static void main(String[] args){
+//        System.out.println("Starting level serialization test...");
+//        LevelDataObject lvl = new LevelDataObject(2);
+//
+//        LevelDataObject.save(lvl,"Assets/Levels/test.txt");
+//        System.out.println("Done.");
+
+        getListOfLevels();
 
         //int[][] test = new int[][]{{1,2,3},{4,5,6},{7,8,9}};
         //test = lvl.rotate90Degrees(test);

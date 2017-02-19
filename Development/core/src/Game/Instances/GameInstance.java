@@ -71,10 +71,11 @@ public class GameInstance extends AbstractGameInstance {
 
     @Override
     public void init() {
+        shadowViewportSize = 100f;
         super.init();
 
         physicsWorld = new PhysicsWorld(this);
-        physicsWorld.setDebug(true);
+        physicsWorld.setDebug(false);
 
         level.calculateRoomPositions();
 
@@ -149,6 +150,7 @@ public class GameInstance extends AbstractGameInstance {
     public void update() {
         super.update();
 
+        level.triggerRotatePlane(LevelDataObject.PLANE.X,0, LevelDataObject.PLANE_ROTATION.NINETY,1f);
         level.update();
 
         physicsWorld.update();
@@ -172,6 +174,7 @@ public class GameInstance extends AbstractGameInstance {
 
     @Override
     public void render() {
+        //frameBuffer.start();
         startWorld();
 
         //Render skybox under all the other models
@@ -180,6 +183,7 @@ public class GameInstance extends AbstractGameInstance {
         renderModels();
 
         endWorld();
+        //frameBuffer.end();
 
         renderShadows();
         physicsWorld.render();

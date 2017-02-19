@@ -34,7 +34,7 @@ public class FirstPersonCharacterController extends Camera3d {
     }
 
     private Camera camera;
-    private float velocity = 0.1f;
+    private float velocity = 0.20f;
     private float degreesPerPixel = 0.5f;
     private final Vector3 tmp = new Vector3();
     private float vLeft = 0;
@@ -84,7 +84,7 @@ public class FirstPersonCharacterController extends Camera3d {
         camera.rotate(viewAngle);
 
         float decay = 0.85f;
-        float rampUp = 0.05f;
+        float rampUp = 0.10f;
         if (Engine.Input.Input.getKey(FORWARD)) {
             vForward = Math.min(vForward+rampUp,1.0f);
         } else {

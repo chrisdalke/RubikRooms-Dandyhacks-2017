@@ -279,21 +279,23 @@ public class LevelDataObject {
     }
 
     public void undoMove() {
-        Move move = moves.pop();
-        undoneMoves.push(move);
-        Move undoMove = null;
-        switch (move.getAngle()) {
-            case NINETY:
-                undoMove = new Move(move.getRotatePlane(), move.getRotatePlaneId(), TWO_SEVENTY);
-                break;
-            case ONE_EIGHTY:
-                undoMove = new Move(move.getRotatePlane(), move.getRotatePlaneId(), ONE_EIGHTY);
-                break;
-            case TWO_SEVENTY:
-                undoMove = new Move(move.getRotatePlane(), move.getRotatePlaneId(), NINETY);
-                break;
+        if(!moves.isEmpty()) {
+            Move move = moves.pop();
+            undoneMoves.push(move);
+            Move undoMove = null;
+            switch (move.getAngle()) {
+                case NINETY:
+                    undoMove = new Move(move.getRotatePlane(), move.getRotatePlaneId(), TWO_SEVENTY);
+                    break;
+                case ONE_EIGHTY:
+                    undoMove = new Move(move.getRotatePlane(), move.getRotatePlaneId(), ONE_EIGHTY);
+                    break;
+                case TWO_SEVENTY:
+                    undoMove = new Move(move.getRotatePlane(), move.getRotatePlaneId(), NINETY);
+                    break;
+            }
+            shiftPlane(undoMove);
         }
-        shiftPlane(undoMove);
     }
 
     public void redoMove() {

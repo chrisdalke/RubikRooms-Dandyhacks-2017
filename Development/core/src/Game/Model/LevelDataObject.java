@@ -27,6 +27,8 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 import static Game.Model.LevelDataObject.PLANE.X;
+import static Game.Model.LevelDataObject.PLANE.Y;
+import static Game.Model.LevelDataObject.PLANE.Z;
 import static Game.Model.LevelDataObject.PLANE_ROTATION.*;
 
 ////////////////////////////////////////////////
@@ -397,7 +399,7 @@ public class LevelDataObject {
                         if (rooms[i][j][k].south.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
                             emitters.add(new LaserEmitterObject(i, j, (float) (k - 0.5), LaserEmitterObject.Emitter_Direction.POS_Z));
                         }
-                        if (rooms[i][j][k].west.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
+                        if (rooms[i][j][k].north.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
                             emitters.add(new LaserEmitterObject(i, j, (float) (k + 0.5), LaserEmitterObject.Emitter_Direction.NEG_Z));
                         }
                     }
@@ -428,7 +430,7 @@ public class LevelDataObject {
                         if (rooms[i][j][k].south.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
                             receivers.add(new LaserReceiverObject(i, j, (float) (k - 0.5), LaserReceiverObject.Receiver_Direction.POS_Z));
                         }
-                        if (rooms[i][j][k].west.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
+                        if (rooms[i][j][k].north.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
                             receivers.add(new LaserReceiverObject(i, j, (float) (k + 0.5), LaserReceiverObject.Receiver_Direction.NEG_Z));
                         }
                     }
@@ -438,14 +440,29 @@ public class LevelDataObject {
         return receivers;
     }
 
-    public ArrayList<Mirror> getMirrorsArray() {
-        ArrayList<Mirror> mirrors = new ArrayList<Mirror>();
+    public ArrayList<MirrorObject> getMirrorPositions() {
+        ArrayList<MirrorObject> mirrors = new ArrayList<MirrorObject>();
         for (int i=0; i<size; i++) {
             for (int j = 0; j < size; j++) {
                 for (int k = 0; k < size; k++) {
                     if(!positionIsRotating(i,j,k)) {
-                        if(rooms[i][j][k].hasMirror()) {
-                            mirrors.add(rooms[i][j][k].getMirror());
+                        if(rooms[i][j][k].west.wallType == Wall.WALL_TYPE.LASER_MIRROR) {
+                            mirrors.add(new MirrorObject((float) (i - 0.5), j, k, X));
+                        }
+                        if(rooms[i][j][k].east.wallType == Wall.WALL_TYPE.LASER_MIRROR) {
+                            mirrors.add(new MirrorObject((float) (i + 0.5), j, k, X));
+                        }
+                        if(rooms[i][j][k].floor.wallType == Wall.WALL_TYPE.LASER_MIRROR) {
+                            mirrors.add(new MirrorObject(i, (float) (j - 0.5), k, Y));
+                        }
+                        if(rooms[i][j][k].ceiling.wallType == Wall.WALL_TYPE.LASER_MIRROR) {
+                            mirrors.add(new MirrorObject(i, (float) (j + 0.5), k, Y));
+                        }
+                        if(rooms[i][j][k].south.wallType == Wall.WALL_TYPE.LASER_MIRROR) {
+                            mirrors.add(new MirrorObject(i, j, (float) (k - 0.5), Z));
+                        }
+                        if(rooms[i][j][k].north.wallType == Wall.WALL_TYPE.LASER_MIRROR) {
+                            mirrors.add(new MirrorObject(i, j, (float) (k + 0.5), Z));
                         }
                     }
                 }

@@ -30,8 +30,6 @@ public class Room {
 
     public Matrix4 transform;
 
-    Mirror mirror;
-
     public void setWorldTransform(Matrix4 transform){
         this.transform = transform;
     }
@@ -42,18 +40,6 @@ public class Room {
 
     public Room() {
         transform = new Matrix4();
-        mirror = null;
-    }
-
-    public boolean hasMirror() {
-        if(mirror != null) {
-            return true;
-        }
-        return false;
-    }
-
-    public Mirror getMirror() {
-        return mirror;
     }
 
     public void rotateOrientation(LevelDataObject.PLANE plane, LevelDataObject.PLANE_ROTATION rotation) {

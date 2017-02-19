@@ -204,6 +204,17 @@ public class GameInstance extends AbstractGameInstance {
                 level.triggerRotatePlane(LevelDataObject.PLANE.X,1, LevelDataObject.PLANE_ROTATION.ONE_EIGHTY,1f);
             }
         }
+        if (level.getFilenameShort().equals("demo4.txt")){
+            if (Input.getKeyPress(com.badlogic.gdx.Input.Keys.NUM_1)){
+                level.triggerRotatePlane(LevelDataObject.PLANE.X,3, LevelDataObject.PLANE_ROTATION.NINETY,1f);
+            }
+            if (Input.getKeyPress(com.badlogic.gdx.Input.Keys.NUM_2)){
+                level.triggerRotatePlane(LevelDataObject.PLANE.Y,3, LevelDataObject.PLANE_ROTATION.ONE_EIGHTY,1f);
+            }
+            if (Input.getKeyPress(com.badlogic.gdx.Input.Keys.NUM_3)){
+                level.triggerRotatePlane(LevelDataObject.PLANE.Z,3, LevelDataObject.PLANE_ROTATION.ONE_EIGHTY,1f);
+            }
+        }
 
 
         level.update();

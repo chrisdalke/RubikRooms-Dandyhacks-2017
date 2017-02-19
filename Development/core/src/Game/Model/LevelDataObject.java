@@ -680,14 +680,70 @@ public class LevelDataObject {
     }
 
     public static void test() {
-        LevelDataObject test2 = new LevelDataObject(2);
-        save(test2, "Assets/Levels/Templates/2x2.txt");
-        LevelDataObject test3 = new LevelDataObject(3);
-        save(test3, "Assets/Levels/Templates/3x3.txt");
-        LevelDataObject test4 = new LevelDataObject(4);
-        save(test4, "Assets/Levels/Templates/4x4.txt");
+        LevelDataObject test = new LevelDataObject(7);
 
-        getListOfLevels();
+
+        for (int x = 0; x < test.getSize(); x++) {
+            for (int y = 0; y < test.getSize(); y++) {
+                for (int z = 0; z < test.getSize(); z++) {
+                    test.getRoom(x,y,z).floor = new Wall(Wall.WALL_TYPE.NONE);
+                    test.getRoom(x,y,z).ceiling = new Wall(Wall.WALL_TYPE.NONE);
+                    test.getRoom(x,y,z).north = new Wall(Wall.WALL_TYPE.NONE);
+                    test.getRoom(x,y,z).south = new Wall(Wall.WALL_TYPE.NONE);
+                    test.getRoom(x,y,z).east = new Wall(Wall.WALL_TYPE.NONE);
+                    test.getRoom(x,y,z).west = new Wall(Wall.WALL_TYPE.NONE);
+                }
+            }
+        }
+
+        //set the values of 6 areas and the center
+        test.getRoom(3,3,0).floor = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(3,3,0).ceiling = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(3,3,0).north = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(3,3,0).south = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(3,3,0).east = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(3,3,0).west = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(3,3,6).floor = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(3,3,6).ceiling = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(3,3,6).north = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(3,3,6).south = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(3,3,6).east = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(3,3,6).west = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(0,3,3).floor = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(0,3,3).ceiling = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(0,3,3).north = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(0,3,3).south = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(0,3,3).east = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(0,3,3).west = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(6,3,3).floor = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(6,3,3).ceiling = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(6,3,3).north = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(6,3,3).south = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(6,3,3).east = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(6,3,3).west = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(3,0,3).floor = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(3,0,3).ceiling = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(3,0,3).north = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(3,0,3).south = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(3,0,3).east = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(3,0,3).west = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+
+        test.getRoom(3,6,3).floor = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(3,6,3).ceiling = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(3,6,3).north = new Wall(Wall.WALL_TYPE.DOOR);
+        test.getRoom(3,6,3).south = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(3,6,3).east = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+        test.getRoom(3,6,3).west = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+
+
+
+        //set player in the center
+        test.startX = 3;
+        test.startY = 4;
+        test.startZ = 3;
+
+        save(test, "Assets/Levels/demo4.txt");
+
     }
 
     public static void main(String[] args){

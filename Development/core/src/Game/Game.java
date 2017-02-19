@@ -151,8 +151,23 @@ public class Game {
                 });
             }
         });
+        Commands.bind("demo4", new Runnable() {
+            @Override
+            public void run() {
+                UIStageManager.fadeOutEvent(new Runnable() {
+                    @Override
+                    public void run() {
+                        gameInstance = new GameInstance("Assets/Levels/demo4.txt");
+                        gameInstance.init();
+                        setPaused(false);
+                        UIStageManager.switchTo("GameStage");
+                        Commands.hide();
+                    }
+                });
+            }
+        });
 
-        LevelDataObject.test();
+        //LevelDataObject.test();
 
     }
 
@@ -262,6 +277,9 @@ public class Game {
         }
         if (Input.getKeyPress(com.badlogic.gdx.Input.Keys.NUM_0)){
             Commands.execute("demo3");
+        }
+        if (Input.getKeyPress(com.badlogic.gdx.Input.Keys.MINUS)){
+            Commands.execute("demo4");
         }
     }
 

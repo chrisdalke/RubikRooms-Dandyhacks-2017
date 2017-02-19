@@ -11,7 +11,6 @@ import Engine.Game.Entity.GameObject3d;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.bullet.collision.*;
-import com.badlogic.gdx.physics.bullet.dynamics.btDiscreteDynamicsWorld;
 import com.badlogic.gdx.physics.bullet.dynamics.btKinematicCharacterController;
 
 public class PhysicsCharacterController extends PhysicsEntity {
@@ -43,7 +42,7 @@ public class PhysicsCharacterController extends PhysicsEntity {
         world.collisionWorld.addCollisionObject(ghostObject,
                 (short) btBroadphaseProxy.CollisionFilterGroups.CharacterFilter,
                 (short)(btBroadphaseProxy.CollisionFilterGroups.StaticFilter | btBroadphaseProxy.CollisionFilterGroups.DefaultFilter));
-        ((btDiscreteDynamicsWorld)(world.collisionWorld)).addAction(characterController);
+        (world.collisionWorld).addAction(characterController);
     }
 
     public void setCharacterPosition(Vector3 pos){

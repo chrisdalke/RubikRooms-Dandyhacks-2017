@@ -17,6 +17,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
@@ -32,6 +33,7 @@ import static Game.Model.LevelDataObject.PLANE_ROTATION.*;
 // Level Data Object class
 ////////////////////////////////////////////////
 
+@JsonIgnoreProperties(value = {""})
 public class LevelDataObject {
 
     ////////////////////////////////////////////////
@@ -50,6 +52,10 @@ public class LevelDataObject {
     // Constructors
     ////////////////////////////////////////////////
 
+    public LevelDataObject(){
+
+    }
+
     public LevelDataObject(int size) {
         this.size = size;
 
@@ -64,7 +70,9 @@ public class LevelDataObject {
             for (int y = 0; y < size; y++) {
                 for (int z = 0; z < size; z++) {
                     rooms[x][y][z] = new Room();
+                    rooms[x][y][z].setPos(x+","+y+","+z);
                     solution[x][y][z] = rooms[x][y][z];
+
                     rooms[x][y][z].transform = new Matrix4().translate(x,y,z);
                 }
             }
@@ -78,6 +86,8 @@ public class LevelDataObject {
         undoneMoves = new Stack<Move>();
 
     }
+
+
 
     ////////////////////////////////////////////////
     // Properties
@@ -406,10 +416,12 @@ public class LevelDataObject {
             for (int j=0; j<size; j++) {
                 for (int k=0; k<size; k++) {
                     for (int l=0; l<6; l++) {
+                        /*
                         if (rooms[i][j][k].walls[l].wallType == Wall.WALL_TYPE.NONE ||
                                 rooms[i][j][k].walls[l].wallType == Wall.WALL_TYPE.WALL_GLASS) {
                             // will continue later
                         }
+                        */
                     }
                 }
             }
@@ -575,8 +587,8 @@ public class LevelDataObject {
     }
 
     public static void test() {
-        LevelDataObject test = new LevelDataObject(3);
-        save(test, "Assets/Levels/NateTest.txt");
+        LevelDataObject test = new LevelDataObject(2);
+        save(test, "Assets/Levels/2x2.txt");
 
         getListOfLevels();
     }

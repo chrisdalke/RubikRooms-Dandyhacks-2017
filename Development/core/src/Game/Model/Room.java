@@ -9,20 +9,24 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * Class to represent a room in the level
  */
 
-@JsonIgnoreProperties(value = {"transform"})
+@JsonIgnoreProperties(value = {"worldTransform", "transform"})
 public class Room {
 
-    public Wall ceiling = new Wall(Wall.WALL_TYPE.WALL);
-    public Wall floor = new Wall(Wall.WALL_TYPE.WALL);
-    public Wall north = new Wall(Wall.WALL_TYPE.WALL);
-    public Wall south = new Wall(Wall.WALL_TYPE.WALL);
-    public Wall east = new Wall(Wall.WALL_TYPE.WALL);
-    public Wall west = new Wall(Wall.WALL_TYPE.WALL);
+    public Wall ceiling = new Wall(Wall.WALL_TYPE.NONE);
+    public Wall floor = new Wall(Wall.WALL_TYPE.NONE);
+    public Wall north = new Wall(Wall.WALL_TYPE.NONE);
+    public Wall south = new Wall(Wall.WALL_TYPE.NONE);
+    public Wall east = new Wall(Wall.WALL_TYPE.NONE);
+    public Wall west = new Wall(Wall.WALL_TYPE.NONE);
+    public String pos;
 
-    // lasers = [ceiling/floor, north/south, east/west]
-    boolean[] lasers = new boolean[]{false, false, false};
+    public String getPos() {
+        return pos;
+    }
 
-    Wall[] walls = new Wall[]{ceiling, floor, north, south, east, west};
+    public void setPos(String pos) {
+        this.pos = pos;
+    }
 
     public Matrix4 transform;
 
@@ -36,10 +40,6 @@ public class Room {
 
     public Room() {
         transform = new Matrix4();
-    }
-
-    public Wall[] getWalls() {
-        return walls;
     }
 
     public void rotateOrientation(LevelDataObject.PLANE plane, LevelDataObject.PLANE_ROTATION rotation) {

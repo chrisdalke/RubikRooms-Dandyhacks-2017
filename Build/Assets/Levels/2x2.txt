@@ -1,0 +1,330 @@
+{
+  "size" : 2,
+  "levelNumber" : 1,
+  "name" : "Untitled",
+  "description" : "Untitled Level",
+  "rooms" : [ [ [ {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "0,0,0"
+  }, {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "0,0,1"
+  } ], [ {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "0,1,0"
+  }, {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "0,1,1"
+  } ] ], [ [ {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "1,0,0"
+  }, {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "1,0,1"
+  } ], [ {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "1,1,0"
+  }, {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "1,1,1"
+  } ] ] ],
+  "solution" : [ [ [ {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "0,0,0"
+  }, {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "0,0,1"
+  } ], [ {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "0,1,0"
+  }, {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "0,1,1"
+  } ] ], [ [ {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "1,0,0"
+  }, {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "1,0,1"
+  } ], [ {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "1,1,0"
+  }, {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "1,1,1"
+  } ] ] ],
+  "laserEmitterPositions" : [ ],
+  "laserReceiverPositions" : [ ]
+}

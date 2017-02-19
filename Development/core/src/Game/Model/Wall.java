@@ -1,7 +1,5 @@
 package Game.Model;
 
-import Game.Game;
-
 /**
  * Created by Nate on 2/15/17.
  *
@@ -15,6 +13,10 @@ public class Wall {
     }
 
     //TODO Implement orientation changes!!!
+
+    public Wall(){
+
+    }
 
     public WALL_TYPE wallType;
 

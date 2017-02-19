@@ -1,8 +1,0 @@
-{
-  "size" : [ 2, 2, 2 ],
-  "levelNumber" : 1,
-  "name" : "Untitled",
-  "description" : "Untitled Level",
-  "rooms" : [ [ [ null, null ], [ null, null ] ], [ [ null, null ], [ null, null ] ] ],
-  "solution" : [ [ [ null, null ], [ null, null ] ], [ [ null, null ], [ null, null ] ] ]
-}

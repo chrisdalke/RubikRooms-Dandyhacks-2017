@@ -21,7 +21,7 @@ public class GameStage extends UIStage {
    protected void init() {
 
       TextButton menu = new TextButton("Exit to Menu",skin);
-      addActor(menu);
+      //addActor(menu);
       menu.addListener(new ChangeListener() {
          public void changed(ChangeListener.ChangeEvent event, Actor actor) {
             Game.triggerMenu();

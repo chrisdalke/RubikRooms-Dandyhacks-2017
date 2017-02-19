@@ -14,16 +14,16 @@
       "wallType" : "WALL_GLASS"
     },
     "north" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "south" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "east" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "west" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "pos" : "0,0,0"
   }, {
@@ -34,16 +34,16 @@
       "wallType" : "WALL_GLASS"
     },
     "north" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "south" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "east" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "west" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "pos" : "0,0,1"
   } ], [ {
@@ -54,16 +54,16 @@
       "wallType" : "WALL_GLASS"
     },
     "north" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "south" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "east" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "west" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "pos" : "0,1,0"
   }, {
@@ -74,16 +74,16 @@
       "wallType" : "WALL_GLASS"
     },
     "north" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "south" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "east" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "west" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "pos" : "0,1,1"
   } ] ], [ [ {
@@ -94,16 +94,16 @@
       "wallType" : "WALL_GLASS"
     },
     "north" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "south" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "east" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "west" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "pos" : "1,0,0"
   }, {
@@ -114,16 +114,16 @@
       "wallType" : "WALL_GLASS"
     },
     "north" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "south" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "east" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "west" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "pos" : "1,0,1"
   } ], [ {
@@ -134,16 +134,16 @@
       "wallType" : "WALL_GLASS"
     },
     "north" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "south" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "east" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "west" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "pos" : "1,1,0"
   }, {
@@ -154,16 +154,16 @@
       "wallType" : "WALL_GLASS"
     },
     "north" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "south" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "east" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "west" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "pos" : "1,1,1"
   } ] ] ]

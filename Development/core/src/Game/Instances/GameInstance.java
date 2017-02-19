@@ -60,21 +60,13 @@ public class GameInstance extends AbstractGameInstance {
 
     FrameBuffer frameBuffer;
 
-    public GameInstance(){
-        this((LevelDataObject)null);
-    }
-
     public GameInstance(String filename){
         this(LevelDataObject.load(new File(filename)));
     }
 
     public GameInstance(LevelDataObject level){
-
         frameBuffer = new FrameBuffer(320,240);
         this.level = level;
-        if (this.level == null){
-            this.level = new LevelDataObject(1);
-        }
     }
 
     ////////////////////////////////////////////////
@@ -87,6 +79,8 @@ public class GameInstance extends AbstractGameInstance {
 
         physicsWorld = new PhysicsWorld(this);
         physicsWorld.setDebug(false);
+
+        level.calculateRoomPositions();
 
         for (int x = 0; x < level.getSize(); x++){
             for (int y = 0; y < level.getSize(); y++){
@@ -150,14 +144,6 @@ public class GameInstance extends AbstractGameInstance {
     public void update() {
         super.update();
 
-        //testAngle = (testAngle + 1f) % 360;
-        //level.rotatePlane();
-        /*
-        float speed = 0.01f;
-        if (Input.getKey(com.badlogic.gdx.Input.Keys.G)){
-            speed = -1f;
-        }*/
-        //level.triggerRotatePlane(LevelDataObject.PLANE.Z,level.getSize()-1, LevelDataObject.PLANE_ROTATION.NINETY, 1f);
         level.update();
 
         physicsWorld.update();
@@ -172,45 +158,30 @@ public class GameInstance extends AbstractGameInstance {
             float scale = 50.0f;
             sphereEntity.applyForce(camera.direction.x*scale,camera.direction.y*scale,camera.direction.z*scale);
         }
-
-        
     }
 
     ////////////////////////////////////////////////
     // Level Rendering
     ////////////////////////////////////////////////
 
-    float testAngle;
-
     @Override
     public void render() {
-        //Center cursor
-        //Gdx.input.setCursorPosition((int)Display.getWidth()/2,(int)Display.getHeight()/2);
-
-
-        //frameBuffer.start();
         startWorld();
 
         //Render skybox under all the other models
         skybox.render(camera);
-
+        //Render models
         renderModels();
-        endWorld();
-        renderShadows();
 
+        endWorld();
+
+        renderShadows();
         physicsWorld.render();
 
-        //frameBuffer.end();
         Renderer.startUI();
         //PostProcessManager.start();
         //Renderer.draw(frameBuffer.getRegion(),0,0, (float)Display.getWidth(),(float)Display.getHeight());
         //PostProcessManager.end();
-
-        /*
-        Text.setColor(Color.BLACK);
-        Text.draw(100,100,"Test Angle: "+testAngle);
-        */
-
 
         float crosshairSize = 20;
         Renderer.setInvert();

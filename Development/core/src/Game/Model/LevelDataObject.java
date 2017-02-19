@@ -109,7 +109,7 @@ public class LevelDataObject {
 
     //Rotation properties
     //Stores the current plane of rotation, ID of rotation, and float indicating rotation angle
-    PLANE plane;
+    PLANE plane = PLANE.X;
     int planeId;
     float planeRotation;
     Quaternion planeRotationQ;
@@ -594,6 +594,7 @@ public class LevelDataObject {
             mapper.writeValue(new File(filename), level);
         } catch (IOException e){
             System.out.println("Failed to save level file!");
+            e.printStackTrace();
         }
     }
     public static LevelDataObject load(File file){
@@ -638,8 +639,12 @@ public class LevelDataObject {
     }
 
     public static void test() {
-        LevelDataObject test = new LevelDataObject(2);
-        save(test, "Assets/Levels/2x2.txt");
+        LevelDataObject test2 = new LevelDataObject(2);
+        save(test2, "Assets/Levels/Templates/2x2.txt");
+        LevelDataObject test3 = new LevelDataObject(3);
+        save(test3, "Assets/Levels/Templates/3x3.txt");
+        LevelDataObject test4 = new LevelDataObject(4);
+        save(test4, "Assets/Levels/Templates/4x4.txt");
 
         getListOfLevels();
     }

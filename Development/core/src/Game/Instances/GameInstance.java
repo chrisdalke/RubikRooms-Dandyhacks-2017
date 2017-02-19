@@ -17,7 +17,6 @@ import Engine.Physics.DynamicPhysicsEntity;
 import Engine.Physics.PhysicsWorld;
 import Engine.Renderer.FrameBuffer;
 import Engine.Renderer.Renderer;
-import Engine.Renderer.Text;
 import Engine.Renderer.Textures.TextureLoader;
 import Engine.System.Commands.Commands;
 import Game.Entities.BackgroundCube;
@@ -25,9 +24,9 @@ import Game.Entities.FirstPersonFlightCamera;
 import Game.Entities.RoomObject;
 import Game.Entities.Sphere;
 import Game.Model.LevelDataObject;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 
+import java.io.File;
 import java.util.concurrent.ThreadLocalRandom;
 
 
@@ -57,22 +56,23 @@ public class GameInstance extends AbstractGameInstance {
     // Level Loading
     ////////////////////////////////////////////////
 
-    /*
-    //Load from file
-    public GameInstance(String levelFilename){
-        level = new LevelDataObject(levelFilename);
-    }
-
-    //Load from precreated LevelDataObject
-    public GameInstance(LevelDataObject newLevel){
-        level = newLevel;
-    }
-    */
-
     FrameBuffer frameBuffer;
 
     public GameInstance(){
+        this((LevelDataObject)null);
+    }
+
+    public GameInstance(String filename){
+        this(LevelDataObject.load(new File(filename)));
+    }
+
+    public GameInstance(LevelDataObject level){
+
         frameBuffer = new FrameBuffer(320,240);
+        this.level = level;
+        if (this.level == null){
+            this.level = new LevelDataObject(1);
+        }
     }
 
     ////////////////////////////////////////////////
@@ -116,19 +116,15 @@ public class GameInstance extends AbstractGameInstance {
         physicsWorld.add(new StaticPhysicsEntity(testRoom));
         */
 
-
-        int testSize = 3;
-        level = new LevelDataObject(testSize);
-        for (int x = 0; x < testSize; x++){
-            for (int y = 0; y < testSize; y++){
-                for (int z = 0; z < testSize; z++){
+        for (int x = 0; x < level.getSize(); x++){
+            for (int y = 0; y < level.getSize(); y++){
+                for (int z = 0; z < level.getSize(); z++){
                     RoomObject roomObject = new RoomObject(level.getRoom(x,y,z));
                     physicsWorld.add(roomObject.getRoomPhysicsObject());
                     addObject(roomObject);
                 }
             }
         }
-
 
         for (int i = 0; i < 20; i++){
             GameObject3d cubeObj = new BackgroundCube();
@@ -228,8 +224,10 @@ public class GameInstance extends AbstractGameInstance {
         //Renderer.draw(frameBuffer.getRegion(),0,0, (float)Display.getWidth(),(float)Display.getHeight());
         //PostProcessManager.end();
 
+        /*
         Text.setColor(Color.BLACK);
         Text.draw(100,100,"Test Angle: "+testAngle);
+        */
 
 
         float crosshairSize = 20;

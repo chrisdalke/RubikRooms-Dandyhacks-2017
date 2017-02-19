@@ -9,13 +9,17 @@ package Game.Stages;
 
 import Engine.UI.Stages.UIStage;
 import Game.Game;
+import Game.Model.LevelDataObject;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 
+import java.util.ArrayList;
+
 import static Engine.UI.UISkinLoader.skin;
+import static Game.Model.LevelDataObject.getListOfLevels;
 
 public class LevelSelectionStage extends UIStage {
 
@@ -26,14 +30,16 @@ public class LevelSelectionStage extends UIStage {
    protected void init() {
 
 
+      ArrayList<LevelDataObject> levels = getListOfLevels();
 
       Table scrollTable = new Table();
-      for (int i = 1; i <= 50; i++){
-         TextButton tmpButton = new TextButton("Level "+i,skin);
+      for (int i = 0; i < levels.size(); i++){
+         LevelDataObject level = levels.get(i);
+         TextButton tmpButton = new TextButton(levels.get(i).getName()+"\n"+levels.get(i).getDescription(),skin);
          tmpButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-               Game.triggerGame();
+               Game.triggerGame(level);
             }
          });
          scrollTable.add(tmpButton).pad(20).height(100).expandX().fillX();

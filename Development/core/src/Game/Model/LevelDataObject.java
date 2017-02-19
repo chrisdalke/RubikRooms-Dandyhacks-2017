@@ -33,7 +33,7 @@ import static Game.Model.LevelDataObject.PLANE_ROTATION.*;
 // Level Data Object class
 ////////////////////////////////////////////////
 
-@JsonIgnoreProperties(value = {""})
+@JsonIgnoreProperties(value = {"laserEmitterPositions","laserReceiverPositions","mirrorsArray"})
 public class LevelDataObject {
 
     ////////////////////////////////////////////////
@@ -54,6 +54,8 @@ public class LevelDataObject {
 
     public LevelDataObject(){
 
+        moves = new Stack<Move>();
+        undoneMoves = new Stack<Move>();
     }
 
     public LevelDataObject(int size) {
@@ -64,15 +66,11 @@ public class LevelDataObject {
         description = "Untitled Level";
 
         rooms = new Room[size][size][size];
-        solution = new Room[size][size][size];
-
         for (int x = 0; x < size; x++) {
             for (int y = 0; y < size; y++) {
                 for (int z = 0; z < size; z++) {
                     rooms[x][y][z] = new Room();
                     rooms[x][y][z].setPos(x+","+y+","+z);
-                    solution[x][y][z] = rooms[x][y][z];
-
                     rooms[x][y][z].transform = new Matrix4().translate(x,y,z);
                 }
             }
@@ -96,6 +94,9 @@ public class LevelDataObject {
     //General level properties
     int size;
     int levelNumber;
+    int startX;
+    int startY;
+    int startZ;
     String name;
     String description;
 
@@ -115,7 +116,6 @@ public class LevelDataObject {
     //Room object contains data about what a room contains
     //as well as information about the room's orientation, which this class modifies
     Room[][][] rooms; //Stores shifted rooms
-    Room[][][] solution; //Stores unshifted rooms (solution)
 
     // Laser properties
     double receiverRadiusThreshold;
@@ -564,17 +564,6 @@ public class LevelDataObject {
 
     }
 
-    public boolean isSolutionPosition(int x, int y, int z){
-        //Check if a given room position in the cube contains the correct room
-        //In other words, check if a room is in a solution position
-        try {
-            return rooms[x][y][z] == solution[x][y][z];
-        } catch (Exception e){
-            //Arrays out of bounds so this position is invalid
-            return false;
-        }
-    }
-
     ////////////////////////////////////////////////
     // Level Serialization and Tests
     ////////////////////////////////////////////////
@@ -686,14 +675,6 @@ public class LevelDataObject {
         this.rooms = rooms;
     }
 
-    public Room[][][] getSolution() {
-        return solution;
-    }
-
-    public void setSolution(Room[][][] solution) {
-        this.solution = solution;
-    }
-
     public int getLevelNumber() {
         return levelNumber;
     }
@@ -716,6 +697,30 @@ public class LevelDataObject {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getStartX() {
+        return startX;
+    }
+
+    public void setStartX(int startX) {
+        this.startX = startX;
+    }
+
+    public int getStartY() {
+        return startY;
+    }
+
+    public void setStartY(int startY) {
+        this.startY = startY;
+    }
+
+    public int getStartZ() {
+        return startZ;
+    }
+
+    public void setStartZ(int startZ) {
+        this.startZ = startZ;
     }
 }
 

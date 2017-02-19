@@ -89,8 +89,7 @@ public class Game {
             UIStageManager.switchTo("MainMenuStage");
             //gameInstance = new GameInstance();
             //gameInstance.init();
-
-            triggerGame();
+            //triggerGame(null);
 
             //We are on desktop, so start the server
             Networking.startServer();
@@ -140,11 +139,11 @@ public class Game {
         });
     }
 
-    public static void triggerGame(){
+    public static void triggerGame(LevelDataObject level){
         UIStageManager.fadeOutEvent(new Runnable() {
             @Override
             public void run() {
-                gameInstance = new GameInstance();
+                gameInstance = new GameInstance(level);
                 gameInstance.init();
                 setPaused(false);
                 UIStageManager.switchTo("GameSplashStage");

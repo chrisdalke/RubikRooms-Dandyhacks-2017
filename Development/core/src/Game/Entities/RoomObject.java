@@ -18,6 +18,7 @@ import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
+import com.badlogic.gdx.graphics.g3d.model.Node;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.shapebuilders.BoxShapeBuilder;
@@ -68,12 +69,17 @@ public class RoomObject extends GameObject3d {
         Material mat = new Material();
         mat.set(ColorAttribute.createDiffuse(191.0f/255.0f * 0.5f, 245.0f/255.0f * 0.5f, 255.0f/255.0f * 0.5f,1.0f));
         Material matWalls = new Material();
-        matWalls.set(ColorAttribute.createDiffuse(1.0f,1.0f,1.0f,1.0f));
+        matWalls.set(ColorAttribute.createDiffuse(1.0f,0.0f,0.0f,1.0f));
+
         Material matGlassWalls = new Material();
         matGlassWalls.set(ColorAttribute.createDiffuse(1.0f,1.0f,1.0f,1.0f));
         matGlassWalls.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA, 0.3f));
 
         //mat.set(ColorAttribute.createDiffuse(ThreadLocalRandom.current().nextFloat(),ThreadLocalRandom.current().nextFloat(),ThreadLocalRandom.current().nextFloat(),1.0f));
+
+        Node node1 = modelBuilder.node();
+        node1.id = "borders";
+
         MeshPartBuilder meshBuilder = modelBuilder.part("borders", GL20.GL_TRIANGLES, VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal, mat);
    
         //X
@@ -97,52 +103,80 @@ public class RoomObject extends GameObject3d {
         //Walls, if walls exist in the level
         //Check all 6 possible walls
 
+        Node node2 = modelBuilder.node();
+        node2.id = "walls";
         MeshPartBuilder meshBuilderWalls = modelBuilder.part("walls", GL20.GL_TRIANGLES, VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal, matWalls);
-        MeshPartBuilder meshBuilderGlassWalls = modelBuilder.part("wallsGlass", GL20.GL_TRIANGLES, VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal, matGlassWalls);
+        //Build walls
 
         //Put down the normal walls
         if (roomDataObject.ceiling.wallType != Wall.WALL_TYPE.NONE){
+            if (roomDataObject.ceiling.wallType != Wall.WALL_TYPE.WALL_GLASS){
+                buildRoomBox(meshBuilderWalls,collisionShape,0,ROOM_RADIUS_CENTER,0,ROOM_DIAMETER_INNER,ROOM_WALL_THICKNESS,ROOM_DIAMETER_INNER);
+            }
+        }
+        if (roomDataObject.floor.wallType != Wall.WALL_TYPE.NONE){
+            if (roomDataObject.floor.wallType != Wall.WALL_TYPE.WALL_GLASS) {
+                buildRoomBox(meshBuilderWalls,collisionShape, 0, -ROOM_RADIUS_CENTER, 0, ROOM_DIAMETER_INNER, ROOM_WALL_THICKNESS, ROOM_DIAMETER_INNER);
+            }
+        }
+        if (roomDataObject.east.wallType != Wall.WALL_TYPE.NONE){
+            if (roomDataObject.east.wallType != Wall.WALL_TYPE.WALL_GLASS){
+                buildRoomBox(meshBuilderWalls,collisionShape,ROOM_RADIUS_CENTER,0,0,ROOM_WALL_THICKNESS,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER);
+            }
+        }
+        if (roomDataObject.west.wallType != Wall.WALL_TYPE.NONE){
+            if (roomDataObject.west.wallType != Wall.WALL_TYPE.WALL_GLASS){
+                buildRoomBox(meshBuilderWalls,collisionShape,-ROOM_RADIUS_CENTER,0,0,ROOM_WALL_THICKNESS,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER);
+            }
+        }
+        if (roomDataObject.north.wallType != Wall.WALL_TYPE.NONE){
+            if (roomDataObject.north.wallType != Wall.WALL_TYPE.WALL_GLASS){
+                buildRoomBox(meshBuilderWalls,collisionShape,0,0,-ROOM_RADIUS_CENTER,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER,ROOM_WALL_THICKNESS);
+            }
+        }
+        if (roomDataObject.south.wallType != Wall.WALL_TYPE.NONE){
+            if (roomDataObject.south.wallType != Wall.WALL_TYPE.WALL_GLASS){
+                buildRoomBox(meshBuilderWalls,collisionShape,0,0,ROOM_RADIUS_CENTER,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER,ROOM_WALL_THICKNESS);
+            }
+        }
+
+        //Build glass walls / transparent objects
+        Node node3 = modelBuilder.node();
+        node3.id = "wallsGlass";
+        MeshPartBuilder meshBuilderGlassWalls = modelBuilder.part("wallsGlass", GL20.GL_TRIANGLES, VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal, matGlassWalls);
+
+        //Put down the glass walls
+        if (roomDataObject.ceiling.wallType != Wall.WALL_TYPE.NONE){
             if (roomDataObject.ceiling.wallType == Wall.WALL_TYPE.WALL_GLASS){
                 buildRoomBox(meshBuilderGlassWalls,collisionShape,0,ROOM_RADIUS_CENTER,0,ROOM_DIAMETER_INNER,ROOM_WALL_THICKNESS,ROOM_DIAMETER_INNER);
-            } else {
-                buildRoomBox(meshBuilderWalls,collisionShape,0,ROOM_RADIUS_CENTER,0,ROOM_DIAMETER_INNER,ROOM_WALL_THICKNESS,ROOM_DIAMETER_INNER);
             }
         }
         if (roomDataObject.floor.wallType != Wall.WALL_TYPE.NONE){
             if (roomDataObject.floor.wallType == Wall.WALL_TYPE.WALL_GLASS) {
                 buildRoomBox(meshBuilderGlassWalls,collisionShape, 0, -ROOM_RADIUS_CENTER, 0, ROOM_DIAMETER_INNER, ROOM_WALL_THICKNESS, ROOM_DIAMETER_INNER);
-            } else {
-                buildRoomBox(meshBuilderWalls,collisionShape, 0, -ROOM_RADIUS_CENTER, 0, ROOM_DIAMETER_INNER, ROOM_WALL_THICKNESS, ROOM_DIAMETER_INNER);
             }
         }
         if (roomDataObject.east.wallType != Wall.WALL_TYPE.NONE){
             if (roomDataObject.east.wallType == Wall.WALL_TYPE.WALL_GLASS){
                 buildRoomBox(meshBuilderGlassWalls,collisionShape,ROOM_RADIUS_CENTER,0,0,ROOM_WALL_THICKNESS,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER);
-            } else {
-                buildRoomBox(meshBuilderWalls,collisionShape,ROOM_RADIUS_CENTER,0,0,ROOM_WALL_THICKNESS,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER);
             }
         }
         if (roomDataObject.west.wallType != Wall.WALL_TYPE.NONE){
             if (roomDataObject.west.wallType == Wall.WALL_TYPE.WALL_GLASS){
                 buildRoomBox(meshBuilderGlassWalls,collisionShape,-ROOM_RADIUS_CENTER,0,0,ROOM_WALL_THICKNESS,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER);
-            } else {
-                buildRoomBox(meshBuilderWalls,collisionShape,-ROOM_RADIUS_CENTER,0,0,ROOM_WALL_THICKNESS,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER);
             }
         }
         if (roomDataObject.north.wallType != Wall.WALL_TYPE.NONE){
             if (roomDataObject.north.wallType == Wall.WALL_TYPE.WALL_GLASS){
                 buildRoomBox(meshBuilderGlassWalls,collisionShape,0,0,-ROOM_RADIUS_CENTER,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER,ROOM_WALL_THICKNESS);
-            } else {
-                buildRoomBox(meshBuilderWalls,collisionShape,0,0,-ROOM_RADIUS_CENTER,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER,ROOM_WALL_THICKNESS);
             }
         }
         if (roomDataObject.south.wallType != Wall.WALL_TYPE.NONE){
             if (roomDataObject.south.wallType == Wall.WALL_TYPE.WALL_GLASS){
                 buildRoomBox(meshBuilderGlassWalls,collisionShape,0,0,ROOM_RADIUS_CENTER,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER,ROOM_WALL_THICKNESS);
-            } else {
-                buildRoomBox(meshBuilderWalls,collisionShape,0,0,ROOM_RADIUS_CENTER,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER,ROOM_WALL_THICKNESS);
             }
         }
+
 
         Model model = modelBuilder.end();
         setModel(new ModelInstance(model));

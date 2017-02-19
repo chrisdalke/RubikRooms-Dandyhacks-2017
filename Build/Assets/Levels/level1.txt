@@ -4,14 +4,14 @@
   "startX" : 0,
   "startY" : 0,
   "startZ" : 0,
-  "name" : "Untitled",
-  "description" : "Untitled Level",
+  "name" : "Level 1",
+  "description" : "Tear down that wall!",
   "rooms" : [ [ [ {
     "ceiling" : {
-      "wallType" : "WALL_GLASS"
+      "wallType" : "NONE"
     },
     "floor" : {
-      "wallType" : "WALL_GLASS"
+      "wallType" : "WALL"
     },
     "north" : {
       "wallType" : "WALL"
@@ -29,10 +29,10 @@
     "mirror" : null
   }, {
     "ceiling" : {
-      "wallType" : "WALL_GLASS"
+      "wallType" : "NONE"
     },
     "floor" : {
-      "wallType" : "WALL_GLASS"
+      "wallType" : "WALL"
     },
     "north" : {
       "wallType" : "WALL"
@@ -50,10 +50,10 @@
     "mirror" : null
   } ], [ {
     "ceiling" : {
-      "wallType" : "WALL_GLASS"
+      "wallType" : "WALL"
     },
     "floor" : {
-      "wallType" : "WALL_GLASS"
+      "wallType" : "NONE"
     },
     "north" : {
       "wallType" : "WALL"
@@ -71,10 +71,10 @@
     "mirror" : null
   }, {
     "ceiling" : {
-      "wallType" : "WALL_GLASS"
+      "wallType" : "WALL"
     },
     "floor" : {
-      "wallType" : "WALL_GLASS"
+      "wallType" : "NONE"
     },
     "north" : {
       "wallType" : "WALL"
@@ -92,10 +92,10 @@
     "mirror" : null
   } ] ], [ [ {
     "ceiling" : {
-      "wallType" : "WALL_GLASS"
+      "wallType" : "NONE"
     },
     "floor" : {
-      "wallType" : "WALL_GLASS"
+      "wallType" : "WALL"
     },
     "north" : {
       "wallType" : "WALL"
@@ -113,10 +113,10 @@
     "mirror" : null
   }, {
     "ceiling" : {
-      "wallType" : "WALL_GLASS"
+      "wallType" : "NONE"
     },
     "floor" : {
-      "wallType" : "WALL_GLASS"
+      "wallType" : "WALL"
     },
     "north" : {
       "wallType" : "WALL"
@@ -134,10 +134,10 @@
     "mirror" : null
   } ], [ {
     "ceiling" : {
-      "wallType" : "WALL_GLASS"
+      "wallType" : "WALL"
     },
     "floor" : {
-      "wallType" : "WALL_GLASS"
+      "wallType" : "NONE"
     },
     "north" : {
       "wallType" : "WALL"
@@ -155,10 +155,10 @@
     "mirror" : null
   }, {
     "ceiling" : {
-      "wallType" : "WALL_GLASS"
+      "wallType" : "WALL"
     },
     "floor" : {
-      "wallType" : "WALL_GLASS"
+      "wallType" : "NONE"
     },
     "north" : {
       "wallType" : "WALL"

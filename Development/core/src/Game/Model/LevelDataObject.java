@@ -343,28 +343,53 @@ public class LevelDataObject {
         }
     }
 
+    public boolean positionIsRotating(int x, int y, int z) {
+        if(planeHasRotation) {
+            switch(plane) {
+                case X:
+                    if(planeId == x) {
+                        return true;
+                    }
+                    break;
+                case Y:
+                    if(planeId == y) {
+                        return true;
+                    }
+                    break;
+                case Z:
+                    if(planeId == z) {
+                        return true;
+                    }
+                    break;
+            }
+        }
+        return false;
+    }
+
     public ArrayList<LaserEmitterObject> getLaserEmitterPositions(){
         ArrayList<LaserEmitterObject> emitters = new ArrayList<LaserEmitterObject>();
         for (int i=0; i<size; i++) {
             for (int j=0; j<size; j++) {
                 for (int k=0; k<size; k++) {
-                    if(rooms[i][j][k].west.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
-                        emitters.add(new LaserEmitterObject((float)(i - 0.5), j, k, LaserEmitterObject.Emitter_Direction.POS_X));
-                    }
-                    if(rooms[i][j][k].east.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
-                        emitters.add(new LaserEmitterObject((float)(i + 0.5), j, k, LaserEmitterObject.Emitter_Direction.NEG_X));
-                    }
-                    if(rooms[i][j][k].floor.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
-                        emitters.add(new LaserEmitterObject(i, (float)(j - 0.5), k, LaserEmitterObject.Emitter_Direction.POS_Y));
-                    }
-                    if(rooms[i][j][k].ceiling.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
-                        emitters.add(new LaserEmitterObject(i, (float)(j + 0.5), k, LaserEmitterObject.Emitter_Direction.NEG_Y));
-                    }
-                    if(rooms[i][j][k].south.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
-                        emitters.add(new LaserEmitterObject(i, j, (float)(k - 0.5), LaserEmitterObject.Emitter_Direction.POS_Z));
-                    }
-                    if(rooms[i][j][k].west.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
-                        emitters.add(new LaserEmitterObject(i, j, (float)(k + 0.5), LaserEmitterObject.Emitter_Direction.NEG_Z));
+                    if(!positionIsRotating(i,j,k)) {
+                        if (rooms[i][j][k].west.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
+                            emitters.add(new LaserEmitterObject((float) (i - 0.5), j, k, LaserEmitterObject.Emitter_Direction.POS_X));
+                        }
+                        if (rooms[i][j][k].east.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
+                            emitters.add(new LaserEmitterObject((float) (i + 0.5), j, k, LaserEmitterObject.Emitter_Direction.NEG_X));
+                        }
+                        if (rooms[i][j][k].floor.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
+                            emitters.add(new LaserEmitterObject(i, (float) (j - 0.5), k, LaserEmitterObject.Emitter_Direction.POS_Y));
+                        }
+                        if (rooms[i][j][k].ceiling.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
+                            emitters.add(new LaserEmitterObject(i, (float) (j + 0.5), k, LaserEmitterObject.Emitter_Direction.NEG_Y));
+                        }
+                        if (rooms[i][j][k].south.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
+                            emitters.add(new LaserEmitterObject(i, j, (float) (k - 0.5), LaserEmitterObject.Emitter_Direction.POS_Z));
+                        }
+                        if (rooms[i][j][k].west.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
+                            emitters.add(new LaserEmitterObject(i, j, (float) (k + 0.5), LaserEmitterObject.Emitter_Direction.NEG_Z));
+                        }
                     }
                 }
             }
@@ -377,23 +402,25 @@ public class LevelDataObject {
         for (int i=0; i<size; i++) {
             for (int j=0; j<size; j++) {
                 for (int k=0; k<size; k++) {
-                    if(rooms[i][j][k].west.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
-                        receivers.add(new LaserReceiverObject((float)(i - 0.5), j, k, LaserReceiverObject.Receiver_Direction.POS_X));
-                    }
-                    if(rooms[i][j][k].east.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
-                        receivers.add(new LaserReceiverObject((float)(i + 0.5), j, k, LaserReceiverObject.Receiver_Direction.NEG_X));
-                    }
-                    if(rooms[i][j][k].floor.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
-                        receivers.add(new LaserReceiverObject(i, (float)(j - 0.5), k, LaserReceiverObject.Receiver_Direction.POS_Y));
-                    }
-                    if(rooms[i][j][k].ceiling.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
-                        receivers.add(new LaserReceiverObject(i, (float)(j + 0.5), k, LaserReceiverObject.Receiver_Direction.NEG_Y));
-                    }
-                    if(rooms[i][j][k].south.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
-                        receivers.add(new LaserReceiverObject(i, j, (float)(k - 0.5), LaserReceiverObject.Receiver_Direction.POS_Z));
-                    }
-                    if(rooms[i][j][k].west.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
-                        receivers.add(new LaserReceiverObject(i, j, (float)(k + 0.5), LaserReceiverObject.Receiver_Direction.NEG_Z));
+                    if(!positionIsRotating(i,j,k)) {
+                        if (rooms[i][j][k].west.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
+                            receivers.add(new LaserReceiverObject((float) (i - 0.5), j, k, LaserReceiverObject.Receiver_Direction.POS_X));
+                        }
+                        if (rooms[i][j][k].east.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
+                            receivers.add(new LaserReceiverObject((float) (i + 0.5), j, k, LaserReceiverObject.Receiver_Direction.NEG_X));
+                        }
+                        if (rooms[i][j][k].floor.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
+                            receivers.add(new LaserReceiverObject(i, (float) (j - 0.5), k, LaserReceiverObject.Receiver_Direction.POS_Y));
+                        }
+                        if (rooms[i][j][k].ceiling.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
+                            receivers.add(new LaserReceiverObject(i, (float) (j + 0.5), k, LaserReceiverObject.Receiver_Direction.NEG_Y));
+                        }
+                        if (rooms[i][j][k].south.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
+                            receivers.add(new LaserReceiverObject(i, j, (float) (k - 0.5), LaserReceiverObject.Receiver_Direction.POS_Z));
+                        }
+                        if (rooms[i][j][k].west.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
+                            receivers.add(new LaserReceiverObject(i, j, (float) (k + 0.5), LaserReceiverObject.Receiver_Direction.NEG_Z));
+                        }
                     }
                 }
             }

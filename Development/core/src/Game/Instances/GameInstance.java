@@ -175,7 +175,7 @@ public class GameInstance extends AbstractGameInstance {
         if (Input.getKey(com.badlogic.gdx.Input.Keys.G)){
             speed = -1f;
         }*/
-        level.triggerRotatePlane(LevelDataObject.PLANE.Z,level.getSize()-1, LevelDataObject.PLANE_ROTATION.NINETY, 1f);
+        //level.triggerRotatePlane(LevelDataObject.PLANE.Z,level.getSize()-1, LevelDataObject.PLANE_ROTATION.NINETY, 1f);
         level.update();
 
         physicsWorld.update();

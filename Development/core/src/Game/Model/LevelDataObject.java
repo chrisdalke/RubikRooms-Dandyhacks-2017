@@ -35,7 +35,7 @@ import static Game.Model.LevelDataObject.PLANE_ROTATION.*;
 // Level Data Object class
 ////////////////////////////////////////////////
 
-@JsonIgnoreProperties(value = {"laserEmitterPositions","laserReceiverPositions","mirrorsArray"})
+@JsonIgnoreProperties(value = {"laserEmitterPositions","laserReceiverPositions","mirrorsArray","mirrorPositions"})
 public class LevelDataObject {
 
     ////////////////////////////////////////////////

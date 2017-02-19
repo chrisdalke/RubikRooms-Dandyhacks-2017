@@ -1,0 +1,550 @@
+{
+  "size" : 3,
+  "levelNumber" : 2,
+  "startX" : 0,
+  "startY" : 0,
+  "startZ" : 0,
+  "name" : "Level 2",
+  "description" : "The Human Scoop",
+  "rooms" : [ [ [ {
+    "ceiling" : {
+      "wallType" : "WALL"
+    },
+    "floor" : {
+      "wallType" : "WALL"
+    },
+    "north" : {
+      "wallType" : "WALL"
+    },
+    "south" : {
+      "wallType" : "WALL"
+    },
+    "east" : {
+      "wallType" : "WALL"
+    },
+    "west" : {
+      "wallType" : "WALL"
+    },
+    "pos" : "0,0,0"
+  }, {
+    "ceiling" : {
+      "wallType" : "WALL"
+    },
+    "floor" : {
+      "wallType" : "WALL"
+    },
+    "north" : {
+      "wallType" : "WALL"
+    },
+    "south" : {
+      "wallType" : "WALL"
+    },
+    "east" : {
+      "wallType" : "WALL"
+    },
+    "west" : {
+      "wallType" : "WALL"
+    },
+    "pos" : "0,0,1"
+  }, {
+    "ceiling" : {
+      "wallType" : "WALL"
+    },
+    "floor" : {
+      "wallType" : "WALL"
+    },
+    "north" : {
+      "wallType" : "WALL"
+    },
+    "south" : {
+      "wallType" : "WALL"
+    },
+    "east" : {
+      "wallType" : "WALL"
+    },
+    "west" : {
+      "wallType" : "WALL"
+    },
+    "pos" : "0,0,2"
+  } ], [ {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "pos" : "0,1,0"
+  }, {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "pos" : "0,1,1"
+  }, {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "pos" : "0,1,2"
+  } ], [ {
+    "ceiling" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "pos" : "0,2,0"
+  }, {
+    "ceiling" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "pos" : "0,2,1"
+  }, {
+    "ceiling" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "pos" : "0,2,2"
+  } ] ], [ [ {
+    "ceiling" : {
+      "wallType" : "WALL"
+    },
+    "floor" : {
+      "wallType" : "WALL"
+    },
+    "north" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "south" : {
+      "wallType" : "WALL"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "1,0,0"
+  }, {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "WALL"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "1,0,1"
+  }, {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "WALL"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "1,0,2"
+  } ], [ {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "1,1,0"
+  }, {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "1,1,1"
+  }, {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "1,1,2"
+  } ], [ {
+    "ceiling" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "1,2,0"
+  }, {
+    "ceiling" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "1,2,1"
+  }, {
+    "ceiling" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "1,2,2"
+  } ] ], [ [ {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "WALL"
+    },
+    "north" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "2,0,0"
+  }, {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "WALL"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "2,0,1"
+  }, {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "WALL"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "east" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "2,0,2"
+  } ], [ {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "2,1,0"
+  }, {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "2,1,1"
+  }, {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "east" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "2,1,2"
+  } ], [ {
+    "ceiling" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "2,2,0"
+  }, {
+    "ceiling" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "2,2,1"
+  }, {
+    "ceiling" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "east" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "2,2,2"
+  } ] ] ]
+}

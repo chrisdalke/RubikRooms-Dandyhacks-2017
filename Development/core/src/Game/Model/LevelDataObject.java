@@ -12,9 +12,11 @@ package Game.Model;
 ////////////////////////////////////////////////
 
 import Engine.System.Logging.Logger;
+import com.badlogic.gdx.ai.steer.utils.paths.LinePath;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.Array;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
@@ -73,6 +75,7 @@ public class LevelDataObject {
         planeRotation = 0;
         planeHasRotation = false;
         moves = new Stack<Move>();
+        undoneMoves = new Stack<Move>();
 
     }
 
@@ -88,6 +91,7 @@ public class LevelDataObject {
 
     // Stores the moves made by the user
     Stack<Move> moves;
+    Stack<Move> undoneMoves;
 
     //Rotation properties
     //Stores the current plane of rotation, ID of rotation, and float indicating rotation angle
@@ -102,6 +106,9 @@ public class LevelDataObject {
     //as well as information about the room's orientation, which this class modifies
     Room[][][] rooms; //Stores shifted rooms
     Room[][][] solution; //Stores unshifted rooms (solution)
+
+    // Laser properties
+    double receiverRadiusThreshold;
 
     ////////////////////////////////////////////////
     // Methods
@@ -208,8 +215,10 @@ public class LevelDataObject {
         //Perform rotation if the direction isn't zero
         if (direction != ZERO){
             Move move = new Move(plane, planeId, direction);
-            moves.add(move);
+            moves.push(move);
             shiftPlane(move);
+            // clear undoneMoves (so that the user can not redo -- moves have been overwritten)
+            undoneMoves.clear();
         }
         planeRotation = 0;
         planeHasRotation = false;
@@ -304,49 +313,92 @@ public class LevelDataObject {
     }
 
     public void undoMove() {
-        Move move = moves.pop();
-        Move undoMove = null;
-        switch (move.getAngle()) {
-            case NINETY:
-                undoMove = new Move(move.getRotatePlane(), move.getRotatePlaneId(), TWO_SEVENTY);
-                break;
-            case ONE_EIGHTY:
-                undoMove = new Move(move.getRotatePlane(), move.getRotatePlaneId(), ONE_EIGHTY);
-                break;
-            case TWO_SEVENTY:
-                undoMove = new Move(move.getRotatePlane(), move.getRotatePlaneId(), NINETY);
-                break;
+        if(!moves.isEmpty()) {
+            Move move = moves.pop();
+            undoneMoves.push(move);
+            Move undoMove = null;
+            switch (move.getAngle()) {
+                case NINETY:
+                    undoMove = new Move(move.getRotatePlane(), move.getRotatePlaneId(), TWO_SEVENTY);
+                    break;
+                case ONE_EIGHTY:
+                    undoMove = new Move(move.getRotatePlane(), move.getRotatePlaneId(), ONE_EIGHTY);
+                    break;
+                case TWO_SEVENTY:
+                    undoMove = new Move(move.getRotatePlane(), move.getRotatePlaneId(), NINETY);
+                    break;
+            }
+            shiftPlane(undoMove);
         }
-        shiftPlane(undoMove);
+    }
+
+    public void redoMove() {
+        // make sure undoneMoves stack is not empty
+        if(!undoneMoves.isEmpty()) {
+            // pop from undone moves stack, push to moves stack
+            Move move = undoneMoves.pop();
+            moves.push(move);
+            // perform move
+            shiftPlane(move);
+        }
     }
 
     public ArrayList<LaserEmitterObject> getLaserEmitterPositions(){
-        ArrayList<LaserEmitterObject> lasers = new ArrayList<LaserEmitterObject>();
+        ArrayList<LaserEmitterObject> emitters = new ArrayList<LaserEmitterObject>();
         for (int i=0; i<size; i++) {
             for (int j=0; j<size; j++) {
                 for (int k=0; k<size; k++) {
                     if(rooms[i][j][k].west.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
-                        lasers.add(new LaserEmitterObject(i - 0.5, j, k, LaserEmitterObject.Laser_Direction.POS_X));
+                        emitters.add(new LaserEmitterObject((float)(i - 0.5), j, k, LaserEmitterObject.Emitter_Direction.POS_X));
                     }
                     if(rooms[i][j][k].east.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
-                        lasers.add(new LaserEmitterObject(i + 0.5, j, k, LaserEmitterObject.Laser_Direction.NEG_X));
+                        emitters.add(new LaserEmitterObject((float)(i + 0.5), j, k, LaserEmitterObject.Emitter_Direction.NEG_X));
                     }
                     if(rooms[i][j][k].floor.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
-                        lasers.add(new LaserEmitterObject(i, j - 0.5, k, LaserEmitterObject.Laser_Direction.POS_Y));
+                        emitters.add(new LaserEmitterObject(i, (float)(j - 0.5), k, LaserEmitterObject.Emitter_Direction.POS_Y));
                     }
                     if(rooms[i][j][k].ceiling.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
-                        lasers.add(new LaserEmitterObject(i, j + 0.5, k, LaserEmitterObject.Laser_Direction.NEG_Y));
+                        emitters.add(new LaserEmitterObject(i, (float)(j + 0.5), k, LaserEmitterObject.Emitter_Direction.NEG_Y));
                     }
                     if(rooms[i][j][k].south.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
-                        lasers.add(new LaserEmitterObject(i, j, k - 0.5, LaserEmitterObject.Laser_Direction.POS_Z));
+                        emitters.add(new LaserEmitterObject(i, j, (float)(k - 0.5), LaserEmitterObject.Emitter_Direction.POS_Z));
                     }
                     if(rooms[i][j][k].west.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
-                        lasers.add(new LaserEmitterObject(i, j, k + 0.5, LaserEmitterObject.Laser_Direction.NEG_Z));
+                        emitters.add(new LaserEmitterObject(i, j, (float)(k + 0.5), LaserEmitterObject.Emitter_Direction.NEG_Z));
                     }
                 }
             }
         }
-        return lasers;
+        return emitters;
+    }
+
+    public ArrayList<LaserReceiverObject> getLaserReceiverPositions(){
+        ArrayList<LaserReceiverObject> receivers = new ArrayList<LaserReceiverObject>();
+        for (int i=0; i<size; i++) {
+            for (int j=0; j<size; j++) {
+                for (int k=0; k<size; k++) {
+                    if(rooms[i][j][k].west.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
+                        receivers.add(new LaserReceiverObject((float)(i - 0.5), j, k, LaserReceiverObject.Receiver_Direction.POS_X));
+                    }
+                    if(rooms[i][j][k].east.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
+                        receivers.add(new LaserReceiverObject((float)(i + 0.5), j, k, LaserReceiverObject.Receiver_Direction.NEG_X));
+                    }
+                    if(rooms[i][j][k].floor.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
+                        receivers.add(new LaserReceiverObject(i, (float)(j - 0.5), k, LaserReceiverObject.Receiver_Direction.POS_Y));
+                    }
+                    if(rooms[i][j][k].ceiling.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
+                        receivers.add(new LaserReceiverObject(i, (float)(j + 0.5), k, LaserReceiverObject.Receiver_Direction.NEG_Y));
+                    }
+                    if(rooms[i][j][k].south.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
+                        receivers.add(new LaserReceiverObject(i, j, (float)(k - 0.5), LaserReceiverObject.Receiver_Direction.POS_Z));
+                    }
+                    if(rooms[i][j][k].west.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
+                        receivers.add(new LaserReceiverObject(i, j, (float)(k + 0.5), LaserReceiverObject.Receiver_Direction.NEG_Z));
+                    }
+                }
+            }
+        }
+        return receivers;
     }
 
     public void propagateLasers() {
@@ -482,25 +534,59 @@ public class LevelDataObject {
             System.out.println("Failed to save level file!");
         }
     }
-    public static LevelDataObject load(String filename){
+    public static LevelDataObject load(File file){
         //Load a level data object from JSON file
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
         try {
-            LevelDataObject obj = mapper.readValue(new File(filename), LevelDataObject.class);
+            LevelDataObject obj = mapper.readValue(file, LevelDataObject.class);
             return obj;
         } catch (Exception e){
-            System.out.println("Failed to load level file!");
+            System.out.println("Failed to load level file " + file.getName() + " in load()");
+            e.printStackTrace();
         }
         return null;
     }
 
-    public static void main(String[] args){
-        System.out.println("Starting level serialization test...");
-        LevelDataObject lvl = new LevelDataObject(2);
+    public static ArrayList<LevelDataObject> getListOfLevels() {
+        ArrayList<LevelDataObject> levelsList = new ArrayList<LevelDataObject>();
+        File[] files = new File("Assets/Levels").listFiles();
+        for(File file: files) {
 
-        LevelDataObject.save(lvl,"Assets/Levels/test.txt");
-        System.out.println("Done.");
+            // get file extension
+            String extension = "";
+            int i = file.getName().lastIndexOf('.');
+            if(i > 0) {
+                extension = file.getName().substring(i+1);
+            }
+
+            // if the file is a .txt
+            if(extension.equals("txt")) {
+                System.out.println("Loading file " + file.getName());
+                try{
+                    levelsList.add(load(file));
+                }
+                catch (Exception e){
+                    System.out.println("Failed to load level file " + file.getName() + " in getListOfLevels()");
+                }
+            }
+        }
+        return levelsList;
+    }
+
+    public static void test() {
+        LevelDataObject test = new LevelDataObject(3);
+        save(test, "Assets/Levels/NateTest.txt");
+
+        getListOfLevels();
+    }
+
+    public static void main(String[] args){
+//        System.out.println("Starting level serialization test...");
+//        LevelDataObject lvl = new LevelDataObject(2);
+//
+//        LevelDataObject.save(lvl,"Assets/Levels/test.txt");
+//        System.out.println("Done.");
 
         //int[][] test = new int[][]{{1,2,3},{4,5,6},{7,8,9}};
         //test = lvl.rotate90Degrees(test);
@@ -520,6 +606,13 @@ public class LevelDataObject {
         } catch (Exception e){
             return null;
         }
+    }
+
+    public static float getVectorDistance(Vector3 vec1, Vector3 vec2){
+        Array<Vector3> vecPath = new Array<>(true,2);
+        vecPath.add(vec1);
+        vecPath.add(vec2);
+        return new LinePath<Vector3>(vecPath).getLength();
     }
 
     public int getSize() {

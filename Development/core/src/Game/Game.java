@@ -24,6 +24,7 @@ import Engine.UI.Stages.UIStageManager;
 import Game.Instances.ControllerInstance;
 import Game.Instances.GameInstance;
 import Game.Instances.MenuInstance;
+import Game.Model.LevelDataObject;
 import Game.Stages.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -95,6 +96,8 @@ public class Game {
             Networking.startServer();
 
         }
+
+        LevelDataObject.test();
 
     }
 

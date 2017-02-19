@@ -1,0 +1,170 @@
+{
+  "size" : 2,
+  "levelNumber" : 1,
+  "startX" : 0,
+  "startY" : 0,
+  "startZ" : 0,
+  "name" : "Untitled",
+  "description" : "Empty 2x2 Template",
+  "rooms" : [ [ [ {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "WALL"
+    },
+    "north" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "pos" : "0,0,0"
+  }, {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "WALL"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "pos" : "0,0,1"
+  } ], [ {
+    "ceiling" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "pos" : "0,1,0"
+  }, {
+    "ceiling" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "east" : {
+      "wallType" : "NONE"
+    },
+    "west" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "pos" : "0,1,1"
+  } ] ], [ [ {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "WALL"
+    },
+    "north" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "1,0,0"
+  }, {
+    "ceiling" : {
+      "wallType" : "NONE"
+    },
+    "floor" : {
+      "wallType" : "WALL"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "east" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "1,0,1"
+  } ], [ {
+    "ceiling" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "south" : {
+      "wallType" : "NONE"
+    },
+    "east" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "1,1,0"
+  }, {
+    "ceiling" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "floor" : {
+      "wallType" : "NONE"
+    },
+    "north" : {
+      "wallType" : "NONE"
+    },
+    "south" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "east" : {
+      "wallType" : "WALL_GLASS"
+    },
+    "west" : {
+      "wallType" : "NONE"
+    },
+    "pos" : "1,1,1"
+  } ] ] ]
+}

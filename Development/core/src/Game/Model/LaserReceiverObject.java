@@ -1,12 +1,11 @@
 package Game.Model;
 
-import com.badlogic.gdx.ai.steer.utils.paths.LinePath;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.Array;
 
 /**
  * Created by Nate on 2/18/17.
  */
+
 public class LaserReceiverObject {
 
     Vector3 worldCoords;

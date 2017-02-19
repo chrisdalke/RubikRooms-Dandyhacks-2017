@@ -8,13 +8,16 @@
 package Game.Entities;
 
 import Engine.Game.Entity.GameObject3d;
+import Game.Model.Room;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 
 public class ControllerCube extends GameObject3d {
 
     public boolean isRoom;
+    public Room roomObject;
 
     public void setRoom(boolean room) {
         isRoom = room;
@@ -28,10 +31,14 @@ public class ControllerCube extends GameObject3d {
         }
     }
 
-    public ControllerCube() {
-        super("Assets/Models/cube.obj");
+    public ControllerCube(Room roomObj) {
+        super();
+        roomObject = roomObj;
 
-        setScale(0.9f,0.9f,0.9f);
+        RoomObject.buildRoomModel(roomObject);
+        setModel(new ModelInstance(RoomObject.builtModel));
+
+        setScale(1f / RoomObject.ROOM_RADIUS,1f / RoomObject.ROOM_RADIUS,1f / RoomObject.ROOM_RADIUS);
         setRoom(true);
 
         //ModelTexturer.texture(this.getModel(), TextureLoader.load("Assets/Textures/debug.png"));

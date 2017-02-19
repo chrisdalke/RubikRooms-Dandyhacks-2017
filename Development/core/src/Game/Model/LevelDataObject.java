@@ -12,7 +12,9 @@ package Game.Model;
 ////////////////////////////////////////////////
 
 import Engine.System.Logging.Logger;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ai.steer.utils.paths.LinePath;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
@@ -26,16 +28,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Stack;
 
-import static Game.Model.LevelDataObject.PLANE.X;
-import static Game.Model.LevelDataObject.PLANE.Y;
-import static Game.Model.LevelDataObject.PLANE.Z;
+import static Game.Model.LevelDataObject.PLANE.*;
 import static Game.Model.LevelDataObject.PLANE_ROTATION.*;
 
 ////////////////////////////////////////////////
 // Level Data Object class
 ////////////////////////////////////////////////
 
-@JsonIgnoreProperties(value = {"laserEmitterPositions","laserReceiverPositions","mirrorsArray","mirrorPositions","filename"})
+@JsonIgnoreProperties(value = {"laserEmitterPositions","laserReceiverPositions","mirrorsArray","mirrorPositions","filename","filenameShort"})
 public class LevelDataObject {
 
     ////////////////////////////////////////////////
@@ -102,6 +102,7 @@ public class LevelDataObject {
     String name;
     String description;
     String filename;
+    String filenameShort;
 
     // Stores the moves made by the user
     Stack<Move> moves;
@@ -281,7 +282,9 @@ public class LevelDataObject {
                 }
             }
 
-            // rotate over 2D plane
+            // rotate over 2D plane (rotate 90 degrees clockwise)
+            tempArray = rotate90Degrees(tempArray);
+            tempArray = rotate90Degrees(tempArray);
             tempArray = rotate90Degrees(tempArray);
 
             // convert back to 3D array
@@ -290,12 +293,15 @@ public class LevelDataObject {
                     switch (rotatePlane) {
                         case X:
                             rooms[rotatePlaneId][i][j] = tempArray[i][j];
+                            rooms[rotatePlaneId][i][j].rotateOrientation(X,NINETY);
                             break;
                         case Y:
                             rooms[i][rotatePlaneId][j] = tempArray[i][j];
+                            rooms[i][rotatePlaneId][j].rotateOrientation(Y,NINETY);
                             break;
                         case Z:
                             rooms[i][j][rotatePlaneId] = tempArray[i][j];
+                            rooms[i][j][rotatePlaneId].rotateOrientation(Z,NINETY);
                             break;
                     }
                 }
@@ -304,6 +310,19 @@ public class LevelDataObject {
     }
 
     public Room[][] rotate90Degrees(Room[][] array){
+
+        Logger.log("Rotating 90 degrees!");
+
+        int size = getSize();
+        Room[][] ret = new Room[size][size];
+        for (int r = 0; r < size; r++) {
+            for (int c = 0; c < size; c++) {
+                ret[c][size-1-r] = array[r][c];
+            }
+        }
+        return ret;
+
+        /*
         Room[][] result = new Room[array.length][array.length];
 
         // transpose matrix
@@ -323,6 +342,7 @@ public class LevelDataObject {
         }
 
         return result;
+        */
     }
 
     public void undoMove() {
@@ -527,7 +547,6 @@ public class LevelDataObject {
             }
         }
 
-
         //Calculate transforms for the rotated rooms, if one exists
         if (planeHasRotation){
             for (int i = 0; i < size; i++){
@@ -580,6 +599,17 @@ public class LevelDataObject {
             }
         }
 
+        //Calculate transforms for all rooms, setting orientations
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
+                for (int z = 0; z < size; z++) {
+                    rooms[x][y][z].transform.rotate(1,0,0,rooms[x][y][z].orientationX);
+                    rooms[x][y][z].transform.rotate(0,1,0,rooms[x][y][z].orientationY);
+                    rooms[x][y][z].transform.rotate(0,0,1,rooms[x][y][z].orientationZ);
+                }
+            }
+        }
+
     }
 
     ////////////////////////////////////////////////
@@ -604,6 +634,7 @@ public class LevelDataObject {
         try {
             LevelDataObject obj = mapper.readValue(file, LevelDataObject.class);
             obj.setFilename(file.getAbsolutePath());
+            obj.setFilenameShort(file.getName());
             return obj;
         } catch (Exception e){
             System.out.println("Failed to load level file " + file.getName() + " in load()");
@@ -612,9 +643,18 @@ public class LevelDataObject {
         return null;
     }
 
+    public String getFilenameShort() {
+        return filenameShort;
+    }
+
+    public void setFilenameShort(String filenameShort) {
+        this.filenameShort = filenameShort;
+    }
+
     public static ArrayList<LevelDataObject> getListOfLevels() {
         ArrayList<LevelDataObject> levelsList = new ArrayList<LevelDataObject>();
-        File[] files = new File("Assets/Levels").listFiles();
+        FileHandle handle = Gdx.files.internal("Assets/Levels");
+        File[] files = new File(handle.path()).listFiles();
         for(File file: files) {
 
             // get file extension

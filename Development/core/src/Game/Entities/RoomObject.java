@@ -49,19 +49,19 @@ public class RoomObject extends GameObject3d {
     public static final float ROOM_RADIUS_INNER = ROOM_DIAMETER/2 - ROOM_WALL_THICKNESS;
     public static final float ROOM_DIAMETER_INNER = ROOM_DIAMETER - ROOM_WALL_THICKNESS*2;
 
-    public void buildRoomBox(MeshPartBuilder meshBuilder, btCompoundShape collisionShape, float x, float y, float z, float sx, float sy, float sz){
+    public static void buildRoomBox(MeshPartBuilder meshBuilder, btCompoundShape collisionShape, float x, float y, float z, float sx, float sy, float sz){
         BoxShapeBuilder.build(meshBuilder,x,y,z,sx,sy,sz);
         btBoxShape box = new btBoxShape(new Vector3(sx/2.0f,sy/2.0f,sz/2.0f));
         Matrix4 transform = new Matrix4().translate(x,y,z);
-        collisionShape.addChildShape(transform,box);
+        builtShape.addChildShape(transform,box);
     }
 
-    public RoomObject(Room roomDataObject) {
-        super();
+    public static Model builtModel;
+    public static btCompoundShape builtShape;
 
-        this.roomDataObject = roomDataObject;
+    public static void buildRoomModel(Room roomDataObject){
 
-        btCompoundShape collisionShape = new btCompoundShape();
+        builtShape = new btCompoundShape();
 
         //Build a visual model and collision shape based on the room Data Object
         ModelBuilder modelBuilder = new ModelBuilder();
@@ -75,7 +75,7 @@ public class RoomObject extends GameObject3d {
         matGlassWalls.set(ColorAttribute.createDiffuse(0.7f,0.8f,1.0f,1.0f));
         matGlassWalls.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA, 0.4f));
 
-        //mat.set(ColorAttribute.createDiffuse(ThreadLocalRandom.current().nextFloat(),ThreadLocalRandom.current().nextFloat(),ThreadLocalRandom.current().nextFloat(),1.0f));
+        //matGlassWalls.set(ColorAttribute.createDiffuse(ThreadLocalRandom.current().nextFloat(),ThreadLocalRandom.current().nextFloat(),ThreadLocalRandom.current().nextFloat(),1.0f));
 
         Node node1 = modelBuilder.node();
         node1.id = "borders";
@@ -84,53 +84,53 @@ public class RoomObject extends GameObject3d {
 
         //X
         if (roomDataObject.north.wallType != Wall.WALL_TYPE.NONE |  roomDataObject.floor.wallType != Wall.WALL_TYPE.NONE) {
-            buildRoomBox(meshBuilder, collisionShape, 0, -ROOM_RADIUS_CENTER, -ROOM_RADIUS_CENTER, ROOM_DIAMETER, ROOM_WALL_THICKNESS, ROOM_WALL_THICKNESS);
+            buildRoomBox(meshBuilder, builtShape, 0, -ROOM_RADIUS_CENTER, -ROOM_RADIUS_CENTER, ROOM_DIAMETER, ROOM_WALL_THICKNESS, ROOM_WALL_THICKNESS);
         }
 
         if (roomDataObject.south.wallType != Wall.WALL_TYPE.NONE |  roomDataObject.floor.wallType != Wall.WALL_TYPE.NONE) {
-            buildRoomBox(meshBuilder, collisionShape, 0, -ROOM_RADIUS_CENTER, ROOM_RADIUS_CENTER, ROOM_DIAMETER, ROOM_WALL_THICKNESS, ROOM_WALL_THICKNESS);
+            buildRoomBox(meshBuilder, builtShape, 0, -ROOM_RADIUS_CENTER, ROOM_RADIUS_CENTER, ROOM_DIAMETER, ROOM_WALL_THICKNESS, ROOM_WALL_THICKNESS);
         }
 
         if (roomDataObject.north.wallType != Wall.WALL_TYPE.NONE |  roomDataObject.ceiling.wallType != Wall.WALL_TYPE.NONE) {
-            buildRoomBox(meshBuilder, collisionShape, 0, ROOM_RADIUS_CENTER, -ROOM_RADIUS_CENTER, ROOM_DIAMETER, ROOM_WALL_THICKNESS, ROOM_WALL_THICKNESS);
+            buildRoomBox(meshBuilder, builtShape, 0, ROOM_RADIUS_CENTER, -ROOM_RADIUS_CENTER, ROOM_DIAMETER, ROOM_WALL_THICKNESS, ROOM_WALL_THICKNESS);
         }
 
         if (roomDataObject.south.wallType != Wall.WALL_TYPE.NONE |  roomDataObject.ceiling.wallType != Wall.WALL_TYPE.NONE) {
-            buildRoomBox(meshBuilder, collisionShape, 0, ROOM_RADIUS_CENTER, ROOM_RADIUS_CENTER, ROOM_DIAMETER, ROOM_WALL_THICKNESS, ROOM_WALL_THICKNESS);
+            buildRoomBox(meshBuilder, builtShape, 0, ROOM_RADIUS_CENTER, ROOM_RADIUS_CENTER, ROOM_DIAMETER, ROOM_WALL_THICKNESS, ROOM_WALL_THICKNESS);
         }
 
         //Y
         if (roomDataObject.north.wallType != Wall.WALL_TYPE.NONE |  roomDataObject.west.wallType != Wall.WALL_TYPE.NONE) {
-            buildRoomBox(meshBuilder, collisionShape, -ROOM_RADIUS_CENTER, 0, -ROOM_RADIUS_CENTER, ROOM_WALL_THICKNESS, ROOM_DIAMETER, ROOM_WALL_THICKNESS);
+            buildRoomBox(meshBuilder, builtShape, -ROOM_RADIUS_CENTER, 0, -ROOM_RADIUS_CENTER, ROOM_WALL_THICKNESS, ROOM_DIAMETER, ROOM_WALL_THICKNESS);
         }
 
         if (roomDataObject.south.wallType != Wall.WALL_TYPE.NONE |  roomDataObject.west.wallType != Wall.WALL_TYPE.NONE) {
-            buildRoomBox(meshBuilder, collisionShape, -ROOM_RADIUS_CENTER, 0, ROOM_RADIUS_CENTER, ROOM_WALL_THICKNESS, ROOM_DIAMETER, ROOM_WALL_THICKNESS);
+            buildRoomBox(meshBuilder, builtShape, -ROOM_RADIUS_CENTER, 0, ROOM_RADIUS_CENTER, ROOM_WALL_THICKNESS, ROOM_DIAMETER, ROOM_WALL_THICKNESS);
         }
 
         if (roomDataObject.north.wallType != Wall.WALL_TYPE.NONE |  roomDataObject.east.wallType != Wall.WALL_TYPE.NONE) {
-            buildRoomBox(meshBuilder, collisionShape, ROOM_RADIUS_CENTER, 0, -ROOM_RADIUS_CENTER, ROOM_WALL_THICKNESS, ROOM_DIAMETER, ROOM_WALL_THICKNESS);
+            buildRoomBox(meshBuilder, builtShape, ROOM_RADIUS_CENTER, 0, -ROOM_RADIUS_CENTER, ROOM_WALL_THICKNESS, ROOM_DIAMETER, ROOM_WALL_THICKNESS);
         }
 
         if (roomDataObject.south.wallType != Wall.WALL_TYPE.NONE |  roomDataObject.east.wallType != Wall.WALL_TYPE.NONE) {
-            buildRoomBox(meshBuilder, collisionShape, ROOM_RADIUS_CENTER, 0, ROOM_RADIUS_CENTER, ROOM_WALL_THICKNESS, ROOM_DIAMETER, ROOM_WALL_THICKNESS);
+            buildRoomBox(meshBuilder, builtShape, ROOM_RADIUS_CENTER, 0, ROOM_RADIUS_CENTER, ROOM_WALL_THICKNESS, ROOM_DIAMETER, ROOM_WALL_THICKNESS);
         }
 
         //Z
         if (roomDataObject.floor.wallType != Wall.WALL_TYPE.NONE |  roomDataObject.west.wallType != Wall.WALL_TYPE.NONE) {
-            buildRoomBox(meshBuilder, collisionShape, -ROOM_RADIUS_CENTER, -ROOM_RADIUS_CENTER, 0, ROOM_WALL_THICKNESS, ROOM_WALL_THICKNESS, ROOM_DIAMETER);
+            buildRoomBox(meshBuilder, builtShape, -ROOM_RADIUS_CENTER, -ROOM_RADIUS_CENTER, 0, ROOM_WALL_THICKNESS, ROOM_WALL_THICKNESS, ROOM_DIAMETER);
         }
 
         if (roomDataObject.floor.wallType != Wall.WALL_TYPE.NONE |  roomDataObject.east.wallType != Wall.WALL_TYPE.NONE) {
-            buildRoomBox(meshBuilder, collisionShape, ROOM_RADIUS_CENTER, -ROOM_RADIUS_CENTER, 0, ROOM_WALL_THICKNESS, ROOM_WALL_THICKNESS, ROOM_DIAMETER);
+            buildRoomBox(meshBuilder, builtShape, ROOM_RADIUS_CENTER, -ROOM_RADIUS_CENTER, 0, ROOM_WALL_THICKNESS, ROOM_WALL_THICKNESS, ROOM_DIAMETER);
         }
 
         if (roomDataObject.ceiling.wallType != Wall.WALL_TYPE.NONE |  roomDataObject.west.wallType != Wall.WALL_TYPE.NONE) {
-            buildRoomBox(meshBuilder, collisionShape, -ROOM_RADIUS_CENTER, ROOM_RADIUS_CENTER, 0, ROOM_WALL_THICKNESS, ROOM_WALL_THICKNESS, ROOM_DIAMETER);
+            buildRoomBox(meshBuilder, builtShape, -ROOM_RADIUS_CENTER, ROOM_RADIUS_CENTER, 0, ROOM_WALL_THICKNESS, ROOM_WALL_THICKNESS, ROOM_DIAMETER);
         }
 
         if (roomDataObject.ceiling.wallType != Wall.WALL_TYPE.NONE |  roomDataObject.east.wallType != Wall.WALL_TYPE.NONE) {
-            buildRoomBox(meshBuilder, collisionShape, ROOM_RADIUS_CENTER, ROOM_RADIUS_CENTER, 0, ROOM_WALL_THICKNESS, ROOM_WALL_THICKNESS, ROOM_DIAMETER);
+            buildRoomBox(meshBuilder, builtShape, ROOM_RADIUS_CENTER, ROOM_RADIUS_CENTER, 0, ROOM_WALL_THICKNESS, ROOM_WALL_THICKNESS, ROOM_DIAMETER);
         }
 
         //Walls, if walls exist in the level
@@ -144,32 +144,32 @@ public class RoomObject extends GameObject3d {
         //Put down the normal walls
         if (roomDataObject.ceiling.wallType != Wall.WALL_TYPE.NONE){
             if (roomDataObject.ceiling.wallType != Wall.WALL_TYPE.WALL_GLASS){
-                buildRoomBox(meshBuilderWalls,collisionShape,0,ROOM_RADIUS_CENTER,0,ROOM_DIAMETER_INNER,ROOM_WALL_THICKNESS,ROOM_DIAMETER_INNER);
+                buildRoomBox(meshBuilderWalls,builtShape,0,ROOM_RADIUS_CENTER,0,ROOM_DIAMETER_INNER,ROOM_WALL_THICKNESS,ROOM_DIAMETER_INNER);
             }
         }
         if (roomDataObject.floor.wallType != Wall.WALL_TYPE.NONE){
             if (roomDataObject.floor.wallType != Wall.WALL_TYPE.WALL_GLASS) {
-                buildRoomBox(meshBuilderWalls,collisionShape, 0, -ROOM_RADIUS_CENTER, 0, ROOM_DIAMETER_INNER, ROOM_WALL_THICKNESS, ROOM_DIAMETER_INNER);
+                buildRoomBox(meshBuilderWalls,builtShape, 0, -ROOM_RADIUS_CENTER, 0, ROOM_DIAMETER_INNER, ROOM_WALL_THICKNESS, ROOM_DIAMETER_INNER);
             }
         }
         if (roomDataObject.east.wallType != Wall.WALL_TYPE.NONE){
             if (roomDataObject.east.wallType != Wall.WALL_TYPE.WALL_GLASS){
-                buildRoomBox(meshBuilderWalls,collisionShape,ROOM_RADIUS_CENTER,0,0,ROOM_WALL_THICKNESS,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER);
+                buildRoomBox(meshBuilderWalls,builtShape,ROOM_RADIUS_CENTER,0,0,ROOM_WALL_THICKNESS,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER);
             }
         }
         if (roomDataObject.west.wallType != Wall.WALL_TYPE.NONE){
             if (roomDataObject.west.wallType != Wall.WALL_TYPE.WALL_GLASS){
-                buildRoomBox(meshBuilderWalls,collisionShape,-ROOM_RADIUS_CENTER,0,0,ROOM_WALL_THICKNESS,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER);
+                buildRoomBox(meshBuilderWalls,builtShape,-ROOM_RADIUS_CENTER,0,0,ROOM_WALL_THICKNESS,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER);
             }
         }
         if (roomDataObject.north.wallType != Wall.WALL_TYPE.NONE){
             if (roomDataObject.north.wallType != Wall.WALL_TYPE.WALL_GLASS){
-                buildRoomBox(meshBuilderWalls,collisionShape,0,0,-ROOM_RADIUS_CENTER,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER,ROOM_WALL_THICKNESS);
+                buildRoomBox(meshBuilderWalls,builtShape,0,0,-ROOM_RADIUS_CENTER,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER,ROOM_WALL_THICKNESS);
             }
         }
         if (roomDataObject.south.wallType != Wall.WALL_TYPE.NONE){
             if (roomDataObject.south.wallType != Wall.WALL_TYPE.WALL_GLASS){
-                buildRoomBox(meshBuilderWalls,collisionShape,0,0,ROOM_RADIUS_CENTER,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER,ROOM_WALL_THICKNESS);
+                buildRoomBox(meshBuilderWalls,builtShape,0,0,ROOM_RADIUS_CENTER,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER,ROOM_WALL_THICKNESS);
             }
         }
 
@@ -181,43 +181,50 @@ public class RoomObject extends GameObject3d {
         //Put down the glass walls
         if (roomDataObject.ceiling.wallType != Wall.WALL_TYPE.NONE){
             if (roomDataObject.ceiling.wallType == Wall.WALL_TYPE.WALL_GLASS){
-                buildRoomBox(meshBuilderGlassWalls,collisionShape,0,ROOM_RADIUS_CENTER,0,ROOM_DIAMETER_INNER,ROOM_WALL_THICKNESS,ROOM_DIAMETER_INNER);
+                buildRoomBox(meshBuilderGlassWalls,builtShape,0,ROOM_RADIUS_CENTER,0,ROOM_DIAMETER_INNER,ROOM_WALL_THICKNESS,ROOM_DIAMETER_INNER);
             }
         }
         if (roomDataObject.floor.wallType != Wall.WALL_TYPE.NONE){
             if (roomDataObject.floor.wallType == Wall.WALL_TYPE.WALL_GLASS) {
-                buildRoomBox(meshBuilderGlassWalls,collisionShape, 0, -ROOM_RADIUS_CENTER, 0, ROOM_DIAMETER_INNER, ROOM_WALL_THICKNESS, ROOM_DIAMETER_INNER);
+                buildRoomBox(meshBuilderGlassWalls,builtShape, 0, -ROOM_RADIUS_CENTER, 0, ROOM_DIAMETER_INNER, ROOM_WALL_THICKNESS, ROOM_DIAMETER_INNER);
             }
         }
         if (roomDataObject.east.wallType != Wall.WALL_TYPE.NONE){
             if (roomDataObject.east.wallType == Wall.WALL_TYPE.WALL_GLASS){
-                buildRoomBox(meshBuilderGlassWalls,collisionShape,ROOM_RADIUS_CENTER,0,0,ROOM_WALL_THICKNESS,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER);
+                buildRoomBox(meshBuilderGlassWalls,builtShape,ROOM_RADIUS_CENTER,0,0,ROOM_WALL_THICKNESS,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER);
             }
         }
         if (roomDataObject.west.wallType != Wall.WALL_TYPE.NONE){
             if (roomDataObject.west.wallType == Wall.WALL_TYPE.WALL_GLASS){
-                buildRoomBox(meshBuilderGlassWalls,collisionShape,-ROOM_RADIUS_CENTER,0,0,ROOM_WALL_THICKNESS,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER);
+                buildRoomBox(meshBuilderGlassWalls,builtShape,-ROOM_RADIUS_CENTER,0,0,ROOM_WALL_THICKNESS,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER);
             }
         }
         if (roomDataObject.north.wallType != Wall.WALL_TYPE.NONE){
             if (roomDataObject.north.wallType == Wall.WALL_TYPE.WALL_GLASS){
-                buildRoomBox(meshBuilderGlassWalls,collisionShape,0,0,-ROOM_RADIUS_CENTER,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER,ROOM_WALL_THICKNESS);
+                buildRoomBox(meshBuilderGlassWalls,builtShape,0,0,-ROOM_RADIUS_CENTER,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER,ROOM_WALL_THICKNESS);
             }
         }
         if (roomDataObject.south.wallType != Wall.WALL_TYPE.NONE){
             if (roomDataObject.south.wallType == Wall.WALL_TYPE.WALL_GLASS){
-                buildRoomBox(meshBuilderGlassWalls,collisionShape,0,0,ROOM_RADIUS_CENTER,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER,ROOM_WALL_THICKNESS);
+                buildRoomBox(meshBuilderGlassWalls,builtShape,0,0,ROOM_RADIUS_CENTER,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER,ROOM_WALL_THICKNESS);
             }
         }
 
+        builtModel = modelBuilder.end();
 
-        Model model = modelBuilder.end();
-        setModel(new ModelInstance(model));
+        builtShape.createAabbTreeFromChildren();
+    }
 
-        collisionShape.createAabbTreeFromChildren();
+    public RoomObject(Room roomDataObject) {
+        super();
+
+        this.roomDataObject = roomDataObject;
+
+        buildRoomModel(roomDataObject);
+        setModel(new ModelInstance(builtModel));
 
         //Create physics object
-        roomPhysicsObject = new KinematicPhysicsEntity(this,collisionShape);
+        roomPhysicsObject = new KinematicPhysicsEntity(this,builtShape);
 
         //Update position
         update();
@@ -231,20 +238,22 @@ public class RoomObject extends GameObject3d {
     @Override
     public void update() {
         //Update the world translation and physics position of this object based on the roomDataObject
-        Matrix4 tempTransform = roomDataObject.transform;
+        Matrix4 tempTransform = roomDataObject.getWorldTransform();
         Vector3 pos = new Vector3();
-        Quaternion rotation = new Quaternion();
         tempTransform.getTranslation(pos);
+        Quaternion rotation = new Quaternion();
         tempTransform.getRotation(rotation);
 
         Matrix4 scaledTransform = new Matrix4();
         scaledTransform.translate(pos.x * ROOM_DIAMETER, pos.y * ROOM_DIAMETER, pos.z * ROOM_DIAMETER);
         scaledTransform.rotate(rotation);
-
         setTransform(scaledTransform);
-        //Position physics body
 
+        //Position physics body and visual body
+        setTransform(scaledTransform);
         roomPhysicsObject.updateFromTransform(scaledTransform);
+
+        super.update();
     }
 }
 

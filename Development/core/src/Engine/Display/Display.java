@@ -37,7 +37,7 @@ public class Display {
         config.fullscreen = false;
 
         if (PlatformManager.getPlatform() == PlatformManager.IOS){
-            config.fullscreen_window = true;
+            //config.fullscreen_window = true;
         }
 
         if (config.fullscreen_window){

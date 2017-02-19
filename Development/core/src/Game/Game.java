@@ -67,7 +67,10 @@ public class Game {
         UIStageManager.init();
         UIStageManager.addStage("GameStage",new GameStage());
         UIStageManager.addStage("GameSplashStage",new GameSplashStage());
-        UIStageManager.addStage("LevelSelectionStage",new LevelSelectionStage());
+
+        if (PlatformManager.getPlatform() != PlatformManager.IOS){
+            UIStageManager.addStage("LevelSelectionStage",new LevelSelectionStage());
+        }
         UIStageManager.addStage("ControllerStage",new ControllerStage());
         UIStageManager.addStage("MainMenuStage",new MainMenuStage());
         UIStageManager.addStage("ControllerMainMenuStage",new ControllerMainMenuStage());
@@ -83,6 +86,10 @@ public class Game {
             menuInstance = new MenuInstance();
             menuInstance.init();
             UIStageManager.switchTo("ControllerMainMenuStage");
+
+            gameInstance = new ControllerInstance();
+            gameInstance.init();
+            UIStageManager.switchTo("ControllerStage");
         } else {
             //Start desktop menu
             menuInstance = new MenuInstance();
@@ -97,7 +104,7 @@ public class Game {
 
         }
 
-        LevelDataObject.test();
+        //LevelDataObject.test();
 
     }
 

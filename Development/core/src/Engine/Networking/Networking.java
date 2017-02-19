@@ -8,10 +8,10 @@
 package Engine.Networking;
 
 import Engine.System.Config.Configuration;
-import com.esotericsoftware.kryonet.Client;
-import com.esotericsoftware.kryonet.Connection;
-import com.esotericsoftware.kryonet.Listener;
-import com.esotericsoftware.kryonet.Server;
+import Game.Model.LevelNetworkFile;
+import Game.Model.LevelNetworkPacket;
+import com.esotericsoftware.kryo.Kryo;
+import com.esotericsoftware.kryonet.*;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -46,7 +46,7 @@ public class Networking {
    // Server Code
    ////////////////////////////////////////////////
 
-   public static final int TCP_PORT = 54555;
+   public static final int TCP_PORT = 54554;
    public static final int UDP_PORT = 54556;
 
    public static boolean serverRunning;
@@ -66,6 +66,8 @@ public class Networking {
          serverSession = new Server();
          serverSession.start();
          serverSession.bind(TCP_PORT, UDP_PORT);
+
+         registerClasses(serverSession);
 
          String localIp = Networking.getLocalIP();
 
@@ -152,6 +154,8 @@ public class Networking {
          clientSession.start();
          clientSession.connect(5000, ipPort, TCP_PORT, UDP_PORT);
 
+         registerClasses(clientSession);
+
          //Wait and see if the client is connecting
          await().atMost(5, SECONDS).until(() -> clientSession.isConnected());
 
@@ -206,6 +210,13 @@ public class Networking {
 
    public static Client getClientSession() {
       return clientSession;
+   }
+
+   public static void registerClasses(EndPoint session){
+
+      Kryo kryo = session.getKryo();
+      kryo.register(LevelNetworkPacket.class);
+      kryo.register(LevelNetworkFile.class);
    }
 }
 

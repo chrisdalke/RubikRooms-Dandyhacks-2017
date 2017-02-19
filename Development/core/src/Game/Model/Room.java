@@ -1,6 +1,9 @@
 package Game.Model;
 
+import Engine.System.Logging.Logger;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Quaternion;
+import com.badlogic.gdx.math.Vector3;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
@@ -9,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * Class to represent a room in the level
  */
 
-@JsonIgnoreProperties(value = {"worldTransform", "transform"})
+@JsonIgnoreProperties(value = {"worldTransform", "transform","orientation","orientationX","orientationY","orientationZ"})
 public class Room {
 
     public Wall ceiling = new Wall(Wall.WALL_TYPE.WALL_GLASS);
@@ -19,6 +22,11 @@ public class Room {
     public Wall east = new Wall(Wall.WALL_TYPE.WALL_GLASS);
     public Wall west = new Wall(Wall.WALL_TYPE.WALL_GLASS);
     public String pos;
+    public Quaternion orientation;
+
+    public int orientationX;
+    public int orientationY;
+    public int orientationZ;
 
     public String getPos() {
         return pos;
@@ -40,6 +48,7 @@ public class Room {
 
     public Room() {
         transform = new Matrix4();
+        orientation = new Quaternion();
     }
 
     public void rotateOrientation(LevelDataObject.PLANE plane, LevelDataObject.PLANE_ROTATION rotation) {
@@ -67,6 +76,8 @@ public class Room {
                     south = ceiling;
                     ceiling = north;
                     north = temp;
+                    orientationX = (orientationX + 90) % 360;
+                    orientation.add(new Quaternion(new Vector3(1,0,0),180.0f)).nor();
                     break;
                 case Y:
                     temp = north;
@@ -74,6 +85,8 @@ public class Room {
                     east = south;
                     south = west;
                     west = temp;
+                    orientationY = (orientationY + 90) % 360;
+                    orientation.add(new Quaternion(new Vector3(0,1,0),180.0f));
                     break;
                 case Z:
                     temp = ceiling;
@@ -81,9 +94,15 @@ public class Room {
                     east = floor;
                     floor = west;
                     west = temp;
+                    orientationZ = (orientationZ + 90) % 360;
+                    orientation.add(new Quaternion(new Vector3(0,0,1),180.0f));
                     break;
             }
         }
+
+        Logger.log("O: "+orientationX+" "+orientationY+" "+orientationZ);
+        Logger.log(orientation+" ");
+
     }
 }
 

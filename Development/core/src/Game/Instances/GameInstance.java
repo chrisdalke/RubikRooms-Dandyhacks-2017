@@ -11,6 +11,8 @@ import Engine.Display.Display;
 import Engine.Game.Entity.GameObject3d;
 import Engine.Game.Entity.SkyBox;
 import Engine.Game.Instance.AbstractGameInstance;
+import Engine.Networking.Networking;
+import Engine.Networking.NetworkingEventListener;
 import Engine.Physics.PhysicsWorld;
 import Engine.Renderer.FrameBuffer;
 import Engine.Renderer.Renderer;
@@ -22,10 +24,14 @@ import Game.Entities.FirstPersonCharacterController;
 import Game.Entities.RoomObject;
 import Game.Game;
 import Game.Model.LevelDataObject;
+import Game.Model.LevelNetworkFile;
+import Game.Model.LevelNetworkPacket;
 import com.badlogic.gdx.graphics.Texture;
 
 import java.io.File;
 import java.util.concurrent.ThreadLocalRandom;
+
+import static Game.Entities.RoomObject.ROOM_DIAMETER;
 
 
 ////////////////////////////////////////////////
@@ -79,6 +85,9 @@ public class GameInstance extends AbstractGameInstance {
 
         level.calculateRoomPositions();
 
+        Networking.serverSetTCPCallback(new GameEventListener());
+        Networking.serverSendTCP(new LevelNetworkFile(level.getFilenameShort()));
+
         for (int x = 0; x < level.getSize(); x++){
             for (int y = 0; y < level.getSize(); y++){
                 for (int z = 0; z < level.getSize(); z++){
@@ -111,6 +120,7 @@ public class GameInstance extends AbstractGameInstance {
         Logger.log("Test");
 
         FirstPersonCharacterController fpsCam = new FirstPersonCharacterController();
+        fpsCam.setPosition(level.getStartX()*ROOM_DIAMETER,level.getStartY()*ROOM_DIAMETER,level.getStartZ()*ROOM_DIAMETER);
         fpsCam.characterController.addToPhysicsWorld(physicsWorld);
         setCamera(fpsCam.getCam());
         addObject(fpsCam);
@@ -142,6 +152,16 @@ public class GameInstance extends AbstractGameInstance {
         crosshairTex = TextureLoader.load("Assets/Textures/crosshair.png");
     }
 
+
+    private class GameEventListener implements NetworkingEventListener {
+        @Override
+        public void get(Object msg) {
+            if (msg instanceof LevelNetworkPacket){
+                LevelNetworkPacket packet = (LevelNetworkPacket)msg;
+                level.triggerRotatePlane(LevelDataObject.PLANE.values()[packet.plane],packet.planeId, LevelDataObject.PLANE_ROTATION.values()[packet.planeRotation],packet.delta);
+            }
+        }
+    }
     ////////////////////////////////////////////////
     // Level Update
     ////////////////////////////////////////////////
@@ -150,7 +170,10 @@ public class GameInstance extends AbstractGameInstance {
     public void update() {
         super.update();
 
-        level.triggerRotatePlane(LevelDataObject.PLANE.X,0, LevelDataObject.PLANE_ROTATION.NINETY,1f);
+        //Demo test cases
+
+
+
         level.update();
 
         physicsWorld.update();

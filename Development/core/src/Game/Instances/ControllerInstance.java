@@ -13,14 +13,16 @@ import Engine.Game.Entity.Types.Camera3d;
 import Engine.Game.Instance.AbstractGameInstance;
 import Engine.Input.Input;
 import Engine.Networking.Networking;
+import Engine.Networking.NetworkingEventListener;
 import Engine.Renderer.Textures.TextureLoader;
 import Engine.System.Logging.Logger;
-import Engine.UI.Stages.UIStageManager;
 import Game.Entities.BackgroundCube;
 import Game.Entities.ControllerCube;
 import Game.Entities.ToggleableCameraInputController;
-import Game.Game;
 import Game.Model.LevelDataObject;
+import Game.Model.LevelNetworkFile;
+import Game.Model.LevelNetworkPacket;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ai.steer.utils.paths.LinePath;
 import com.badlogic.gdx.graphics.Texture;
@@ -29,6 +31,7 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 import com.badlogic.gdx.math.collision.Ray;
 import com.badlogic.gdx.utils.Array;
 
+import java.io.File;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static Game.Model.LevelDataObject.PLANE.*;
@@ -39,14 +42,29 @@ public class ControllerInstance extends AbstractGameInstance implements InputPro
    public SkyBox skybox;
 
 
-   public LevelDataObject testLevel;
+   public LevelDataObject level;
    public ControllerCube[][][] controllerCubes;
+
+   private class ControllerEventListener implements NetworkingEventListener {
+      @Override
+      public void get(Object msg) {
+         if (msg instanceof LevelNetworkFile){
+            System.out.println("Got level packet file!");
+            LevelNetworkFile packet = (LevelNetworkFile)msg;
+            File file =Gdx.files.internal("Assets/Levels/"+packet.filename).file();
+            System.out.println(file.getAbsolutePath());
+            ControllerInstance.this.setLevel(LevelDataObject.load(file));
+         }
+      }
+   }
 
    @Override
    public void init() {
       shadowViewportSize = 80f;
       hasShadows = false;
       super.init();
+
+      Networking.clientSetTCPCallback(new ControllerEventListener());
 
       //We can assume that the networking client is running; let's configure our local level data object to sync remotely
 
@@ -63,9 +81,7 @@ public class ControllerInstance extends AbstractGameInstance implements InputPro
          addObject(cubeObj);
       }
 
-      int testSize = 4;
-      testLevel = new LevelDataObject(testSize);
-
+/*
       controllerCubes = new ControllerCube[testSize][testSize][testSize];
       for (int x = 0; x < testSize; x++){
          for (int y = 0; y < testSize; y++){
@@ -81,6 +97,7 @@ public class ControllerInstance extends AbstractGameInstance implements InputPro
          }
       }
       updateCubes(); //Update the position of the cubes.
+      */
 
       Texture skyTexTop = TextureLoader.load("Assets/Textures/skybox/skyboxTop.png").getTex();
       Texture skyTexSide = TextureLoader.load("Assets/Textures/skybox/skyboxSide.png").getTex();
@@ -94,33 +111,75 @@ public class ControllerInstance extends AbstractGameInstance implements InputPro
       Input.addInputHandler(this);
       Input.addInputHandler(cameraInputController);
       cameraInputController.setEnabled(true);
-      cameraInputController.zoom(testLevel.getSize()*-4.0f);
+      setLevel(LevelDataObject.load(new File("Assets/Levels/level1.txt")));
 
+   }
+
+   public void setLevel(LevelDataObject levelObj){
+      Logger.log("Setting level...");
+
+      if (level != null){
+         for (int x = 0; x < level.getSize(); x++) {
+            for (int y = 0; y < level.getSize(); y++) {
+               for (int z = 0; z < level.getSize(); z++) {
+                  removeObject(controllerCubes[x][y][z]);
+               }
+            }
+         }
+      }
+
+      level = levelObj;
+      cameraInputController.zoom(level.getSize()*-4.0f);
+      generateCubes();
    }
 
    boolean camEnabled = false;
    boolean sentPacket;
    float center;
 
+   public void generateCubes(){
+      if (level != null) {
+         controllerCubes = new ControllerCube[level.getSize()][level.getSize()][level.getSize()];
+         for (int x = 0; x < level.getSize(); x++) {
+            for (int y = 0; y < level.getSize(); y++) {
+               for (int z = 0; z < level.getSize(); z++) {
+                  controllerCubes[x][y][z] = new ControllerCube(level.getRoom(x,y,z));
+                  addObject(controllerCubes[x][y][z]);
+               }
+            }
+         }
+         updateCubes(); //Update the position of the cubes.
+      }
+   }
+
    public void updateCubes(){
-      //Update the positions of the room cubes based on the room objects
-      for (int x = 0; x < testLevel.getSize(); x++) {
-         for (int y = 0; y < testLevel.getSize(); y++) {
-            for (int z = 0; z < testLevel.getSize(); z++) {
-               Matrix4 tempTransform = testLevel.getRoom(x, y, z).getWorldTransform();
-               Vector3 pos = new Vector3();
-               Quaternion rotation = new Quaternion();
-               tempTransform.getTranslation(pos);
-               tempTransform.getRotation(rotation);
+      if (level != null) {
+         //Update the positions of the room cubes based on the room objects
+         for (int x = 0; x < level.getSize(); x++) {
+            for (int y = 0; y < level.getSize(); y++) {
+               for (int z = 0; z < level.getSize(); z++) {
 
-               //  | . | . | . |
-               center = (testLevel.getSize()-1);
-               float wx = pos.x * 2 - center;
-               float wy = pos.y * 2 - center;
-               float wz = pos.z * 2 - center;
 
-               controllerCubes[x][y][z].setPosition(wx, wy, wz);
-               controllerCubes[x][y][z].setRotation(rotation.getYaw(), rotation.getPitch(), rotation.getRoll());
+
+
+
+
+
+                  Matrix4 tempTransform = level.getRoom(x, y, z).getWorldTransform();
+                  Vector3 pos = new Vector3();
+                  Quaternion rotation = new Quaternion();
+                  tempTransform.getTranslation(pos);
+                  tempTransform.getRotation(rotation);
+
+                  //  | . | . | . |
+                  center = (level.getSize() - 1);
+                  float wx = pos.x * 2 - center;
+                  float wy = pos.y * 2 - center;
+                  float wz = pos.z * 2 - center;
+
+                  controllerCubes[x][y][z].setPosition(wx, wy, wz);
+                  controllerCubes[x][y][z].setRotation(rotation.getYaw(), rotation.getPitch(), rotation.getRoll());
+               }
             }
          }
       }
@@ -132,16 +191,20 @@ public class ControllerInstance extends AbstractGameInstance implements InputPro
    public void update() {
       super.update();
 
-      testLevel.update();
+      if (level != null) {
+         level.update();
+      }
+
       updateCubes();
 
+      /*
       if (!Networking.getClientRunning() & gameOverState == 0){
          gameOverState = 1;
          Game.setGameInstance(null);
          Game.setPaused(true);
          UIStageManager.getCurrentStage().setFlag("error",2);
          UIStageManager.switchTo("ControllerGameCodeStage");
-      }
+      }*/
    }
 
    @Override
@@ -181,32 +244,33 @@ public class ControllerInstance extends AbstractGameInstance implements InputPro
    public boolean scrolled (int amount) { return false; }
 
    public boolean touchDown (int x, int y, int pointer, int button) {
-
-      //Mouse has been detected as down
-      //Turn on dragging if we detect that we are over a rubiks cube object
-      GameObject3d pickObj = getObjectStartDrag(x,y);
-      if (pickObj != null){ //&  !cameraInputController.consumingDrag
-         isDragging = true;
-         cameraInputController.setEnabled(false);
-         return true;
-      } else {
-         isDragging = false;
-         cameraInputController.setEnabled(true);
-         //cameraInputController.touchDown(x,y,pointer,button);
-         return false;
+      if (level != null) {
+         //Mouse has been detected as down
+         //Turn on dragging if we detect that we are over a rubiks cube object
+         GameObject3d pickObj = getObjectStartDrag(x, y);
+         if (pickObj != null) { //&  !cameraInputController.consumingDrag
+            isDragging = true;
+            cameraInputController.setEnabled(false);
+            return true;
+         } else {
+            isDragging = false;
+            cameraInputController.setEnabled(true);
+            //cameraInputController.touchDown(x,y,pointer,button);
+            return false;
+         }
       }
-
+      return false;
    }
 
    public boolean touchUp (int x, int y, int pointer, int button) {
 
-
-      if (isDragging){
-         dragMode = 0;
+      if (level != null) {
+         if (isDragging) {
+            dragMode = 0;
+         }
+         cameraInputController.setEnabled(true);
+         isDragging = false;
       }
-      cameraInputController.setEnabled(true);
-      isDragging = false;
-
 
       return false;
    }
@@ -230,139 +294,147 @@ public class ControllerInstance extends AbstractGameInstance implements InputPro
    float isReversedPlane = 0;
 
    public boolean touchDragged (int x, int y, int pointer) {
+      if (level != null) {
 
-      if (isDragging){
-         //Calculate the drag rotation of the object if we are dragging it
+         if (isDragging) {
+            //Calculate the drag rotation of the object if we are dragging it
 
-         switch (dragMode){
-            case 0: { //Drag mode 0 aka the drag just started and we are in 'evaluation' mode
+            switch (dragMode) {
+               case 0: { //Drag mode 0 aka the drag just started and we are in 'evaluation' mode
 
-               //Find the 3d position of the drag along a plane along normal we previously found
-               Ray ray = camera.getPickRay(x, y);
-               Vector3 rayTouchPoint = new Vector3();
-               int lvlSize = (testLevel.getSize());
+                  //Find the 3d position of the drag along a plane along normal we previously found
+                  Ray ray = camera.getPickRay(x, y);
+                  Vector3 rayTouchPoint = new Vector3();
+                  int lvlSize = (level.getSize());
 
-               //Intersector.intersectRayPlane(ray,new Plane(dragPlaneVector,dragPlaneDistanceFromOrigin),rayTouchPoint)
+                  //Intersector.intersectRayPlane(ray,new Plane(dragPlaneVector,dragPlaneDistanceFromOrigin),rayTouchPoint)
 
-               if (Intersector.intersectRayBounds(ray, new BoundingBox(new Vector3(-lvlSize,-lvlSize,-lvlSize),new Vector3(lvlSize,lvlSize,lvlSize)),rayTouchPoint)){
-                  dragEndPosition = rayTouchPoint;
-                  //Wait until the distance exceeds the threshold we have set
-                  if (getVectorDistance(dragStartPosition, dragEndPosition) > dragDistanceThreshold){
-                     //Determine which axis has a larger value and use that to choose which plane we are on
-                     float distXa = (dragStartPosition.x - dragEndPosition.x);
-                     float distYa = (dragStartPosition.y - dragEndPosition.y);
-                     float distZa = (dragStartPosition.z - dragEndPosition.z);
-                     float distX = Math.abs(distXa);
-                     float distY = Math.abs(distYa);
-                     float distZ = Math.abs(distZa);
+                  if (Intersector.intersectRayBounds(ray, new BoundingBox(new Vector3(-lvlSize, -lvlSize, -lvlSize), new Vector3(lvlSize, lvlSize, lvlSize)), rayTouchPoint)) {
+                     dragEndPosition = rayTouchPoint;
+                     //Wait until the distance exceeds the threshold we have set
+                     if (getVectorDistance(dragStartPosition, dragEndPosition) > dragDistanceThreshold) {
+                        //Determine which axis has a larger value and use that to choose which plane we are on
+                        float distXa = (dragStartPosition.x - dragEndPosition.x);
+                        float distYa = (dragStartPosition.y - dragEndPosition.y);
+                        float distZa = (dragStartPosition.z - dragEndPosition.z);
+                        float distX = Math.abs(distXa);
+                        float distY = Math.abs(distYa);
+                        float distZ = Math.abs(distZa);
 
-                     Logger.log("Drag plane position: "+dragPlaneDistanceFromOrigin);
-                     Logger.log("Finished the drag with a delta of "+distX+" "+distY+" "+distZ);
-                     Logger.log("Drag end position:");
-                     printVector(dragEndPosition);
+                        Logger.log("Drag plane position: " + dragPlaneDistanceFromOrigin);
+                        Logger.log("Finished the drag with a delta of " + distX + " " + distY + " " + distZ);
+                        Logger.log("Drag end position:");
+                        printVector(dragEndPosition);
 
-                     switch (dragNormalPlane){
-                        case X:{
-                           //Compare Y and Z, y larger = Z plane, z larger = Y plane
-                           if (distY > distZ){
-                              dragPlane = Z;
-                           } else {
-                              dragPlane = Y;
-                           }
-                           break;
-                        }
-                        case Y:{
-                           //Compare X and Z, x larger = Z plane, z larger = X plane
-                           if (distX > distZ){
-                              dragPlane = Z;
-                           } else {
-                              dragPlane = X;
-                           }
-                           break;
-                        }
-                        case Z:{
-                           //Compare X and Y, x larger = Y plane, y larger = X plane
-                           if (distX > distY){
-                              dragPlane = Y;
-                           } else {
-                              dragPlane = X;
-                           }
-                           break;
-                        }
-                     }
-
-                     //Determine the index of the plane based on original position
-                     switch (dragPlane){
-                        case X:{
-                           dragDirection = findVectorWindingDirection(dragStartPosition,dragEndPosition,X);
-                           Logger.log("Decided to rotate around X plane");
-                           dragIndex = Math.min(Math.max(Math.round((dragStartPosition.x + center)/2.0f),0),testLevel.getSize()-1);
-                           dragPlaneVector = xVectorPlane;
-                           dragStartPosition = new Vector3((dragIndex * 2) - center,0,0);
-                           break;
-                        }
-                        case Y:{
-                           dragDirection = findVectorWindingDirection(dragStartPosition,dragEndPosition,Y);
-                           Logger.log("Decided to rotate around Y plane");
-                           dragIndex = Math.min(Math.max(Math.round((dragStartPosition.y + center)/2.0f),0),testLevel.getSize()-1);
-                           dragPlaneVector = yVectorPlane;
-                           dragStartPosition = new Vector3(0,(dragIndex * 2) - center,0);
-                           break;
-                        }
-                        case Z:{
-                           dragDirection = findVectorWindingDirection(dragStartPosition,dragEndPosition,Z);
-                           Logger.log("Decided to rotate around Z plane");
-                           dragIndex = Math.min(Math.max(Math.round((dragStartPosition.z + center)/2.0f),0),testLevel.getSize()-1);
-                           dragPlaneVector = zVectorPlane;
-                           dragStartPosition = new Vector3(0,0,(dragIndex * 2) - center);
-                           break;
-                        }
-                     }
-                     dragMode = 1;
-                     Logger.log("Chose index "+dragIndex);
-
-                     //Calculate drag start angle; should always start at 0.
-                     if (Intersector.intersectRayPlane(ray,new Plane(dragPlaneVector,center + testLevel.getSize()),rayTouchPoint)){
-                        switch (dragPlane){
-                           case X:{
-                              dragStartAngle = MathUtils.atan2(rayTouchPoint.y - dragStartPosition.y,rayTouchPoint.z - dragStartPosition.z) * MathUtils.radiansToDegrees;
+                        switch (dragNormalPlane) {
+                           case X: {
+                              //Compare Y and Z, y larger = Z plane, z larger = Y plane
+                              if (distY > distZ) {
+                                 dragPlane = Z;
+                              } else {
+                                 dragPlane = Y;
+                              }
                               break;
                            }
-                           case Y:{
-                              dragStartAngle = MathUtils.atan2(rayTouchPoint.x - dragStartPosition.x,rayTouchPoint.z - dragStartPosition.z) * MathUtils.radiansToDegrees;
+                           case Y: {
+                              //Compare X and Z, x larger = Z plane, z larger = X plane
+                              if (distX > distZ) {
+                                 dragPlane = Z;
+                              } else {
+                                 dragPlane = X;
+                              }
                               break;
                            }
-                           case Z:{
-                              dragStartAngle = MathUtils.atan2(rayTouchPoint.x - dragStartPosition.x,rayTouchPoint.y - dragStartPosition.y) * MathUtils.radiansToDegrees;
+                           case Z: {
+                              //Compare X and Y, x larger = Y plane, y larger = X plane
+                              if (distX > distY) {
+                                 dragPlane = Y;
+                              } else {
+                                 dragPlane = X;
+                              }
                               break;
                            }
                         }
-                     }
 
+                        //Determine the index of the plane based on original position
+                        switch (dragPlane) {
+                           case X: {
+                              dragDirection = findVectorWindingDirection(dragStartPosition, dragEndPosition, X);
+                              Logger.log("Decided to rotate around X plane");
+                              dragIndex = Math.min(Math.max(Math.round((dragStartPosition.x + center) / 2.0f), 0), level.getSize() - 1);
+                              dragPlaneVector = xVectorPlane;
+                              dragStartPosition = new Vector3((dragIndex * 2) - center, 0, 0);
+                              break;
+                           }
+                           case Y: {
+                              dragDirection = findVectorWindingDirection(dragStartPosition, dragEndPosition, Y);
+                              Logger.log("Decided to rotate around Y plane");
+                              dragIndex = Math.min(Math.max(Math.round((dragStartPosition.y + center) / 2.0f), 0), level.getSize() - 1);
+                              dragPlaneVector = yVectorPlane;
+                              dragStartPosition = new Vector3(0, (dragIndex * 2) - center, 0);
+                              break;
+                           }
+                           case Z: {
+                              dragDirection = findVectorWindingDirection(dragStartPosition, dragEndPosition, Z);
+                              Logger.log("Decided to rotate around Z plane");
+                              dragIndex = Math.min(Math.max(Math.round((dragStartPosition.z + center) / 2.0f), 0), level.getSize() - 1);
+                              dragPlaneVector = zVectorPlane;
+                              dragStartPosition = new Vector3(0, 0, (dragIndex * 2) - center);
+                              break;
+                           }
+                        }
+                        dragMode = 1;
+                        Logger.log("Chose index " + dragIndex);
+
+                        //Calculate drag start angle; should always start at 0.
+                        if (Intersector.intersectRayPlane(ray, new Plane(dragPlaneVector, center + level.getSize()), rayTouchPoint)) {
+                           switch (dragPlane) {
+                              case X: {
+                                 dragStartAngle = MathUtils.atan2(rayTouchPoint.y - dragStartPosition.y, rayTouchPoint.z - dragStartPosition.z) * MathUtils.radiansToDegrees;
+                                 break;
+                              }
+                              case Y: {
+                                 dragStartAngle = MathUtils.atan2(rayTouchPoint.x - dragStartPosition.x, rayTouchPoint.z - dragStartPosition.z) * MathUtils.radiansToDegrees;
+                                 break;
+                              }
+                              case Z: {
+                                 dragStartAngle = MathUtils.atan2(rayTouchPoint.x - dragStartPosition.x, rayTouchPoint.y - dragStartPosition.y) * MathUtils.radiansToDegrees;
+                                 break;
+                              }
+                           }
+                        }
+
+                     }
                   }
+                  break;
                }
-               break;
-            }
-            case 1: {
+               case 1: {
 
-               //Drag mode 1 aka we have decided what plane and will start actually triggering rotations
-               //Calculate the drag direction and apply this!
-               //The levelDataObject itself will automatically handle the rotation interpolation.
-               Logger.log("Triggering drag of direction: "+dragDirection);
-               if (dragDirection > 0) {
-                  testLevel.triggerRotatePlane(dragPlane, dragIndex, LevelDataObject.PLANE_ROTATION.NINETY, 5);
-               } else {
-                  testLevel.triggerRotatePlane(dragPlane,dragIndex, LevelDataObject.PLANE_ROTATION.TWO_SEVENTY, -5);
+                  //Drag mode 1 aka we have decided what plane and will start actually triggering rotations
+                  //Calculate the drag direction and apply this!
+                  //The levelDataObject itself will automatically handle the rotation interpolation.
+                  Logger.log("Triggering drag of direction: " + dragDirection);
+                  LevelNetworkPacket levelNetworkPacket;
+                  if (dragDirection > 0) {
+                     level.triggerRotatePlane(dragPlane, dragIndex, LevelDataObject.PLANE_ROTATION.NINETY, 5);
+                     levelNetworkPacket = new LevelNetworkPacket(dragPlane.ordinal(), dragIndex, LevelDataObject.PLANE_ROTATION.NINETY.ordinal(), 5);
+                  } else {
+                     level.triggerRotatePlane(dragPlane, dragIndex, LevelDataObject.PLANE_ROTATION.TWO_SEVENTY, -5);
+                     levelNetworkPacket = new LevelNetworkPacket(dragPlane.ordinal(), dragIndex, LevelDataObject.PLANE_ROTATION.TWO_SEVENTY.ordinal(), -5);
+                  }
+                  Networking.clientSendTCP(levelNetworkPacket);
+                  //Send level packet
+                  isDragging = false;
+                  break;
                }
-               isDragging = false;
-               break;
             }
+
+            return true;
+         } else {
+            return false;
          }
-
-         return true;
-      } else {
-         return false;
       }
+      return false;
    }
 
    //Determines whether a given vector points clockwise or counterclockwise around a certain axis.
@@ -410,62 +482,66 @@ public class ControllerInstance extends AbstractGameInstance implements InputPro
 
    public GameObject3d getObjectStartDrag (int screenX, int screenY) {
 
-      calculateClosestIntersection(screenX,screenY);
+      if (level != null) {
 
-      if (lastIntersectionObject != null) {
-         //Based on the ray touch point, determine what face we are in by which difference magnitudes are greatest
-         float diffX = Math.abs(lastIntersectionPoint.x - lastIntersectionObject.getX());
-         float diffY = Math.abs(lastIntersectionPoint.y - lastIntersectionObject.getY());
-         float diffZ = Math.abs(lastIntersectionPoint.z - lastIntersectionObject.getZ());
+         calculateClosestIntersection(screenX, screenY);
 
-         //Find the largest of the three values
-         float largest = Math.max(Math.max(diffX, diffY), diffZ);
-         dragNormalPlane = X;
+         if (lastIntersectionObject != null) {
+            //Based on the ray touch point, determine what face we are in by which difference magnitudes are greatest
+            float diffX = Math.abs(lastIntersectionPoint.x - lastIntersectionObject.getX());
+            float diffY = Math.abs(lastIntersectionPoint.y - lastIntersectionObject.getY());
+            float diffZ = Math.abs(lastIntersectionPoint.z - lastIntersectionObject.getZ());
 
-         dragStartPosition = lastIntersectionPoint;
-         dragEndPosition = lastIntersectionPoint;
-         dragMode = 0;
-
-         Logger.log("Drag starting position:");
-         printVector(dragStartPosition);
-
-         //Find out the face of the drag
-         if (largest == diffX) {
+            //Find the largest of the three values
+            float largest = Math.max(Math.max(diffX, diffY), diffZ);
             dragNormalPlane = X;
-         }
-         if (largest == diffY) {
-            dragNormalPlane = Y;
-         }
-         if (largest == diffZ) {
-            dragNormalPlane = Z;
-         }
 
-         //dragFace identifies the normal of the face that we are touching
-         switch (dragNormalPlane) {
-            case X: {
-               //Normal is along X axis
-               dragPlaneDistanceFromOrigin = lastIntersectionPoint.x;
-               dragPlaneVector = xVectorPlane;
-               Logger.log("Drag plane: X");
-               break;
+            dragStartPosition = lastIntersectionPoint;
+            dragEndPosition = lastIntersectionPoint;
+            dragMode = 0;
+
+            Logger.log("Drag starting position:");
+            printVector(dragStartPosition);
+
+            //Find out the face of the drag
+            if (largest == diffX) {
+               dragNormalPlane = X;
             }
-            case Y: {
-               //Normal is along Y axis
-               dragPlaneDistanceFromOrigin = lastIntersectionPoint.y;
-               dragPlaneVector = yVectorPlane;
-               Logger.log("Drag plane: Y");
-               break;
+            if (largest == diffY) {
+               dragNormalPlane = Y;
             }
-            case Z: {
-               //Normal is along Z axis
-               dragPlaneDistanceFromOrigin = lastIntersectionPoint.z;
-               dragPlaneVector = zVectorPlane;
-               Logger.log("Drag plane: Z");
-               break;
+            if (largest == diffZ) {
+               dragNormalPlane = Z;
+            }
+
+            //dragFace identifies the normal of the face that we are touching
+            switch (dragNormalPlane) {
+               case X: {
+                  //Normal is along X axis
+                  dragPlaneDistanceFromOrigin = lastIntersectionPoint.x;
+                  dragPlaneVector = xVectorPlane;
+                  Logger.log("Drag plane: X");
+                  break;
+               }
+               case Y: {
+                  //Normal is along Y axis
+                  dragPlaneDistanceFromOrigin = lastIntersectionPoint.y;
+                  dragPlaneVector = yVectorPlane;
+                  Logger.log("Drag plane: Y");
+                  break;
+               }
+               case Z: {
+                  //Normal is along Z axis
+                  dragPlaneDistanceFromOrigin = lastIntersectionPoint.z;
+                  dragPlaneVector = zVectorPlane;
+                  Logger.log("Drag plane: Z");
+                  break;
+               }
             }
          }
+         return lastIntersectionObject;
       }
-      return lastIntersectionObject;
+      return null;
    }
 
    public Vector3 lastIntersectionPoint;

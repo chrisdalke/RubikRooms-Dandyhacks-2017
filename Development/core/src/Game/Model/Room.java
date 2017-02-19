@@ -70,17 +70,17 @@ public class Room {
                     break;
                 case Y:
                     temp = north;
-                    north = east;
-                    east = south;
-                    south = west;
-                    west = temp;
+                    north = west;
+                    west = south;
+                    south = east;
+                    east = temp;
                     break;
                 case Z:
                     temp = ceiling;
-                    ceiling = east;
-                    east = floor;
-                    floor = west;
-                    west = temp;
+                    ceiling = west;
+                    west = floor;
+                    floor = east;
+                    east = temp;
                     break;
             }
         }

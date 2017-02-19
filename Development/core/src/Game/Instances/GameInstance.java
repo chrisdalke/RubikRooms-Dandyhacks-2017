@@ -19,10 +19,12 @@ import Engine.Renderer.FrameBuffer;
 import Engine.Renderer.Renderer;
 import Engine.Renderer.Textures.TextureLoader;
 import Engine.System.Commands.Commands;
+import Engine.System.Logging.Logger;
 import Game.Entities.BackgroundCube;
 import Game.Entities.FirstPersonFlightCamera;
 import Game.Entities.RoomObject;
 import Game.Entities.Sphere;
+import Game.Game;
 import Game.Model.LevelDataObject;
 import com.badlogic.gdx.graphics.Texture;
 
@@ -83,38 +85,8 @@ public class GameInstance extends AbstractGameInstance {
     public void init() {
         super.init();
 
-        /*
-        for (int x = 0; x < 3; x++){
-            for (int y = 0; y < 3; y++){
-                for (int z = 0; z < 3; z++){
-                    //OutlineCube outlineCube = new OutlineCube();
-                    //outlineCube.setPosition(x*10,y*10,z*10);
-                    RoomObject room = new RoomObject();
-                    room.setPosition(x*20,y*20,z*20);
-                    //addObject(outlineCube);
-                    addObject(room);
-
-                    PointLight light = new PointLight();
-                    light.setPosition(x*20,y*20+10,z*20);
-                    light.setIntensity(100.0f);
-
-                    getEnvironment().add(light);
-
-                }
-            }
-        }
-        */
-
-
         physicsWorld = new PhysicsWorld(this);
         physicsWorld.setDebug(false);
-
-        /*
-        TestRoomObject testRoom = new TestRoomObject();
-        addObject(testRoom);
-
-        physicsWorld.add(new StaticPhysicsEntity(testRoom));
-        */
 
         for (int x = 0; x < level.getSize(); x++){
             for (int y = 0; y < level.getSize(); y++){
@@ -147,6 +119,16 @@ public class GameInstance extends AbstractGameInstance {
             @Override
             public void run() {
                 fpsCam.getCam().translate(fpsCam.getX(),100,fpsCam.getZ());
+            }
+        });
+
+        Commands.bind("reload", new Runnable() {
+            @Override
+            public void run() {
+
+                Logger.log("Reloading game instance!");
+                Game.setGameInstance(new GameInstance(LevelDataObject.load(new File(level.getFilename()))));
+                Game.getGameInstance().init();
             }
         });
 

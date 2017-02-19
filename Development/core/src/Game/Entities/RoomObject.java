@@ -69,11 +69,11 @@ public class RoomObject extends GameObject3d {
         Material mat = new Material();
         mat.set(ColorAttribute.createDiffuse(191.0f/255.0f * 0.5f, 245.0f/255.0f * 0.5f, 255.0f/255.0f * 0.5f,1.0f));
         Material matWalls = new Material();
-        matWalls.set(ColorAttribute.createDiffuse(1.0f,0.0f,0.0f,1.0f));
+        matWalls.set(ColorAttribute.createDiffuse(1.0f,1.0f,1.0f,1.0f));
 
         Material matGlassWalls = new Material();
-        matGlassWalls.set(ColorAttribute.createDiffuse(1.0f,1.0f,1.0f,1.0f));
-        matGlassWalls.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA, 0.3f));
+        matGlassWalls.set(ColorAttribute.createDiffuse(0.7f,0.8f,1.0f,1.0f));
+        matGlassWalls.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA, 0.4f));
 
         //mat.set(ColorAttribute.createDiffuse(ThreadLocalRandom.current().nextFloat(),ThreadLocalRandom.current().nextFloat(),ThreadLocalRandom.current().nextFloat(),1.0f));
 

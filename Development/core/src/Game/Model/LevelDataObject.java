@@ -35,7 +35,7 @@ import static Game.Model.LevelDataObject.PLANE_ROTATION.*;
 // Level Data Object class
 ////////////////////////////////////////////////
 
-@JsonIgnoreProperties(value = {"laserEmitterPositions","laserReceiverPositions","mirrorsArray","mirrorPositions"})
+@JsonIgnoreProperties(value = {"laserEmitterPositions","laserReceiverPositions","mirrorsArray","mirrorPositions","filename"})
 public class LevelDataObject {
 
     ////////////////////////////////////////////////
@@ -101,6 +101,7 @@ public class LevelDataObject {
     int startZ;
     String name;
     String description;
+    String filename;
 
     // Stores the moves made by the user
     Stack<Move> moves;
@@ -601,6 +602,7 @@ public class LevelDataObject {
         mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
         try {
             LevelDataObject obj = mapper.readValue(file, LevelDataObject.class);
+            obj.setFilename(file.getAbsolutePath());
             return obj;
         } catch (Exception e){
             System.out.println("Failed to load level file " + file.getName() + " in load()");
@@ -738,6 +740,14 @@ public class LevelDataObject {
 
     public void setStartZ(int startZ) {
         this.startZ = startZ;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 }
 

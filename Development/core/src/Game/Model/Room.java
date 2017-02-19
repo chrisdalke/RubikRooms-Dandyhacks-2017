@@ -14,10 +14,10 @@ public class Room {
 
     public Wall ceiling = new Wall(Wall.WALL_TYPE.WALL_GLASS);
     public Wall floor = new Wall(Wall.WALL_TYPE.WALL_GLASS);
-    public Wall north = new Wall(Wall.WALL_TYPE.WALL);
-    public Wall south = new Wall(Wall.WALL_TYPE.WALL);
-    public Wall east = new Wall(Wall.WALL_TYPE.WALL);
-    public Wall west = new Wall(Wall.WALL_TYPE.WALL);
+    public Wall north = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+    public Wall south = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+    public Wall east = new Wall(Wall.WALL_TYPE.WALL_GLASS);
+    public Wall west = new Wall(Wall.WALL_TYPE.WALL_GLASS);
     public String pos;
 
     public String getPos() {

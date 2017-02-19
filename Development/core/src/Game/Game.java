@@ -17,6 +17,7 @@ import Engine.Renderer.Shapes;
 import Engine.Renderer.Text;
 import Engine.System.Commands.Commands;
 import Engine.System.Config.Configuration;
+import Engine.System.Logging.Logger;
 import Engine.System.Platforms.PlatformManager;
 import Engine.System.Timer.DeltaTimeManager;
 import Engine.System.Utility.MethodInvoker;
@@ -139,10 +140,12 @@ public class Game {
         });
     }
 
+
     public static void triggerGame(LevelDataObject level){
         UIStageManager.fadeOutEvent(new Runnable() {
             @Override
             public void run() {
+                Logger.log("Running game with instance "+level.getName());
                 gameInstance = new GameInstance(level);
                 gameInstance.init();
                 setPaused(false);

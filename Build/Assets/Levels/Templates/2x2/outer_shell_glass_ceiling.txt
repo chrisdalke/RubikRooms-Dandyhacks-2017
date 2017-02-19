@@ -4,8 +4,8 @@
   "startX" : 0,
   "startY" : 0,
   "startZ" : 0,
-  "name" : "Level 1",
-  "description" : "Tear down that wall!",
+  "name" : "Untitled",
+  "description" : "Empty 2x2 Template",
   "rooms" : [ [ [ {
     "ceiling" : {
       "wallType" : "NONE"
@@ -94,7 +94,7 @@
       "wallType" : "WALL"
     },
     "north" : {
-      "wallType" : "WALL_GLASS"
+      "wallType" : "WALL"
     },
     "south" : {
       "wallType" : "NONE"
@@ -103,7 +103,7 @@
       "wallType" : "WALL"
     },
     "west" : {
-      "wallType" : "WALL"
+      "wallType" : "NONE"
     },
     "pos" : "1,0,0"
   }, {
@@ -123,7 +123,7 @@
       "wallType" : "WALL"
     },
     "west" : {
-      "wallType" : "WALL"
+      "wallType" : "NONE"
     },
     "pos" : "1,0,1"
   } ], [ {

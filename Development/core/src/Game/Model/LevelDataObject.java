@@ -438,6 +438,22 @@ public class LevelDataObject {
         return receivers;
     }
 
+    public ArrayList<Mirror> getMirrorsArray() {
+        ArrayList<Mirror> mirrors = new ArrayList<Mirror>();
+        for (int i=0; i<size; i++) {
+            for (int j = 0; j < size; j++) {
+                for (int k = 0; k < size; k++) {
+                    if(!positionIsRotating(i,j,k)) {
+                        if(rooms[i][j][k].hasMirror()) {
+                            mirrors.add(rooms[i][j][k].getMirror());
+                        }
+                    }
+                }
+            }
+        }
+        return mirrors;
+    }
+
     public void propagateLasers() {
         for(int i=0; i<size; i++) {
             for (int j=0; j<size; j++) {

@@ -7,6 +7,7 @@
 
 package Engine.Physics;
 
+import Engine.System.Logging.Logger;
 import Game.Instances.GameInstance;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.bullet.DebugDrawer;
@@ -25,6 +26,8 @@ public class PhysicsWorld {
     public final btCollisionDispatcher dispatcher;
     public final btBroadphaseInterface broadphase;
     public final btConstraintSolver solver;
+    public final btAxisSweep3 sweep;
+    public final btGhostPairCallback ghostPairCallback;
     public final btDynamicsWorld collisionWorld;
     public final Vector3 gravity;
     public int maxSubSteps = 5;
@@ -36,14 +39,19 @@ public class PhysicsWorld {
     public GameInstance instance;
 
     public PhysicsWorld(GameInstance instance) {
+        Logger.log("Trying to create physics world...");
         this.instance = instance;
         debug = false;
 
         collisionConfiguration = new btDefaultCollisionConfiguration();
         dispatcher = new btCollisionDispatcher(collisionConfiguration);
         broadphase = new btDbvtBroadphase();
+        sweep = new btAxisSweep3(new Vector3(-1000, -1000, -1000), new Vector3(1000, 1000, 1000));
         solver = new btSequentialImpulseConstraintSolver();
-        collisionWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
+        collisionWorld = new btDiscreteDynamicsWorld(dispatcher, sweep, solver, collisionConfiguration);
+        ghostPairCallback = new btGhostPairCallback();
+        sweep.getOverlappingPairCache().setInternalGhostPairCallback(ghostPairCallback);
+
         gravity = new Vector3(0,-10,0);
         collisionWorld.setGravity(gravity);
         objects = new ArrayList<>();
@@ -51,6 +59,7 @@ public class PhysicsWorld {
         debugDrawer = new DebugDrawer();
         collisionWorld.setDebugDrawer(debugDrawer);
         debugDrawer.setDebugMode(1);
+        Logger.log("Created physics world!");
     }
 
     public void add(PhysicsEntity physicsObject){

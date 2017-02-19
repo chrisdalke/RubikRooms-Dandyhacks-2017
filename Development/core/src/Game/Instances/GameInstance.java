@@ -10,10 +10,7 @@ package Game.Instances;
 import Engine.Display.Display;
 import Engine.Game.Entity.GameObject3d;
 import Engine.Game.Entity.SkyBox;
-import Engine.Game.Entity.Types.Camera3d;
 import Engine.Game.Instance.AbstractGameInstance;
-import Engine.Input.Input;
-import Engine.Physics.DynamicPhysicsEntity;
 import Engine.Physics.PhysicsWorld;
 import Engine.Renderer.FrameBuffer;
 import Engine.Renderer.Renderer;
@@ -21,9 +18,8 @@ import Engine.Renderer.Textures.TextureLoader;
 import Engine.System.Commands.Commands;
 import Engine.System.Logging.Logger;
 import Game.Entities.BackgroundCube;
-import Game.Entities.FirstPersonFlightCamera;
+import Game.Entities.FirstPersonCharacterController;
 import Game.Entities.RoomObject;
-import Game.Entities.Sphere;
 import Game.Game;
 import Game.Model.LevelDataObject;
 import com.badlogic.gdx.graphics.Texture;
@@ -78,7 +74,7 @@ public class GameInstance extends AbstractGameInstance {
         super.init();
 
         physicsWorld = new PhysicsWorld(this);
-        physicsWorld.setDebug(false);
+        physicsWorld.setDebug(true);
 
         level.calculateRoomPositions();
 
@@ -105,7 +101,16 @@ public class GameInstance extends AbstractGameInstance {
             addObject(cubeObj);
 
         }
+        /*
         Camera3d fpsCam = new FirstPersonFlightCamera();
+        setCamera(fpsCam.getCam());
+        addObject(fpsCam);
+        */
+
+        Logger.log("Test");
+
+        FirstPersonCharacterController fpsCam = new FirstPersonCharacterController();
+        fpsCam.characterController.addToPhysicsWorld(physicsWorld);
         setCamera(fpsCam.getCam());
         addObject(fpsCam);
 
@@ -148,6 +153,7 @@ public class GameInstance extends AbstractGameInstance {
 
         physicsWorld.update();
 
+        /*
         if (Input.getKey(com.badlogic.gdx.Input.Keys.SPACE)){
             Sphere sphere = new Sphere();
             sphere.setPosition(camera.position);
@@ -157,7 +163,7 @@ public class GameInstance extends AbstractGameInstance {
             addObject(sphere);
             float scale = 50.0f;
             sphereEntity.applyForce(camera.direction.x*scale,camera.direction.y*scale,camera.direction.z*scale);
-        }
+        }*/
     }
 
     ////////////////////////////////////////////////

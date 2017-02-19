@@ -100,19 +100,19 @@ public class RoomObject extends GameObject3d {
         }
 
         //Y
-        if (roomDataObject.north.wallType != Wall.WALL_TYPE.NONE |  roomDataObject.east.wallType != Wall.WALL_TYPE.NONE) {
+        if (roomDataObject.north.wallType != Wall.WALL_TYPE.NONE |  roomDataObject.west.wallType != Wall.WALL_TYPE.NONE) {
             buildRoomBox(meshBuilder, collisionShape, -ROOM_RADIUS_CENTER, 0, -ROOM_RADIUS_CENTER, ROOM_WALL_THICKNESS, ROOM_DIAMETER, ROOM_WALL_THICKNESS);
         }
 
-        if (roomDataObject.south.wallType != Wall.WALL_TYPE.NONE |  roomDataObject.east.wallType != Wall.WALL_TYPE.NONE) {
+        if (roomDataObject.south.wallType != Wall.WALL_TYPE.NONE |  roomDataObject.west.wallType != Wall.WALL_TYPE.NONE) {
             buildRoomBox(meshBuilder, collisionShape, -ROOM_RADIUS_CENTER, 0, ROOM_RADIUS_CENTER, ROOM_WALL_THICKNESS, ROOM_DIAMETER, ROOM_WALL_THICKNESS);
         }
 
-        if (roomDataObject.north.wallType != Wall.WALL_TYPE.NONE |  roomDataObject.west.wallType != Wall.WALL_TYPE.NONE) {
+        if (roomDataObject.north.wallType != Wall.WALL_TYPE.NONE |  roomDataObject.east.wallType != Wall.WALL_TYPE.NONE) {
             buildRoomBox(meshBuilder, collisionShape, ROOM_RADIUS_CENTER, 0, -ROOM_RADIUS_CENTER, ROOM_WALL_THICKNESS, ROOM_DIAMETER, ROOM_WALL_THICKNESS);
         }
 
-        if (roomDataObject.south.wallType != Wall.WALL_TYPE.NONE |  roomDataObject.west.wallType != Wall.WALL_TYPE.NONE) {
+        if (roomDataObject.south.wallType != Wall.WALL_TYPE.NONE |  roomDataObject.east.wallType != Wall.WALL_TYPE.NONE) {
             buildRoomBox(meshBuilder, collisionShape, ROOM_RADIUS_CENTER, 0, ROOM_RADIUS_CENTER, ROOM_WALL_THICKNESS, ROOM_DIAMETER, ROOM_WALL_THICKNESS);
         }
 

@@ -102,10 +102,12 @@ public class Display {
     public static void finishRender(){
 
         //take a screenshot?
+        /*
         if (Input.getKeyPress(com.badlogic.gdx.Input.Keys.P) & !Commands.isShown){
             Screenshot.saveScreenshot();
             Logger.log("Took a screenshot!");
         }
+        */
 
         //Handle video capture
         if (Recording.isRecording()){

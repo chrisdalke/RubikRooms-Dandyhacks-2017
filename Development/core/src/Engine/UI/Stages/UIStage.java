@@ -9,10 +9,27 @@ package Engine.UI.Stages;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
+import java.util.HashMap;
+
 public abstract class UIStage extends Stage {
+
+    public HashMap<String, Integer> flags;
+
+    public void setFlag(String flag, int value){
+        flags.put(flag,value);
+    }
+
+    public int getFlag(String flag){
+        if (flags.containsKey(flag)) {
+            return flags.get(flag);
+        } else {
+            return 0;
+        }
+    }
 
     public UIStage() {
         super();
+        flags = new HashMap<>();
         init();
     }
 

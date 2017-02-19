@@ -13,6 +13,8 @@ package Game.Model;
 
 import Engine.System.Logging.Logger;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Quaternion;
+import com.badlogic.gdx.math.Vector3;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
@@ -92,6 +94,8 @@ public class LevelDataObject {
     PLANE plane;
     int planeId;
     float planeRotation;
+    Quaternion planeRotationQ;
+    Vector3 planeRotationVector;
     boolean planeHasRotation;
 
     //Room object contains data about what a room contains
@@ -111,6 +115,23 @@ public class LevelDataObject {
         this.plane = plane;
         this.planeId = planeId;
         planeRotation = angle % 360.0f;
+        switch (plane){
+            case X:{
+                planeRotationVector = new Vector3(1,0,0);
+                planeRotationQ = new Quaternion(planeRotationVector,angle);
+                break;
+            }
+            case Y:{
+                planeRotationVector = new Vector3(0,1,0);
+                planeRotationQ = new Quaternion(planeRotationVector,angle);
+                break;
+            }
+            case Z:{
+                planeRotationVector = new Vector3(0,0,1);
+                planeRotationQ = new Quaternion(planeRotationVector,angle);
+                break;
+            }
+        }
         planeHasRotation = true;
         calculateRoomPositions(); //Trigger calculation of room world positions
     }
@@ -118,6 +139,7 @@ public class LevelDataObject {
     boolean smoothRotateActive;
     float smoothRotateTargetAngle;
     float delta;
+
 
     //Triggers a smooth rotation which snaps into place once it reaches its target.
     public void triggerRotatePlane(PLANE plane, int planeId, PLANE_ROTATION targetAngle, float delta){
@@ -146,17 +168,24 @@ public class LevelDataObject {
 
     public void update(){
         if (smoothRotateActive){
-            if (delta > 0 & smoothRotateTargetAngle > planeRotation){
+            if (delta > 0 & smoothRotateTargetAngle >= planeRotation){
                 planeRotation += delta;
-            } else if (delta < 0 & -(360-smoothRotateTargetAngle) < planeRotation){
+                //planeRotationQ.add(new Quaternion(planeRotationVector,delta));
+            } else if (delta < 0 & -(360.0f-smoothRotateTargetAngle) <= planeRotation){
                 planeRotation += delta;
+                //planeRotationQ.add(new Quaternion(planeRotationVector,delta));
             } else {
                 //turn rotation off and snap the plane into place.
+                Logger.log("SNAPPED ROTATION");
                 snapPlane();
                 smoothRotateActive = false;
             }
             calculateRoomPositions();
         }
+    }
+
+    public void setDelta(float deltaNew){
+        delta = deltaNew;
     }
 
     //Triggers the plane to "snap" into place, converting the smooth angle into a shifted plane.
@@ -382,16 +411,19 @@ public class LevelDataObject {
                         case X:{
                             //Rotate around the X axis, uses Y,Z
                             rooms[planeId][i][j].transform.rotate(1,0,0,planeRotation);
+                            //rooms[planeId][i][j].transform.rotate(planeRotationQ);
                             break;
                         }
                         case Y:{
                             //Rotate around the Y axis, uses X,Z
                             rooms[i][planeId][j].transform.rotate(0,1,0,planeRotation);
+                            //rooms[planeId][i][j].transform.rotate(planeRotationQ);
                             break;
                         }
                         case Z:{
                             //Rotate around the Z axis, uses X,Y
                             rooms[i][j][planeId].transform.rotate(0,0,1,planeRotation);
+                            //rooms[planeId][i][j].transform.rotate(planeRotationQ);
                             break;
                         }
                     }

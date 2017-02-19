@@ -9,6 +9,7 @@ package Engine.Game.Entity;
 
 import Engine.Renderer.Models.ModelLoader;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 
@@ -20,6 +21,21 @@ public class GameObject3d {
     private Vector3 scale;
     private boolean isCollider;
     private boolean isKilled;
+    private Matrix4 transform;
+
+    public void setTransform(Matrix4 inTransform){
+
+        transform = inTransform;
+        updateModelTransform();
+
+        Vector3 pos = new Vector3();
+        Quaternion rotation = new Quaternion();
+        transform.getTranslation(pos);
+        transform.getRotation(rotation);
+        setPosition(pos.x,pos.y,pos.z);
+        setRotation(rotation.getYaw(), rotation.getPitch(), rotation.getRoll());
+
+    }
 
     public void kill(){
         isKilled = true;
@@ -78,8 +94,12 @@ public class GameObject3d {
 
     private void updateModelTransform(){
         if (model != null) {
-            model.transform.idt();
-            model.transform.set(position,new Quaternion().setEulerAngles(rotation.x,rotation.y,rotation.z),scale);
+            if (transform == null) {
+                model.transform.idt();
+                model.transform.set(position, new Quaternion().setEulerAngles(rotation.x, rotation.y, rotation.z), scale);
+            } else {
+                model.transform.idt().scale(scale.x,scale.y,scale.z).mul(transform);
+            }
         }
     }
 

@@ -12,11 +12,14 @@ import Engine.Game.Entity.SkyBox;
 import Engine.Game.Entity.Types.Camera3d;
 import Engine.Game.Instance.AbstractGameInstance;
 import Engine.Input.Input;
+import Engine.Networking.Networking;
 import Engine.Renderer.Textures.TextureLoader;
 import Engine.System.Logging.Logger;
+import Engine.UI.Stages.UIStageManager;
 import Game.Entities.BackgroundCube;
 import Game.Entities.ControllerCube;
 import Game.Entities.ToggleableCameraInputController;
+import Game.Game;
 import Game.Model.LevelDataObject;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.ai.steer.utils.paths.LinePath;
@@ -28,9 +31,7 @@ import com.badlogic.gdx.utils.Array;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import static Game.Model.LevelDataObject.PLANE.X;
-import static Game.Model.LevelDataObject.PLANE.Y;
-import static Game.Model.LevelDataObject.PLANE.Z;
+import static Game.Model.LevelDataObject.PLANE.*;
 
 public class ControllerInstance extends AbstractGameInstance implements InputProcessor {
 
@@ -46,6 +47,8 @@ public class ControllerInstance extends AbstractGameInstance implements InputPro
       shadowViewportSize = 80f;
       hasShadows = false;
       super.init();
+
+      //We can assume that the networking client is running; let's configure our local level data object to sync remotely
 
       for (int i = 0; i < 20; i++){
          GameObject3d cubeObj = new BackgroundCube();
@@ -123,6 +126,8 @@ public class ControllerInstance extends AbstractGameInstance implements InputPro
       }
    }
 
+   int gameOverState = 0;
+
    @Override
    public void update() {
       super.update();
@@ -130,14 +135,13 @@ public class ControllerInstance extends AbstractGameInstance implements InputPro
       testLevel.update();
       updateCubes();
 
-      if (Input.getMouseClicked() == 1){
-         if (!sentPacket){
-            sentPacket = true;
-         }
-      } else {
-         sentPacket = false;
+      if (!Networking.getClientRunning() & gameOverState == 0){
+         gameOverState = 1;
+         Game.setGameInstance(null);
+         Game.setPaused(true);
+         UIStageManager.getCurrentStage().setFlag("error",2);
+         UIStageManager.switchTo("ControllerGameCodeStage");
       }
-
    }
 
    @Override

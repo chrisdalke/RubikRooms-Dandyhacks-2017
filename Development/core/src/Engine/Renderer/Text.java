@@ -29,6 +29,8 @@ public class Text {
         parameter.size = 36;
         parameter.color = Color.WHITE;
         font = generator.generateFont(parameter);
+        parameter.size = 22;
+        font3 = generator.generateFont(parameter);
         generator.dispose(); // don't forget to dispose to avoid memory leaks!
 
         FreeTypeFontGenerator generator2 = new FreeTypeFontGenerator(Gdx.files.internal("Assets/Fonts/courier_new/courier_new.ttf"));
@@ -58,6 +60,9 @@ public class Text {
                 break;
             case 2:
                 currentFont = font2;
+                break;
+            case 3:
+                currentFont = font3;
                 break;
         }
     }
@@ -99,6 +104,7 @@ public class Text {
         currentFont = null;
         font.dispose();
         font2.dispose();
+        font3.dispose();
     }
 }
 

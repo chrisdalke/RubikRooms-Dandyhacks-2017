@@ -11,9 +11,13 @@ import Engine.Audio.Audio;
 import Engine.Display.Display;
 import Engine.Game.Instance.AbstractGameInstance;
 import Engine.Input.Input;
+import Engine.Networking.Networking;
 import Engine.Renderer.Renderer;
+import Engine.Renderer.Shapes;
+import Engine.Renderer.Text;
 import Engine.System.Commands.Commands;
 import Engine.System.Config.Configuration;
+import Engine.System.Platforms.PlatformManager;
 import Engine.System.Timer.DeltaTimeManager;
 import Engine.System.Utility.MethodInvoker;
 import Engine.UI.Stages.UIStageManager;
@@ -22,6 +26,7 @@ import Game.Instances.GameInstance;
 import Game.Instances.MenuInstance;
 import Game.Stages.*;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 
 import java.util.ArrayList;
 
@@ -40,6 +45,7 @@ public class Game {
 
     // Game variable properties
     public static boolean isPaused;
+    private static String gameCode;
 
     // Game instances
     private static AbstractGameInstance gameInstance;
@@ -62,31 +68,35 @@ public class Game {
         UIStageManager.addStage("LevelSelectionStage",new LevelSelectionStage());
         UIStageManager.addStage("ControllerStage",new ControllerStage());
         UIStageManager.addStage("MainMenuStage",new MainMenuStage());
+        UIStageManager.addStage("ControllerMainMenuStage",new ControllerMainMenuStage());
+        UIStageManager.addStage("ControllerGameCodeStage",new ControllerGameCodeStage());
         UIStageManager.addStage("OptionsStage",new OptionsStage());
-        UIStageManager.switchTo("MainMenuStage");
         
         // Set up the game instance / menu instance
-        //gameInstance = new GameInstance();
-        //gameInstance.init();
-        menuInstance = new MenuInstance();
-        menuInstance.init();
+        //PlatformManager.setPlatform(1);
 
-        //test controller instance
-        gameInstance = new ControllerInstance();
-        gameInstance.init();
-        UIStageManager.switchTo("ControllerStage");
-
-        /*
         if (PlatformManager.getPlatform() == PlatformManager.IOS){
-            // Load the controller instance
-            gameInstance = new ControllerInstance();
-            gameInstance.init(config);
+            //IOS / ControllerMode
+            // Load the controller menu
+            menuInstance = new MenuInstance();
+            menuInstance.init();
+            UIStageManager.switchTo("ControllerMainMenuStage");
+        } else {
+            //Start desktop menu
+            menuInstance = new MenuInstance();
+            menuInstance.init();
+            UIStageManager.switchTo("MainMenuStage");
+            //gameInstance = new GameInstance();
+            //gameInstance.init();
+
+            triggerGame();
+
+            //We are on desktop, so start the server
+            Networking.startServer();
+
         }
-        */
 
     }
-    static boolean sentPacket;
-
 
     ////////////////////////////////////////////////
     // Game Controller: Game State Methods
@@ -94,6 +104,27 @@ public class Game {
     // These methods cause a state transition between
     // menu and game, and also between pieces of the menu.
     // Useful to have these in a globally available context.
+
+    public static void connectControllerInstance(String connectionCode){
+
+        Networking.startClient(connectionCode);
+
+        //Check if we successfully started a session.
+        //If we didn't start a session, return to menu and display error message.
+        if (Networking.clientRunning){
+             //Create client game instance
+            gameInstance = new ControllerInstance();
+            gameInstance.init();
+            UIStageManager.switchTo("ControllerStage");
+        } else {
+            //Client isn't running; networking attempt has failed.
+            //Return to the menu with an error message.
+            UIStageManager.switchTo("ControllerGameCodeStage");
+            UIStageManager.getCurrentStage().setFlag("error",1);
+            UIStageManager.getCurrentStage().reset();
+        }
+
+    }
 
 
     public static void triggerMenu(){
@@ -128,6 +159,8 @@ public class Game {
     
         //Update subsystems
         Audio.update();
+        //Update networking
+        Networking.updateServer();
 
         while (deltaTimeManager.consumeTick()) {
         
@@ -176,8 +209,44 @@ public class Game {
         //This is all above the in-game UI layer
         Renderer.startUI();
         UIStageManager.render();
+
         Renderer.endUI();
         Commands.render();
+
+        //Draw controller status
+        //If we are on Desktop, render a UI element in the bottom corner that displays if a controller is connected.
+        //Make this element smaller when we are in the game.
+        if (PlatformManager.getPlatform() != 1) {
+            String text = "";
+            boolean connected = false;
+            if (Networking.getServerSession().getConnections().length < 1) {
+                text = "No Controller! Game Code: " + Networking.getGameCode();
+            } else {
+                text = "Controller Connected";
+                connected = true;
+            }
+
+            Shapes.begin(Renderer.cameraUI);
+            Shapes.setColor(255, 255, 255, 40);
+            float height = Text.getTextHeight(text);
+            float width = Text.getTextWidth(text) + 20;
+            if (!connected){
+                width = (float) Display.getWidth();
+            }
+            Shapes.drawBox(0, 0, width, height + 20);
+            Shapes.end();
+            Renderer.startUI();
+            Text.setFont(3);
+            Text.setColor(Color.BLACK);
+            if (connected){
+                Text.setColor(Color.GREEN);
+            }
+            Text.draw(10, 10 + height, text);
+            Text.setColor(Color.WHITE);
+            Renderer.endUI();
+        }
+
+
     }
     
     ////////////////////////////////////////////////
@@ -191,6 +260,9 @@ public class Game {
         }
         //Dispose of any extra game resources that we won't need.
         UIStageManager.dispose();
+
+        //Dispose of networking server.
+        Networking.stopServer();
     }
 
     ////////////////////////////////////////////////

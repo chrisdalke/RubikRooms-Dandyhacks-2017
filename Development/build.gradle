@@ -84,6 +84,7 @@ project(":core") {
         compile "com.esotericsoftware:kryonet:2.22.0-RC1"
         compile "com.badlogicgames.gdx:gdx-bullet:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-ai:1.8.0"
+        compile 'org.awaitility:awaitility:2.0.0'
         compile files('../dependencies/jcodec-0.1.5.jar')
         compile files('../dependencies/vis-ui-1.0.2.jar')
         

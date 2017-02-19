@@ -12,12 +12,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(value = {"transform"})
 public class Room {
 
-    Wall ceiling = new Wall(Wall.WALL_TYPE.WALL);
-    Wall floor = new Wall(Wall.WALL_TYPE.WALL);
-    Wall north = new Wall(Wall.WALL_TYPE.WALL);
-    Wall south = new Wall(Wall.WALL_TYPE.WALL);
-    Wall east = new Wall(Wall.WALL_TYPE.WALL);
-    Wall west = new Wall(Wall.WALL_TYPE.WALL);
+    public Wall ceiling = new Wall(Wall.WALL_TYPE.WALL);
+    public Wall floor = new Wall(Wall.WALL_TYPE.WALL);
+    public Wall north = new Wall(Wall.WALL_TYPE.WALL);
+    public Wall south = new Wall(Wall.WALL_TYPE.WALL);
+    public Wall east = new Wall(Wall.WALL_TYPE.WALL);
+    public Wall west = new Wall(Wall.WALL_TYPE.WALL);
 
     // lasers = [ceiling/floor, north/south, east/west]
     boolean[] lasers = new boolean[]{false, false, false};

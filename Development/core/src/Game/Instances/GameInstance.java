@@ -15,16 +15,17 @@ import Engine.Game.Instance.AbstractGameInstance;
 import Engine.Input.Input;
 import Engine.Physics.DynamicPhysicsEntity;
 import Engine.Physics.PhysicsWorld;
-import Engine.Physics.StaticPhysicsEntity;
 import Engine.Renderer.FrameBuffer;
 import Engine.Renderer.Renderer;
+import Engine.Renderer.Text;
 import Engine.Renderer.Textures.TextureLoader;
 import Engine.System.Commands.Commands;
 import Game.Entities.BackgroundCube;
 import Game.Entities.FirstPersonFlightCamera;
-import Game.Model.LevelDataObject;
+import Game.Entities.RoomObject;
 import Game.Entities.Sphere;
-import Game.Entities.TestRoomObject;
+import Game.Model.LevelDataObject;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -51,7 +52,6 @@ public class GameInstance extends AbstractGameInstance {
     public SkyBox skybox;
     Engine.Renderer.Textures.Texture crosshairTex;
     PhysicsWorld physicsWorld;
-
 
     ////////////////////////////////////////////////
     // Level Loading
@@ -105,12 +105,30 @@ public class GameInstance extends AbstractGameInstance {
         }
         */
 
-        physicsWorld = new PhysicsWorld(this);
 
+        physicsWorld = new PhysicsWorld(this);
+        physicsWorld.setDebug(false);
+
+        /*
         TestRoomObject testRoom = new TestRoomObject();
         addObject(testRoom);
 
         physicsWorld.add(new StaticPhysicsEntity(testRoom));
+        */
+
+
+        int testSize = 3;
+        level = new LevelDataObject(testSize);
+        for (int x = 0; x < testSize; x++){
+            for (int y = 0; y < testSize; y++){
+                for (int z = 0; z < testSize; z++){
+                    RoomObject roomObject = new RoomObject(level.getRoom(x,y,z));
+                    physicsWorld.add(roomObject.getRoomPhysicsObject());
+                    addObject(roomObject);
+                }
+            }
+        }
+
 
         for (int i = 0; i < 20; i++){
             GameObject3d cubeObj = new BackgroundCube();
@@ -144,7 +162,6 @@ public class GameInstance extends AbstractGameInstance {
         skybox = new SkyBox(skyTexSide,skyTexSide,skyTexTop,skyTexBottom,skyTexSide,skyTexSide);
 
         crosshairTex = TextureLoader.load("Assets/Textures/crosshair.png");
-
     }
 
     ////////////////////////////////////////////////
@@ -155,6 +172,16 @@ public class GameInstance extends AbstractGameInstance {
     public void update() {
         super.update();
 
+        //testAngle = (testAngle + 1f) % 360;
+        //level.rotatePlane();
+        /*
+        float speed = 0.01f;
+        if (Input.getKey(com.badlogic.gdx.Input.Keys.G)){
+            speed = -1f;
+        }*/
+        level.triggerRotatePlane(LevelDataObject.PLANE.Z,level.getSize()-1, LevelDataObject.PLANE_ROTATION.NINETY, 1f);
+        level.update();
+
         physicsWorld.update();
 
         if (Input.getKey(com.badlogic.gdx.Input.Keys.SPACE)){
@@ -164,7 +191,7 @@ public class GameInstance extends AbstractGameInstance {
             DynamicPhysicsEntity sphereEntity = new DynamicPhysicsEntity(sphere);
             physicsWorld.add(sphereEntity);
             addObject(sphere);
-            float scale = 500.0f;
+            float scale = 50.0f;
             sphereEntity.applyForce(camera.direction.x*scale,camera.direction.y*scale,camera.direction.z*scale);
         }
 
@@ -175,10 +202,13 @@ public class GameInstance extends AbstractGameInstance {
     // Level Rendering
     ////////////////////////////////////////////////
 
+    float testAngle;
+
     @Override
     public void render() {
         //Center cursor
         //Gdx.input.setCursorPosition((int)Display.getWidth()/2,(int)Display.getHeight()/2);
+
 
         //frameBuffer.start();
         startWorld();
@@ -197,6 +227,9 @@ public class GameInstance extends AbstractGameInstance {
         //PostProcessManager.start();
         //Renderer.draw(frameBuffer.getRegion(),0,0, (float)Display.getWidth(),(float)Display.getHeight());
         //PostProcessManager.end();
+
+        Text.setColor(Color.BLACK);
+        Text.draw(100,100,"Test Angle: "+testAngle);
 
 
         float crosshairSize = 20;
@@ -218,7 +251,6 @@ public class GameInstance extends AbstractGameInstance {
 
     @Override
     public void dispose() {
-
     }
 
 }

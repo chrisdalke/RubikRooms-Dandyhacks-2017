@@ -1,14 +1,16 @@
 package Game.Model;
 
+import com.badlogic.gdx.math.Vector3;
+
 /**
  * Created by Nate on 2/17/17.
  */
 public class LaserEmitterObject {
 
-    double[] worldCoords;
-    Laser_Direction direction;
+    Vector3 worldCoords;
+    Emitter_Direction direction;
 
-    enum Laser_Direction {
+    enum Emitter_Direction {
         NEG_X,
         POS_X,
         NEG_Y,
@@ -17,16 +19,16 @@ public class LaserEmitterObject {
         POS_Z
     }
 
-    public LaserEmitterObject(double x, double y, double z, Laser_Direction direction) {
-        this.worldCoords = new double[]{x, y, z};
+    public LaserEmitterObject(float x, float y, float z, Emitter_Direction direction) {
+        this.worldCoords = new Vector3(x, y, z);
         this.direction = direction;
     }
 
-    public double[] getWorldCoords() {
+    public Vector3 getWorldCoords() {
         return worldCoords;
     }
 
-    public Laser_Direction getDirection() {
+    public Emitter_Direction getDirection() {
         return direction;
     }
 }

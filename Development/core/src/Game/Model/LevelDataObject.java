@@ -12,7 +12,10 @@ package Game.Model;
 ////////////////////////////////////////////////
 
 import Engine.System.Logging.Logger;
+import com.badlogic.gdx.ai.steer.utils.paths.LinePath;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.Array;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
@@ -100,6 +103,9 @@ public class LevelDataObject {
     //as well as information about the room's orientation, which this class modifies
     Room[][][] rooms; //Stores shifted rooms
     Room[][][] solution; //Stores unshifted rooms (solution)
+
+    // Laser properties
+    double receiverRadiusThreshold;
 
     ////////////////////////////////////////////////
     // Methods
@@ -310,32 +316,61 @@ public class LevelDataObject {
     }
 
     public ArrayList<LaserEmitterObject> getLaserEmitterPositions(){
-        ArrayList<LaserEmitterObject> lasers = new ArrayList<LaserEmitterObject>();
+        ArrayList<LaserEmitterObject> emitters = new ArrayList<LaserEmitterObject>();
         for (int i=0; i<size; i++) {
             for (int j=0; j<size; j++) {
                 for (int k=0; k<size; k++) {
                     if(rooms[i][j][k].west.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
-                        lasers.add(new LaserEmitterObject(i - 0.5, j, k, LaserEmitterObject.Laser_Direction.POS_X));
+                        emitters.add(new LaserEmitterObject((float)(i - 0.5), j, k, LaserEmitterObject.Emitter_Direction.POS_X));
                     }
                     if(rooms[i][j][k].east.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
-                        lasers.add(new LaserEmitterObject(i + 0.5, j, k, LaserEmitterObject.Laser_Direction.NEG_X));
+                        emitters.add(new LaserEmitterObject((float)(i + 0.5), j, k, LaserEmitterObject.Emitter_Direction.NEG_X));
                     }
                     if(rooms[i][j][k].floor.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
-                        lasers.add(new LaserEmitterObject(i, j - 0.5, k, LaserEmitterObject.Laser_Direction.POS_Y));
+                        emitters.add(new LaserEmitterObject(i, (float)(j - 0.5), k, LaserEmitterObject.Emitter_Direction.POS_Y));
                     }
                     if(rooms[i][j][k].ceiling.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
-                        lasers.add(new LaserEmitterObject(i, j + 0.5, k, LaserEmitterObject.Laser_Direction.NEG_Y));
+                        emitters.add(new LaserEmitterObject(i, (float)(j + 0.5), k, LaserEmitterObject.Emitter_Direction.NEG_Y));
                     }
                     if(rooms[i][j][k].south.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
-                        lasers.add(new LaserEmitterObject(i, j, k - 0.5, LaserEmitterObject.Laser_Direction.POS_Z));
+                        emitters.add(new LaserEmitterObject(i, j, (float)(k - 0.5), LaserEmitterObject.Emitter_Direction.POS_Z));
                     }
                     if(rooms[i][j][k].west.wallType == Wall.WALL_TYPE.LASER_EMITTER) {
-                        lasers.add(new LaserEmitterObject(i, j, k + 0.5, LaserEmitterObject.Laser_Direction.NEG_Z));
+                        emitters.add(new LaserEmitterObject(i, j, (float)(k + 0.5), LaserEmitterObject.Emitter_Direction.NEG_Z));
                     }
                 }
             }
         }
-        return lasers;
+        return emitters;
+    }
+
+    public ArrayList<LaserReceiverObject> getLaserReceiverPositions(){
+        ArrayList<LaserReceiverObject> receivers = new ArrayList<LaserReceiverObject>();
+        for (int i=0; i<size; i++) {
+            for (int j=0; j<size; j++) {
+                for (int k=0; k<size; k++) {
+                    if(rooms[i][j][k].west.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
+                        receivers.add(new LaserReceiverObject((float)(i - 0.5), j, k, LaserReceiverObject.Receiver_Direction.POS_X));
+                    }
+                    if(rooms[i][j][k].east.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
+                        receivers.add(new LaserReceiverObject((float)(i + 0.5), j, k, LaserReceiverObject.Receiver_Direction.NEG_X));
+                    }
+                    if(rooms[i][j][k].floor.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
+                        receivers.add(new LaserReceiverObject(i, (float)(j - 0.5), k, LaserReceiverObject.Receiver_Direction.POS_Y));
+                    }
+                    if(rooms[i][j][k].ceiling.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
+                        receivers.add(new LaserReceiverObject(i, (float)(j + 0.5), k, LaserReceiverObject.Receiver_Direction.NEG_Y));
+                    }
+                    if(rooms[i][j][k].south.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
+                        receivers.add(new LaserReceiverObject(i, j, (float)(k - 0.5), LaserReceiverObject.Receiver_Direction.POS_Z));
+                    }
+                    if(rooms[i][j][k].west.wallType == Wall.WALL_TYPE.LASER_RECEIVER) {
+                        receivers.add(new LaserReceiverObject(i, j, (float)(k + 0.5), LaserReceiverObject.Receiver_Direction.NEG_Z));
+                    }
+                }
+            }
+        }
+        return receivers;
     }
 
     public void propagateLasers() {
@@ -540,6 +575,13 @@ public class LevelDataObject {
         } catch (Exception e){
             return null;
         }
+    }
+
+    public static float getVectorDistance(Vector3 vec1, Vector3 vec2){
+        Array<Vector3> vecPath = new Array<>(true,2);
+        vecPath.add(vec1);
+        vecPath.add(vec2);
+        return new LinePath<Vector3>(vecPath).getLength();
     }
 
     public int getSize() {

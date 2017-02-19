@@ -73,9 +73,16 @@ public class RoomObject extends GameObject3d {
 
         Material matGlassWalls = new Material();
         matGlassWalls.set(ColorAttribute.createDiffuse(0.7f,0.8f,1.0f,1.0f));
-        matGlassWalls.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA, 0.4f));
+        matGlassWalls.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA, 0.3f));
 
-        //matGlassWalls.set(ColorAttribute.createDiffuse(ThreadLocalRandom.current().nextFloat(),ThreadLocalRandom.current().nextFloat(),ThreadLocalRandom.current().nextFloat(),1.0f));
+        matWalls.set(ColorAttribute.createDiffuse(1.0f,0.3f,0.4f,1.0f));
+        matWalls.set(new BlendingAttribute(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA, 0.8f));
+
+        Material matFloors = new Material();
+        matFloors.set(ColorAttribute.createDiffuse(1.0f,1.0f,1.0f,1.0f));
+
+        Material matDoors = new Material();
+        matDoors.set(ColorAttribute.createDiffuse(0f,0f,0f,1.0f));
 
         Node node1 = modelBuilder.node();
         node1.id = "borders";
@@ -142,16 +149,6 @@ public class RoomObject extends GameObject3d {
         //Build walls
 
         //Put down the normal walls
-        if (roomDataObject.ceiling.wallType != Wall.WALL_TYPE.NONE){
-            if (roomDataObject.ceiling.wallType != Wall.WALL_TYPE.WALL_GLASS){
-                buildRoomBox(meshBuilderWalls,builtShape,0,ROOM_RADIUS_CENTER,0,ROOM_DIAMETER_INNER,ROOM_WALL_THICKNESS,ROOM_DIAMETER_INNER);
-            }
-        }
-        if (roomDataObject.floor.wallType != Wall.WALL_TYPE.NONE){
-            if (roomDataObject.floor.wallType != Wall.WALL_TYPE.WALL_GLASS) {
-                buildRoomBox(meshBuilderWalls,builtShape, 0, -ROOM_RADIUS_CENTER, 0, ROOM_DIAMETER_INNER, ROOM_WALL_THICKNESS, ROOM_DIAMETER_INNER);
-            }
-        }
         if (roomDataObject.east.wallType != Wall.WALL_TYPE.NONE){
             if (roomDataObject.east.wallType != Wall.WALL_TYPE.WALL_GLASS){
                 buildRoomBox(meshBuilderWalls,builtShape,ROOM_RADIUS_CENTER,0,0,ROOM_WALL_THICKNESS,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER);
@@ -170,6 +167,21 @@ public class RoomObject extends GameObject3d {
         if (roomDataObject.south.wallType != Wall.WALL_TYPE.NONE){
             if (roomDataObject.south.wallType != Wall.WALL_TYPE.WALL_GLASS){
                 buildRoomBox(meshBuilderWalls,builtShape,0,0,ROOM_RADIUS_CENTER,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER,ROOM_WALL_THICKNESS);
+            }
+        }
+
+        Node node2b = modelBuilder.node();
+        node2b.id = "walls";
+        MeshPartBuilder meshBuilderFloors = modelBuilder.part("floors", GL20.GL_TRIANGLES, VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal, matFloors);
+        //Build floor and ceiling
+        if (roomDataObject.ceiling.wallType != Wall.WALL_TYPE.NONE){
+            if (roomDataObject.ceiling.wallType != Wall.WALL_TYPE.WALL_GLASS){
+                buildRoomBox(meshBuilderFloors,builtShape,0,ROOM_RADIUS_CENTER,0,ROOM_DIAMETER_INNER,ROOM_WALL_THICKNESS,ROOM_DIAMETER_INNER);
+            }
+        }
+        if (roomDataObject.floor.wallType != Wall.WALL_TYPE.NONE){
+            if (roomDataObject.floor.wallType != Wall.WALL_TYPE.WALL_GLASS) {
+                buildRoomBox(meshBuilderFloors,builtShape, 0, -ROOM_RADIUS_CENTER, 0, ROOM_DIAMETER_INNER, ROOM_WALL_THICKNESS, ROOM_DIAMETER_INNER);
             }
         }
 
@@ -207,6 +219,32 @@ public class RoomObject extends GameObject3d {
         if (roomDataObject.south.wallType != Wall.WALL_TYPE.NONE){
             if (roomDataObject.south.wallType == Wall.WALL_TYPE.WALL_GLASS){
                 buildRoomBox(meshBuilderGlassWalls,builtShape,0,0,ROOM_RADIUS_CENTER,ROOM_DIAMETER_INNER,ROOM_DIAMETER_INNER,ROOM_WALL_THICKNESS);
+            }
+        }
+
+        //Build doors
+        Node node4 = modelBuilder.node();
+        node4.id = "doors";
+        MeshPartBuilder meshBuilderDoors = modelBuilder.part("doors", GL20.GL_TRIANGLES, VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal, matDoors);
+
+        if (roomDataObject.east.wallType == Wall.WALL_TYPE.DOOR){
+            if (roomDataObject.east.wallType != Wall.WALL_TYPE.WALL_GLASS){
+                buildRoomBox(meshBuilderWalls,builtShape,ROOM_RADIUS_CENTER,0,0-ROOM_DIAMETER_INNER*0.15f,ROOM_WALL_THICKNESS*4.0f,ROOM_DIAMETER_INNER*0.75f,ROOM_RADIUS);
+            }
+        }
+        if (roomDataObject.west.wallType == Wall.WALL_TYPE.DOOR){
+            if (roomDataObject.west.wallType != Wall.WALL_TYPE.WALL_GLASS){
+                buildRoomBox(meshBuilderWalls,builtShape,-ROOM_RADIUS_CENTER,0,0-ROOM_DIAMETER_INNER*0.15f,ROOM_WALL_THICKNESS*4.0f,ROOM_DIAMETER_INNER*0.75f,ROOM_RADIUS);
+            }
+        }
+        if (roomDataObject.north.wallType == Wall.WALL_TYPE.DOOR){
+            if (roomDataObject.north.wallType != Wall.WALL_TYPE.WALL_GLASS){
+                buildRoomBox(meshBuilderWalls,builtShape,0,0-ROOM_DIAMETER_INNER*0.15f,-ROOM_RADIUS_CENTER,ROOM_RADIUS,ROOM_DIAMETER_INNER*0.75f,ROOM_WALL_THICKNESS*4.0f);
+            }
+        }
+        if (roomDataObject.south.wallType == Wall.WALL_TYPE.DOOR){
+            if (roomDataObject.south.wallType != Wall.WALL_TYPE.WALL_GLASS){
+                buildRoomBox(meshBuilderWalls,builtShape,0,0-ROOM_DIAMETER_INNER*0.15f,ROOM_RADIUS_CENTER,ROOM_RADIUS,ROOM_DIAMETER_INNER*0.75f,ROOM_WALL_THICKNESS*4.0f);
             }
         }
 

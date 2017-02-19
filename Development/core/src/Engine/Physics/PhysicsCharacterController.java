@@ -47,7 +47,8 @@ public class PhysicsCharacterController extends PhysicsEntity {
     }
 
     public void setCharacterPosition(Vector3 pos){
-        characterTransform.setToTranslation(pos);
+        ghostObject.setWorldTransform(characterTransform.setToTranslation(pos));
+
     }
 
     public Matrix4 getCharacterPosition(){

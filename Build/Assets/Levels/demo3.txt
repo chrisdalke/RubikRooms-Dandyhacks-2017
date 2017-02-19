@@ -11,7 +11,7 @@
       "wallType" : "WALL"
     },
     "floor" : {
-      "wallType" : "WALL"
+      "wallType" : "NONE"
     },
     "north" : {
       "wallType" : "WALL"
@@ -28,10 +28,10 @@
     "pos" : "0,0,0"
   }, {
     "ceiling" : {
-      "wallType" : "WALL"
+      "wallType" : "DOOR"
     },
     "floor" : {
-      "wallType" : "WALL"
+      "wallType" : "NONE"
     },
     "north" : {
       "wallType" : "WALL"
@@ -51,7 +51,7 @@
       "wallType" : "WALL"
     },
     "floor" : {
-      "wallType" : "WALL"
+      "wallType" : "NONE"
     },
     "north" : {
       "wallType" : "WALL"
@@ -268,16 +268,16 @@
     "pos" : "1,1,0"
   }, {
     "ceiling" : {
-      "wallType" : "NONE"
+      "wallType" : "WALL_GLASS"
     },
     "floor" : {
-      "wallType" : "NONE"
+      "wallType" : "WALL_GLASS"
     },
     "north" : {
-      "wallType" : "NONE"
+      "wallType" : "WALL_GLASS"
     },
     "south" : {
-      "wallType" : "NONE"
+      "wallType" : "WALL_GLASS"
     },
     "east" : {
       "wallType" : "NONE"
@@ -371,7 +371,7 @@
       "wallType" : "NONE"
     },
     "floor" : {
-      "wallType" : "WALL"
+      "wallType" : "NONE"
     },
     "north" : {
       "wallType" : "WALL_GLASS"
@@ -391,7 +391,7 @@
       "wallType" : "NONE"
     },
     "floor" : {
-      "wallType" : "WALL"
+      "wallType" : "NONE"
     },
     "north" : {
       "wallType" : "NONE"
@@ -411,7 +411,7 @@
       "wallType" : "NONE"
     },
     "floor" : {
-      "wallType" : "WALL"
+      "wallType" : "WALL_GLASS"
     },
     "north" : {
       "wallType" : "NONE"
@@ -448,19 +448,19 @@
     "pos" : "2,1,0"
   }, {
     "ceiling" : {
-      "wallType" : "NONE"
+      "wallType" : "WALL_GLASS"
     },
     "floor" : {
-      "wallType" : "NONE"
+      "wallType" : "WALL_GLASS"
     },
     "north" : {
-      "wallType" : "NONE"
+      "wallType" : "WALL_GLASS"
     },
     "south" : {
-      "wallType" : "NONE"
+      "wallType" : "WALL_GLASS"
     },
     "east" : {
-      "wallType" : "WALL_GLASS"
+      "wallType" : "DOOR"
     },
     "west" : {
       "wallType" : "NONE"

@@ -635,6 +635,7 @@ public class LevelDataObject {
             LevelDataObject obj = mapper.readValue(file, LevelDataObject.class);
             obj.setFilename(file.getAbsolutePath());
             obj.setFilenameShort(file.getName());
+            Logger.log("Loaded level: "+file.getName());
             return obj;
         } catch (Exception e){
             System.out.println("Failed to load level file " + file.getName() + " in load()");

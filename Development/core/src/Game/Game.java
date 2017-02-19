@@ -106,6 +106,54 @@ public class Game {
 
         //LevelDataObject.test();
 
+        Commands.bind("demo1", new Runnable() {
+            @Override
+            public void run() {
+                UIStageManager.fadeOutEvent(new Runnable() {
+                    @Override
+                    public void run() {
+                        gameInstance = new GameInstance("Assets/Levels/demo1.txt");
+                        gameInstance.init();
+                        setPaused(false);
+                        UIStageManager.switchTo("GameStage");
+                        Commands.hide();
+                    }
+                });
+            }
+        });
+        Commands.bind("demo2", new Runnable() {
+            @Override
+            public void run() {
+                UIStageManager.fadeOutEvent(new Runnable() {
+                    @Override
+                    public void run() {
+                        gameInstance = new GameInstance("Assets/Levels/demo2.txt");
+                        gameInstance.init();
+                        setPaused(false);
+                        UIStageManager.switchTo("GameStage");
+                        Commands.hide();
+                    }
+                });
+            }
+        });
+        Commands.bind("demo3", new Runnable() {
+            @Override
+            public void run() {
+                UIStageManager.fadeOutEvent(new Runnable() {
+                    @Override
+                    public void run() {
+                        gameInstance = new GameInstance("Assets/Levels/demo3.txt");
+                        gameInstance.init();
+                        setPaused(false);
+                        UIStageManager.switchTo("GameStage");
+                        Commands.hide();
+                    }
+                });
+            }
+        });
+
+        LevelDataObject.test();
+
     }
 
     ////////////////////////////////////////////////
@@ -203,6 +251,17 @@ public class Game {
                 //Update the main menu game instance
                 menuInstance.update();
             }
+        }
+
+        //Demo key presses
+        if (Input.getKeyPress(com.badlogic.gdx.Input.Keys.NUM_8)){
+            Commands.execute("demo1");
+        }
+        if (Input.getKeyPress(com.badlogic.gdx.Input.Keys.NUM_9)){
+            Commands.execute("demo2");
+        }
+        if (Input.getKeyPress(com.badlogic.gdx.Input.Keys.NUM_0)){
+            Commands.execute("demo3");
         }
     }
 

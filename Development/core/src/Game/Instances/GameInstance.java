@@ -11,6 +11,7 @@ import Engine.Display.Display;
 import Engine.Game.Entity.GameObject3d;
 import Engine.Game.Entity.SkyBox;
 import Engine.Game.Instance.AbstractGameInstance;
+import Engine.Input.Input;
 import Engine.Networking.Networking;
 import Engine.Networking.NetworkingEventListener;
 import Engine.Physics.PhysicsWorld;
@@ -27,6 +28,7 @@ import Game.Model.LevelDataObject;
 import Game.Model.LevelNetworkFile;
 import Game.Model.LevelNetworkPacket;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector3;
 
 import java.io.File;
 import java.util.concurrent.ThreadLocalRandom;
@@ -77,7 +79,7 @@ public class GameInstance extends AbstractGameInstance {
 
     @Override
     public void init() {
-        shadowViewportSize = 100f;
+        shadowViewportSize = 200f;
         super.init();
 
         physicsWorld = new PhysicsWorld(this);
@@ -98,10 +100,10 @@ public class GameInstance extends AbstractGameInstance {
             }
         }
 
-        for (int i = 0; i < 20; i++){
+        for (int i = 0; i < 40; i++){
             GameObject3d cubeObj = new BackgroundCube();
             float angle = ThreadLocalRandom.current().nextInt(0,360);
-            float dist = ThreadLocalRandom.current().nextInt(150,300);
+            float dist = ThreadLocalRandom.current().nextInt(150,350);
             float x = (float)Math.cos(Math.toRadians(angle)) * dist;
             float y = ThreadLocalRandom.current().nextInt(-100,100);
             float z = (float)Math.sin(Math.toRadians(angle)) * dist;
@@ -120,7 +122,7 @@ public class GameInstance extends AbstractGameInstance {
         Logger.log("Test");
 
         FirstPersonCharacterController fpsCam = new FirstPersonCharacterController();
-        fpsCam.setPosition(level.getStartX()*ROOM_DIAMETER,level.getStartY()*ROOM_DIAMETER,level.getStartZ()*ROOM_DIAMETER);
+        fpsCam.characterController.setCharacterPosition(new Vector3(level.getStartX()*ROOM_DIAMETER,level.getStartY()*ROOM_DIAMETER,level.getStartZ()*ROOM_DIAMETER));
         fpsCam.characterController.addToPhysicsWorld(physicsWorld);
         setCamera(fpsCam.getCam());
         addObject(fpsCam);
@@ -139,6 +141,13 @@ public class GameInstance extends AbstractGameInstance {
                 Logger.log("Reloading game instance!");
                 Game.setGameInstance(new GameInstance(LevelDataObject.load(new File(level.getFilename()))));
                 Game.getGameInstance().init();
+            }
+        });
+
+        Commands.bind("pos", new Runnable() {
+            @Override
+            public void run() {
+                Logger.log(fpsCam.getCam().position.x / ROOM_DIAMETER+","+fpsCam.getCam().position.y / ROOM_DIAMETER+","+fpsCam.getCam().position.z / ROOM_DIAMETER);
             }
         });
 
@@ -171,7 +180,30 @@ public class GameInstance extends AbstractGameInstance {
         super.update();
 
         //Demo test cases
-
+        if (level.getFilenameShort().equals("demo1.txt")){
+            if (Input.getKeyPress(com.badlogic.gdx.Input.Keys.NUM_1)){
+                level.triggerRotatePlane(LevelDataObject.PLANE.Z,0, LevelDataObject.PLANE_ROTATION.NINETY,1f);
+            }
+            if (Input.getKeyPress(com.badlogic.gdx.Input.Keys.NUM_2)){
+                level.triggerRotatePlane(LevelDataObject.PLANE.X,2, LevelDataObject.PLANE_ROTATION.ONE_EIGHTY,1f);
+            }
+        }
+        if (level.getFilenameShort().equals("demo2.txt")){
+            if (Input.getKeyPress(com.badlogic.gdx.Input.Keys.NUM_1)){
+                level.triggerRotatePlane(LevelDataObject.PLANE.X,0, LevelDataObject.PLANE_ROTATION.NINETY,1f);
+            }
+            if (Input.getKeyPress(com.badlogic.gdx.Input.Keys.NUM_2)){
+                level.triggerRotatePlane(LevelDataObject.PLANE.X,1, LevelDataObject.PLANE_ROTATION.NINETY,1f);
+            }
+        }
+        if (level.getFilenameShort().equals("demo3.txt")){
+            if (Input.getKeyPress(com.badlogic.gdx.Input.Keys.NUM_1)){
+                level.triggerRotatePlane(LevelDataObject.PLANE.X,0, LevelDataObject.PLANE_ROTATION.NINETY,1f);
+            }
+            if (Input.getKeyPress(com.badlogic.gdx.Input.Keys.NUM_2)){
+                level.triggerRotatePlane(LevelDataObject.PLANE.X,1, LevelDataObject.PLANE_ROTATION.ONE_EIGHTY,1f);
+            }
+        }
 
 
         level.update();

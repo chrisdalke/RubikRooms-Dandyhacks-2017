@@ -1,9 +1,9 @@
 {
   "size" : 3,
   "levelNumber" : 2,
-  "startX" : 0,
+  "startX" : 1,
   "startY" : 0,
-  "startZ" : 0,
+  "startZ" : 1,
   "name" : "Level 2",
   "description" : "The Human Scoop",
   "rooms" : [ [ [ {
@@ -103,7 +103,7 @@
       "wallType" : "NONE"
     },
     "west" : {
-      "wallType" : "WALL_GLASS"
+      "wallType" : "DOOR"
     },
     "pos" : "0,1,1"
   }, {

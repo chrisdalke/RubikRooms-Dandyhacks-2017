@@ -63,10 +63,10 @@ public class Room {
             switch (plane) {
                 case X:
                     temp = floor;
-                    floor = north;
-                    north = ceiling;
-                    ceiling = south;
-                    south = temp;
+                    floor = south;
+                    south = ceiling;
+                    ceiling = north;
+                    north = temp;
                     break;
                 case Y:
                     temp = north;

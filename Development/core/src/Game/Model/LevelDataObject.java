@@ -71,6 +71,7 @@ public class LevelDataObject {
         planeRotation = 0;
         planeHasRotation = false;
         moves = new Stack<Move>();
+        undoneMoves = new Stack<Move>();
 
     }
 
@@ -86,6 +87,7 @@ public class LevelDataObject {
 
     // Stores the moves made by the user
     Stack<Move> moves;
+    Stack<Move> undoneMoves;
 
     //Rotation properties
     //Stores the current plane of rotation, ID of rotation, and float indicating rotation angle
@@ -179,8 +181,10 @@ public class LevelDataObject {
         //Perform rotation if the direction isn't zero
         if (direction != ZERO){
             Move move = new Move(plane, planeId, direction);
-            moves.add(move);
+            moves.push(move);
             shiftPlane(move);
+            // clear undoneMoves (so that the user can not redo -- moves have been overwritten)
+            undoneMoves.clear();
         }
         planeRotation = 0;
         planeHasRotation = false;
@@ -276,6 +280,7 @@ public class LevelDataObject {
 
     public void undoMove() {
         Move move = moves.pop();
+        undoneMoves.push(move);
         Move undoMove = null;
         switch (move.getAngle()) {
             case NINETY:
@@ -289,6 +294,17 @@ public class LevelDataObject {
                 break;
         }
         shiftPlane(undoMove);
+    }
+
+    public void redoMove() {
+        // make sure undoneMoves stack is not empty
+        if(!undoneMoves.isEmpty()) {
+            // pop from undone moves stack, push to moves stack
+            Move move = undoneMoves.pop();
+            moves.push(move);
+            // perform move
+            shiftPlane(move);
+        }
     }
 
     public ArrayList<LaserEmitterObject> getLaserEmitterPositions(){

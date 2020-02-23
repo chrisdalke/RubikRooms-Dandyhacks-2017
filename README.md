@@ -40,5 +40,3 @@ Getting a complex 3d game engine mostly complete in a short time span was incred
 
 ## What's next for Rubik Rooms
 We plan to continue this game after the hackathon! the gameplay concept is extremely compelling and has the potential to allow for some other very cool features, such as levels that take more advantage of gravity manipulation and puzzles that are only possible to complete by rotating slices of the space, as well as an implementation of the lasers feature that unfortunately didn't make it into the game in time for the competition.
-
-

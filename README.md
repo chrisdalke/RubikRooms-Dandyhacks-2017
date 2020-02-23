@@ -2,7 +2,7 @@
 
 Rubik Rooms is an experimental cooperative puzzle game with a novel control scheme. The game features a connection between a mobile game player and a desktop game player through a common world.
 
-The team of Chris Dalke and Nate Conroy built Rubik Rooms as part of the DandyHacks 2017 hackathon, the fourth annual computer science hackathon held at the University of Rochester. Our team won 1st place overall at the hackathon out of over 79 teams.
+The team of Chris Dalke and Nate Conroy built Rubik Rooms as part of the DandyHacks Spring 2017 hackathon, the fourth annual computer science hackathon held at the University of Rochester. Our team won 1st place overall at the hackathon out of over 79 teams.
 
 Nate: "Worked on the backend logic to model the rotational behavior of the cube's planes along the axes, developed game levels."
 
